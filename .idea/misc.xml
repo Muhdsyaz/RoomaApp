@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/aquaround_corner.xml" value="0.35462962962962963" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/gradient_background.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/pink_round.xml" value="0.3828125" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/white_round.xml" value="0.35462962962962963" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_intro.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_register.xml" value="0.31203703703703706" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_start.xml" value="0.3175925925925926" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

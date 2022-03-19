@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "819723786946",
+    "project_id": "rooma-d087e",
+    "storage_bucket": "rooma-d087e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819723786946:android:c11fa73284c17e25e1795b",
+        "android_client_info": {
+          "package_name": "my.edu.utem.ftmk.bitp3453.rooma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819723786946-lggmjp88l8hd21msi882bcovorlddbgn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.edu.utem.ftmk.bitp3453.rooma",
+            "certificate_hash": "97852e92064595a644fabf8abde82ad69cb70b87"
+          }
+        },
+        {
+          "client_id": "819723786946-r4fo8gf7u1qfcahmg6avqig8o5b46t80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY2NpSNIAs3uJItjCY0aYkkijpdKp_BbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819723786946-r4fo8gf7u1qfcahmg6avqig8o5b46t80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
