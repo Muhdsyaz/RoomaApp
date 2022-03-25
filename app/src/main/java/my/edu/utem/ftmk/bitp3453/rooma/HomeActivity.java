@@ -34,4 +34,25 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toFavorite(View v){
+        Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+        startActivity(intent);
+    }
+
+    public void toPostAds(View v){
+        Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
+        startActivity(intent);
+    }
+
+    public void toProfile(View v){
+        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        moveTaskToBack(true);
+    }
+
 }
