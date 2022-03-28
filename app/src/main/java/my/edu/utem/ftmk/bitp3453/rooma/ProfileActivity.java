@@ -81,6 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toEditProfile(View v){
+        Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+        startActivity(intent);
+    }
+
     public void signOut() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

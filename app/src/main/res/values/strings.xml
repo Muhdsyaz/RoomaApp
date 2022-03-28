@@ -1,4 +1,67 @@
 <resources>
     <string name="app_name">Rooma</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string-array name="category">
+        <item>House</item>
+        <item>Apartment</item>
+        <item>Room</item>
+    </string-array>
+
+    <string-array name="restype">
+        <item>Condo/Services residence/Penthouse/Townhouse</item>
+        <item>Apartment/Flat</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="housetype">
+        <item>Bungalow/Villa/Cluster houses</item>
+        <item>Single storey</item>
+        <item>One and a half storey</item>
+        <item>Double storey</item>
+        <item>Two and a half storey</item>
+        <item>Triple storey</item>
+        <item>Semi detached</item>
+        <item>Townhouse</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="floor">
+        <item>High</item>
+        <item>Mid</item>
+        <item>Low</item>
+    </string-array>
+
+    <string-array name="bedroom">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>More than 10</item>
+    </string-array>
+
+    <string-array name="bathroom">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>More than 10</item>
+    </string-array>
+
+    <string-array name="furnishing">
+        <item>Fully furnished</item>
+        <item>Partially furnished</item>
+        <item>Not furnished</item>
+    </string-array>
 </resources>
