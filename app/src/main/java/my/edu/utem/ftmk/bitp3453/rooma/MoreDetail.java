@@ -12,11 +12,15 @@ public class MoreDetail extends AppCompatActivity {
 
     String category;
     MaterialIconView mvBackBtn;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_detail);
+
+        bundle = getIntent().getExtras();
+        category = bundle.getString("category");
 
         mvBackBtn = findViewById(R.id.mvBackBtn);
 
@@ -34,7 +38,25 @@ public class MoreDetail extends AppCompatActivity {
 
     public void toAvailableFacilities(){
         Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
-        intent.putExtra("category",category);
+        bundle.remove("Swimming");
+        bundle.remove("Gymnasium");
+        bundle.remove("Tennis");
+        bundle.remove("Squash");
+        bundle.remove("Mini");
+        bundle.remove("Playground");
+        bundle.remove("CarPark");
+        bundle.remove("Elevator");
+        bundle.remove("Guard");
+        bundle.remove("Jogging");
+        bundle.remove("Balcony");
+        bundle.remove("CableTv");
+        bundle.remove("AirCond");
+        bundle.remove("Cooking");
+        bundle.remove("Gender");
+        bundle.remove("PublicTrans");
+        bundle.remove("Internet");
+        bundle.remove("Washing");
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

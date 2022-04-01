@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,7 +20,8 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
 
     String category;
     Button btContinue;
-    String text, resType, floorRange, bedroom, bathroom, furnishing, parking;
+    String text, resType, floorRange, bedroom, bathroom, furnishing, parking, propertySize, year, deposit, monthlyRent;
+    EditText etPropertySize, etFinishYear, etDeposit, etMonthlyRent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,13 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_apartment_specification);
 
         Intent intent = getIntent();
-
         category = intent.getStringExtra("category");
+
+        // declare variable for edit text
+        etPropertySize = findViewById(R.id.etPropertySize);
+        etFinishYear = findViewById(R.id.etFinishYear);
+        etDeposit = findViewById(R.id.etDeposit);
+        etMonthlyRent = findViewById(R.id.etMonthlyRent);
 
         // declare variable for button
         btContinue = findViewById(R.id.btContinue);
