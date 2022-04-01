@@ -62,8 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
                 signOut();
             }
         });
-
-
     }
 
     public void toHome(View v){
@@ -83,6 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void toEditProfile(View v){
         Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void toAdsHistory(View v){
+        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
         startActivity(intent);
     }
 

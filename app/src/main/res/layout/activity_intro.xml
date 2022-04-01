@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".IntroActivity">
 
     <ImageView
         android:id="@+id/splashImg"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/ic_launcher_foreground"
+        android:background="@mipmap/ic_rooma_logo_foreground"
         android:layout_marginTop="180dp" />
 
 

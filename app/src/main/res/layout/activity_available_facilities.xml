@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AvailableFacilities"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:id="@+id/mvBackBtn"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+
+            app:materialIcon="chevron_left"
+            app:materialIconColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:padding="20dp"
+            android:text="" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Facilities"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="26dp"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbSwim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Swimming pool"/>
+
+                        <RadioButton
+                            android:id="@+id/rbGym"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Gymnasium"/>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbTennis"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Tennis court"/>
+
+                        <RadioButton
+                            android:id="@+id/rbSquash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Squash court"/>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbMiniMarket"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Mini market"/>
+
+                        <RadioButton
+                            android:id="@+id/rbPlayground"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Playground"/>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbCarPark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Car park"/>
+
+                        <RadioButton
+                            android:id="@+id/rbElevator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Elevator"/>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbGuard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Security guard"/>
+
+                        <RadioButton
+                            android:id="@+id/rbJogging"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Jogging park"/>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <RadioButton
+                            android:id="@+id/rbBalcony"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Balcony"/>
+
+                        <RadioButton
+                            android:id="@+id/rbCableTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_selector"
+                            android:textColor="@drawable/text_color"
+                            android:elevation="5dp"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAlignment="center"
+                            android:text="Cable tv"/>
+
+                    </TableRow>
+
+                </TableLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Convenience"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="26dp"
+                android:layout_gravity="center"/>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TableRow>
+
+                    <RadioButton
+                        android:id="@+id/rbAirCond"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Air-cond"/>
+
+                    <RadioButton
+                        android:id="@+id/rbCooking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Cooking allowed"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <RadioButton
+                        android:id="@+id/rbGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Mix gender"/>
+
+                    <RadioButton
+                        android:id="@+id/rbPublicTrans"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Public transport"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <RadioButton
+                        android:id="@+id/rbInternet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Internet connection"/>
+
+                    <RadioButton
+                        android:id="@+id/rbWashing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/text_color"
+                        android:elevation="5dp"
+                        android:layout_weight="1"
+                        android:layout_margin="10dp"
+                        android:textAlignment="center"
+                        android:text="Washing machine"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/btContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Continue"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
