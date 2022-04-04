@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,12 +35,12 @@
                     app:layout_constraintHorizontal_bias="0.95"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:materialIcon="menu"/>
+                    app:materialIcon="menu" />
 
                 <LinearLayout
                     android:id="@+id/layoutProfileMenu"
                     android:layout_width="120dp"
-                    android:layout_height="90dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@color/white"
                     android:elevation="5dp"
@@ -51,24 +51,47 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/tvEdit"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:onClick="toEditProfile"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Edit Profile"
-                        android:textColor="@color/black" />
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/tvLogout"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/tvEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Edit Profile"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#0F000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Logout"
-                        android:textColor="@color/black" />
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Logout"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -86,13 +109,13 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
-                    android:layout_width="360dp"
+                    android:layout_width="320dp"
                     android:layout_height="220dp"
                     android:background="@drawable/round_pink"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.49"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     app:layout_constraintVertical_bias="0.038">
@@ -111,8 +134,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_marginTop="0dp"
+                        android:layout_marginRight="20dp"
                         android:text="Muhammad Syazani Bin Mohd Shah"
                         android:textColor="@color/white" />
 
@@ -130,8 +153,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_marginTop="0dp"
+                        android:layout_marginRight="20dp"
                         android:text="+60172696437"
                         android:textColor="@color/white" />
 
@@ -149,22 +172,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
                         android:layout_marginTop="0dp"
+                        android:layout_marginRight="20dp"
                         android:text="No. 40 Jalan Melaka Baru 3/12 Taman Melaka Baru Fasa 3, Batu Berendam, 75350 Melaka."
                         android:textColor="@color/white" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="360dp"
+                    android:layout_width="320dp"
                     android:layout_height="160dp"
                     android:background="@drawable/customborder"
-                    android:orientation="vertical"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="toAdsHistory"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.49"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
                     app:layout_constraintVertical_bias="0.15">
@@ -250,31 +275,31 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_home"
-            android:onClick="toHome"/>
+            android:onClick="toHome"
+            android:src="@drawable/ic_home" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_favorite"
-            android:onClick="toFavorite"/>
+            android:onClick="toFavorite"
+            android:src="@drawable/ic_favorite" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_sell"
-            android:onClick="toPostAds"/>
+            android:onClick="toPostAds"
+            android:src="@drawable/ic_sell" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_person_black"/>
+            android:src="@drawable/ic_person_black" />
 
     </LinearLayout>
 

@@ -25,6 +25,15 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="roomtype">
+        <item>Condo/Services residence/Penthouse/Townhouse</item>
+        <item>Apartment/Flat</item>
+        <item>Houses</item>
+        <item>Shoplot</item>
+        <item>Sharing a house/flat</item>
+        <item>Others</item>
+    </string-array>
+
     <string-array name="floor">
         <item>High</item>
         <item>Mid</item>

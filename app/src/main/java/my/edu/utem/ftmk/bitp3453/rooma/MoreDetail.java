@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
@@ -21,6 +22,7 @@ public class MoreDetail extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         category = bundle.getString("category");
+        Log.e("Data ", "MoreDetail: " + bundle);
 
         mvBackBtn = findViewById(R.id.mvBackBtn);
 

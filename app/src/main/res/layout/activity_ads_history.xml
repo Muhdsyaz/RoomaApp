@@ -39,7 +39,7 @@
         app:tabGravity="fill"
         app:tabTextColor="@color/white"
         android:background="#F4717F"
-        app:tabIndicatorColor="#EA6C7A"
+        app:tabIndicatorColor="#EC717F"
         app:tabIndicatorGravity="stretch"
         app:tabSelectedTextColor="#850000"
         app:tabIndicatorAnimationMode="elastic"

@@ -22,6 +22,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
     Button btContinue;
     String text, resType, floorRange, bedroom, bathroom, furnishing, parking, propertySize, year, deposit, monthlyRent;
     EditText etPropertySize, etFinishYear, etDeposit, etMonthlyRent;
+    Spinner spResType, spFloorRange, spBedroom, spBathroom, spFurnishing, spParking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
 
         Log.e("Aparment ", "onCreate: " + category);
 
-        Spinner spResType = findViewById(R.id.spResType);
+        spResType = findViewById(R.id.spResType);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.restype, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -56,7 +57,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         spResType.setOnItemSelectedListener(this);
         resType = spResType.getSelectedItem().toString();
 
-        Spinner spFloorRange = findViewById(R.id.spFloorRange);
+        spFloorRange = findViewById(R.id.spFloorRange);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.floor, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,7 +65,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         spFloorRange.setOnItemSelectedListener(this);
         floorRange = spFloorRange.getSelectedItem().toString();
 
-        Spinner spBedroom = findViewById(R.id.spBedroom);
+        spBedroom = findViewById(R.id.spBedroom);
         ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
                 R.array.bedroom, android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -72,7 +73,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         spBedroom.setOnItemSelectedListener(this);
         bedroom = spBedroom.getSelectedItem().toString();
 
-        Spinner spBathroom = findViewById(R.id.spBathroom);
+        spBathroom = findViewById(R.id.spBathroom);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
                 R.array.bathroom, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -80,7 +81,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         spBathroom.setOnItemSelectedListener(this);
         bathroom = spBathroom.getSelectedItem().toString();
 
-        Spinner spFurnishing = findViewById(R.id.spFurnishing);
+        spFurnishing = findViewById(R.id.spFurnishing);
         ArrayAdapter<CharSequence> adapter5 = ArrayAdapter.createFromResource(this,
                 R.array.furnishing, android.R.layout.simple_spinner_item);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,7 +89,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         spFurnishing.setOnItemSelectedListener(this);
         furnishing = spFurnishing.getSelectedItem().toString();
 
-        Spinner spParking = findViewById(R.id.spParking);
+        spParking = findViewById(R.id.spParking);
         ArrayAdapter<CharSequence> adapter6 = ArrayAdapter.createFromResource(this,
                 R.array.parking, android.R.layout.simple_spinner_item);
         adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,6 +103,12 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+        resType = spResType.getSelectedItem().toString();
+        floorRange = spFloorRange.getSelectedItem().toString();
+        bedroom = spBedroom.getSelectedItem().toString();
+        bathroom = spBathroom.getSelectedItem().toString();
+        furnishing = spFurnishing.getSelectedItem().toString();
+        parking = spParking.getSelectedItem().toString();
     }
 
     @Override

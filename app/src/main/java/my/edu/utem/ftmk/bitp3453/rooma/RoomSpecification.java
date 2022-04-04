@@ -16,6 +16,8 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
 
     String category;
     Button btContinue;
+    Spinner spRoomType, spFloorRange, spFurnishing, spParking;
+    String text, roomType, floorRange, furnishing, parking, propertySize, year, deposit, monthlyRent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,39 +39,47 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
 
         Log.e("Room ", "onCreate: " + category);
 
-        Spinner spResType = findViewById(R.id.spResType);
+        spRoomType = findViewById(R.id.spRoomType);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.restype, android.R.layout.simple_spinner_item);
+                R.array.roomtype, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spResType.setAdapter(adapter);
-        spResType.setOnItemSelectedListener(this);
+        spRoomType.setAdapter(adapter);
+        spRoomType.setOnItemSelectedListener(this);
+        roomType = spRoomType.getSelectedItem().toString();
 
-        Spinner spFloorRange = findViewById(R.id.spFloorRange);
+        spFloorRange = findViewById(R.id.spFloorRange);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.floor, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFloorRange.setAdapter(adapter2);
         spFloorRange.setOnItemSelectedListener(this);
+        floorRange = spFloorRange.getSelectedItem().toString();
 
-        Spinner spFurnishing = findViewById(R.id.spFurnishing);
+        spFurnishing = findViewById(R.id.spFurnishing);
         ArrayAdapter<CharSequence> adapter5 = ArrayAdapter.createFromResource(this,
                 R.array.furnishing, android.R.layout.simple_spinner_item);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFurnishing.setAdapter(adapter5);
         spFurnishing.setOnItemSelectedListener(this);
+        furnishing = spFurnishing.getSelectedItem().toString();
 
-        Spinner spParking = findViewById(R.id.spParking);
+        spParking = findViewById(R.id.spParking);
         ArrayAdapter<CharSequence> adapter6 = ArrayAdapter.createFromResource(this,
                 R.array.parking, android.R.layout.simple_spinner_item);
         adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spParking.setAdapter(adapter6);
         spParking.setOnItemSelectedListener(this);
+        parking = spParking.getSelectedItem().toString();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+        roomType = spRoomType.getSelectedItem().toString();
+        floorRange = spFloorRange.getSelectedItem().toString();
+        furnishing = spFurnishing.getSelectedItem().toString();
+        parking = spParking.getSelectedItem().toString();
     }
 
     @Override
@@ -84,8 +94,15 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
 
     public void toAvailableFacilities(){
         Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
-        intent.putExtra("category",category);
+        Bundle bundle = new Bundle();
+        bundle.putString("resType",roomType);
+        bundle.putString("floorRange",floorRange);
+        bundle.putString("furnishing",furnishing);
+        bundle.putString("parking",parking);
+        bundle.putString("category",category);
+        intent.putExtras(bundle);
         startActivity(intent);
+        Log.e("Data ", "onCreate: " + bundle);
     }
 
     @Override
