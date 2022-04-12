@@ -46,7 +46,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,7 +74,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Swimming pool"/>
+                            android:text="Swimming pool"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbGym"
@@ -86,7 +88,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Gymnasium"/>
+                            android:text="Gymnasium"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -103,7 +106,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Tennis court"/>
+                            android:text="Tennis court"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbSquash"
@@ -116,7 +120,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Squash court"/>
+                            android:text="Squash court"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -133,7 +138,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Mini market"/>
+                            android:text="Mini market"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbPlayground"
@@ -146,7 +152,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Playground"/>
+                            android:text="Playground"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -163,7 +170,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Car park"/>
+                            android:text="Car park"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbElevator"
@@ -176,7 +184,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Elevator"/>
+                            android:text="Elevator"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -193,7 +202,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Security guard"/>
+                            android:text="Security guard"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbJogging"
@@ -206,7 +216,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Jogging park"/>
+                            android:text="Jogging park"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -223,7 +234,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Balcony"/>
+                            android:text="Balcony"
+                            android:fontFamily="@font/poppins"/>
 
                         <RadioButton
                             android:id="@+id/rbCableTv"
@@ -236,7 +248,8 @@
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             android:textAlignment="center"
-                            android:text="Cable tv"/>
+                            android:text="Cable tv"
+                            android:fontFamily="@font/poppins"/>
 
                     </TableRow>
 
@@ -252,7 +265,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"/>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -274,7 +288,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Air-cond"/>
+                        android:text="Air-cond"
+                        android:fontFamily="@font/poppins"/>
 
                     <RadioButton
                         android:id="@+id/rbCooking"
@@ -287,7 +302,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Cooking allowed"/>
+                        android:text="Cooking allowed"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 
@@ -304,7 +320,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Mix gender"/>
+                        android:text="Mix gender"
+                        android:fontFamily="@font/poppins"/>
 
                     <RadioButton
                         android:id="@+id/rbPublicTrans"
@@ -317,7 +334,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Public transport"/>
+                        android:text="Public transport"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 
@@ -334,7 +352,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Internet connection"/>
+                        android:text="Internet connection"
+                        android:fontFamily="@font/poppins"/>
 
                     <RadioButton
                         android:id="@+id/rbWashing"
@@ -347,7 +366,8 @@
                         android:layout_weight="1"
                         android:layout_margin="10dp"
                         android:textAlignment="center"
-                        android:text="Washing machine"/>
+                        android:text="Washing machine"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 

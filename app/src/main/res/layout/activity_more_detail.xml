@@ -30,111 +30,324 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="More Details"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="26dp"
-        android:layout_gravity="center"/>
-
-    <EditText
-        android:id="@+id/etAdTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Ad Title"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/customborder"/>
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Description"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/customborder"/>
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:text="State"
-                android:textSize="17dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/customborder"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/spState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_marginTop="10dp">
+                android:text="More Details"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="26dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:text="Area"
-                android:textSize="17dp"/>
+                android:text="Insert pictures of the property:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:fontFamily="@font/poppins"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/customborder"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/spArea"
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent">
+                    <!--android:background="#F1F1F1"-->
+
+                    <TableRow>
+
+                        <LinearLayout
+                            android:id="@+id/layoutAdsCover"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:padding="10dp"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:background="@drawable/round_gray"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ads cover photo"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="10dp"/>
+
+                            <ImageView
+                                android:id="@+id/ivHouse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/home"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutLivingRoom"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:background="@drawable/round_gray">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Living room"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="10dp"/>
+
+                            <ImageView
+                                android:id="@+id/ivLivingRoom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/livingroom"/>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBedroom"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:background="@drawable/round_gray">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bedroom"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="10dp"/>
+
+                            <ImageView
+                                android:id="@+id/ivBedroom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/bed"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutBathroom"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:background="@drawable/round_gray">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bathroom"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="10dp"/>
+
+                            <ImageView
+                                android:id="@+id/ivBathroom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/bath"/>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <LinearLayout
+                            android:id="@+id/layoutKitchen"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:elevation="5dp"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:background="@drawable/round_gray">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Kitchen"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="10dp"/>
+
+                            <ImageView
+                                android:id="@+id/ivKitchen"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/kitchen"/>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
+                </TableLayout>
 
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Describe the property:"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:fontFamily="@font/poppins"/>
 
-        </TableRow>
+            <EditText
+                android:id="@+id/etAdTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Ad Title"
+                android:textSize="14dp"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/customborder"/>
 
-    </TableLayout>
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Description"
+                android:textSize="14dp"
+                android:fontFamily="@font/poppins"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/customborder"/>
 
-    <Button
-        android:id="@+id/btContinue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continue"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:text="State"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/poppins"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/customborder"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/spState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:text="Area"
+                        android:textSize="14dp"
+                        android:fontFamily="@font/poppins"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/customborder"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/spArea"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/btContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Continue"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

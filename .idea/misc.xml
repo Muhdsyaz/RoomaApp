@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/aquaround_corner.xml" value="0.35462962962962963" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/circle.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/customborder.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/gradient_background.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.3769230769230769" />
@@ -24,6 +25,7 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/radio_normal.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/radio_selected.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/radio_selector.xml" value="0.36018518518518516" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/round_gray.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/round_pink.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/round_white.xml" value="0.36944444444444446" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/tab_indicator.xml" value="0.34444444444444444" />
@@ -41,9 +43,9 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_home.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_house_specification.xml" value="0.3074074074074074" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_intro.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_login.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_more_detail.xml" value="0.30185185185185187" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_more_detail.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_post_ads.xml" value="0.32685185185185184" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_register.xml" value="0.31203703703703706" />

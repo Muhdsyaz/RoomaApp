@@ -32,7 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="EDIT PROFILE" />
+            android:text="EDIT PROFILE"
+            android:fontFamily="@font/poppins"/>
 
         <View
             android:layout_width="1dp"
@@ -61,6 +62,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:layout_marginTop="10dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +77,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Personal Details"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,7 +96,8 @@
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -97,7 +108,8 @@
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:text="Muhammad Syazani Bin Mohd Shah"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"/>
 
             </LinearLayout>
 
@@ -117,7 +129,8 @@
                     android:layout_height="wrap_content"
                     android:text="Phone"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -128,7 +141,8 @@
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:text="+6017269647"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"/>
 
             </LinearLayout>
 
@@ -148,7 +162,8 @@
                     android:layout_height="wrap_content"
                     android:text="Address"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -159,7 +174,8 @@
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:text="No. 40 Jalan Melaka Baru 3/12, Taman Melaka Baru"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"/>
 
             </LinearLayout>
 
@@ -170,7 +186,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Change Password"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -188,7 +205,8 @@
                     android:layout_height="wrap_content"
                     android:text="Password"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -200,13 +218,14 @@
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:inputType="textPassword"
                     android:text="abc123"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="190dp" />
 
         </LinearLayout>
 

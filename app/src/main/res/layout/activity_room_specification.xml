@@ -46,7 +46,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"/>
 
             <TableLayout
                 android:layout_width="match_parent"
@@ -62,7 +63,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Residential type" />
+                        android:text="Residential type"
+                        android:fontFamily="@font/poppins"/>
 
                     <LinearLayout
 
@@ -89,7 +91,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Floor range" />
+                        android:text="Floor range"
+                        android:fontFamily="@font/poppins"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -115,7 +118,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Room size (sq. ft.)" />
+                        android:text="Room size (sq. ft.)"
+                        android:fontFamily="@font/poppins"/>
 
                     <EditText
                         android:id="@+id/etRoomSize"
@@ -124,7 +128,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:background="@drawable/customborder"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 
@@ -136,7 +141,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Furnishing" />
+                        android:text="Furnishing"
+                        android:fontFamily="@font/poppins"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -162,7 +168,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Parking lot" />
+                        android:text="Parking lot"
+                        android:fontFamily="@font/poppins"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -188,7 +195,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Finish year" />
+                        android:text="Finish year"
+                        android:fontFamily="@font/poppins"/>
 
                     <EditText
                         android:id="@+id/etFinishYear"
@@ -197,7 +205,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:background="@drawable/customborder"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 
@@ -209,7 +218,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Deposit (RM)" />
+                        android:text="Deposit (RM)"
+                        android:fontFamily="@font/poppins"/>
 
                     <EditText
                         android:id="@+id/etDeposit"
@@ -218,7 +228,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:background="@drawable/customborder"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 
@@ -230,7 +241,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_marginTop="10dp"
-                        android:text="Monthly rent (RM)" />
+                        android:text="Monthly rent (RM)"
+                        android:fontFamily="@font/poppins"/>
 
                     <EditText
                         android:id="@+id/etMonthlyRent"
@@ -239,7 +251,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:background="@drawable/customborder"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 

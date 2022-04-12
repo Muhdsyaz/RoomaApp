@@ -65,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Edit Profile"
-                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"
                             android:textColor="@color/black" />
 
                     </LinearLayout>
@@ -88,7 +88,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Logout"
-                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"
                             android:textColor="@color/black" />
 
                     </LinearLayout>
@@ -99,7 +99,7 @@
                     android:id="@+id/imageView2"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:src="@drawable/roomaiconlogo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -109,8 +109,10 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
-                    android:layout_width="320dp"
-                    android:layout_height="220dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:background="@drawable/round_pink"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -127,7 +129,8 @@
                         android:layout_marginTop="20dp"
                         android:text="Name"
                         android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins"/>
 
                     <TextView
                         android:id="@+id/tvName"
@@ -137,7 +140,8 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="20dp"
                         android:text="Muhammad Syazani Bin Mohd Shah"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -146,7 +150,8 @@
                         android:layout_marginTop="10dp"
                         android:text="Phone"
                         android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins"/>
 
                     <TextView
                         android:id="@+id/tvPhone"
@@ -156,7 +161,8 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="20dp"
                         android:text="+60172696437"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -165,7 +171,8 @@
                         android:layout_marginTop="10dp"
                         android:text="Address"
                         android:textColor="@color/white"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins"/>
 
                     <TextView
                         android:id="@+id/tvAddress"
@@ -175,13 +182,16 @@
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="20dp"
                         android:text="No. 40 Jalan Melaka Baru 3/12 Taman Melaka Baru Fasa 3, Batu Berendam, 75350 Melaka."
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:layout_height="160dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:background="@drawable/customborder"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -217,7 +227,8 @@
                         android:layout_gravity="center"
                         android:text="Live ads"
                         android:textColor="#F4717F"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins"/>
 
                     <LinearLayout
                         android:layout_width="320dp"
@@ -236,7 +247,8 @@
                         android:text="Show more>>"
                         android:textColor="#F4717F"
                         android:textSize="10dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins"/>
 
                 </LinearLayout>
 
@@ -247,6 +259,7 @@
                     android:text="test@gmail.com"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:fontFamily="@font/poppins"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"

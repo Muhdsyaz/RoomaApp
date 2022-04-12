@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 layoutResetPassword.setVisibility(View.VISIBLE);
+                tvForgotPassword.setVisibility(View.INVISIBLE);
 
                 btSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         layoutResetPassword.setVisibility(View.INVISIBLE);
+                        tvForgotPassword.setVisibility(View.VISIBLE);
                     }
                 });
 

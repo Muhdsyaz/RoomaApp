@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="LOG IN"
+            android:fontFamily="@font/poppins"
             android:layout_marginLeft="120dp"
             android:padding="20dp" />
 
@@ -48,7 +49,8 @@
                 android:layout_width="230dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp" />
+                android:layout_marginTop="20dp"
+                android:src="@drawable/roomafontlogo"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -64,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
+                    android:fontFamily="@font/poppins"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
                     android:textColor="@color/black"
@@ -84,6 +87,7 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:hint="Password"
+                    android:fontFamily="@font/poppins"
                     android:inputType="textPassword"
                     android:padding="10dp" />
 
@@ -113,12 +117,12 @@
             android:id="@+id/layoutResetPassword"
             android:layout_width="360dp"
             android:layout_height="190dp"
-            android:background="@drawable/pink_round"
+            android:background="@drawable/round_pink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintVertical_bias="0.408"
             android:visibility="invisible"
             android:orientation="vertical">
 
@@ -146,6 +150,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:fontFamily="@font/poppins"
                     android:hint="Email"/>
 
             </com.google.android.material.textfield.TextInputLayout>
