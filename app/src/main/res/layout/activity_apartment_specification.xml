@@ -45,7 +45,7 @@
                 android:text="Apartment Specification"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="26dp"
+                android:textSize="20dp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"/>
 
@@ -309,61 +309,6 @@
                         android:background="@drawable/customborder"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:layout_marginTop="10dp"
-                        android:text="State"
-                        android:fontFamily="@font/poppins"/>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/customborder"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spState"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:layout_marginTop="10dp"
-                        android:text="Area"
-                        android:fontFamily="@font/poppins"/>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/customborder"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spArea"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </LinearLayout>
-
 
                 </TableRow>
 

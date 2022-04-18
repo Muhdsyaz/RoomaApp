@@ -62,8 +62,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfilePic"
+                app:civ_border_color="#FF000000"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
@@ -100,11 +101,11 @@
                     android:fontFamily="@font/poppins"/>
 
                 <TextView
+                    android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
                     android:onClick="toEditName"
-                    android:padding="5dp"
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:text="Muhammad Syazani Bin Mohd Shah"
@@ -133,10 +134,10 @@
                     android:fontFamily="@font/poppins"/>
 
                 <TextView
+                    android:id="@+id/tvPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:padding="5dp"
                     android:onClick="toEditPhone"
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
@@ -166,10 +167,10 @@
                     android:fontFamily="@font/poppins"/>
 
                 <TextView
+                    android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:padding="5dp"
                     android:onClick="toEditAddress"
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"
@@ -209,10 +210,10 @@
                     android:fontFamily="@font/poppins"/>
 
                 <TextView
+                    android:id="@+id/tvPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
-                    android:padding="5dp"
                     android:onClick="toEditPassword"
                     android:background="@drawable/white_round"
                     android:drawableRight="@drawable/ic_arrow_right"

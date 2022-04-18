@@ -45,7 +45,7 @@
                 android:text="More Details"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="26dp"
+                android:textSize="20dp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"/>
 
@@ -62,7 +62,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
@@ -76,8 +75,8 @@
 
                         <LinearLayout
                             android:id="@+id/layoutAdsCover"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:orientation="vertical"
                             android:layout_margin="10dp"
                             android:padding="10dp"
@@ -105,8 +104,8 @@
 
                         <LinearLayout
                             android:id="@+id/layoutLivingRoom"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:orientation="vertical"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
@@ -138,8 +137,8 @@
 
                         <LinearLayout
                             android:id="@+id/layoutBedroom"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:orientation="vertical"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
@@ -167,8 +166,8 @@
 
                         <LinearLayout
                             android:id="@+id/layoutBathroom"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:orientation="vertical"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
@@ -200,8 +199,8 @@
 
                         <LinearLayout
                             android:id="@+id/layoutKitchen"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:orientation="vertical"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
@@ -313,7 +312,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginTop="10dp"
-                        android:text="Area"
+                        android:text="City"
                         android:textSize="14dp"
                         android:fontFamily="@font/poppins"/>
 
@@ -325,7 +324,7 @@
                         android:orientation="horizontal">
 
                         <Spinner
-                            android:id="@+id/spArea"
+                            android:id="@+id/spCity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 

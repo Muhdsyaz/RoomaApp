@@ -20,7 +20,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
 
     String category;
     Button btContinue;
-    String text, resType, floorRange, bedroom, bathroom, furnishing, parking, propertySize, year, deposit, monthlyRent;
+    String text, resType, floorRange, bedroom, bathroom, furnishing, parking, propertySize, finishYear, deposit, monthlyRent;
     EditText etPropertySize, etFinishYear, etDeposit, etMonthlyRent;
     Spinner spResType, spFloorRange, spBedroom, spBathroom, spFurnishing, spParking;
 
@@ -122,6 +122,12 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
     }
 
     public void toAvailableFacilities(){
+
+        propertySize = etPropertySize.getText().toString();
+        finishYear = etFinishYear.getText().toString();
+        deposit = etDeposit.getText().toString();
+        monthlyRent = etMonthlyRent.getText().toString();
+
         Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
         Bundle bundle = new Bundle();
         bundle.putString("resType",resType);
@@ -130,6 +136,10 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
         bundle.putString("bathroom",bathroom);
         bundle.putString("furnishing",furnishing);
         bundle.putString("parking",parking);
+        bundle.putString("propertySize",propertySize);
+        bundle.putString("finishYear", finishYear);
+        bundle.putString("deposit",deposit);
+        bundle.putString("monthlyRent",monthlyRent);
         bundle.putString("category",category);
         intent.putExtras(bundle);
         startActivity(intent);

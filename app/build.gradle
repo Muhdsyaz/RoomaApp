@@ -50,4 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'
 
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+    //for circularimageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

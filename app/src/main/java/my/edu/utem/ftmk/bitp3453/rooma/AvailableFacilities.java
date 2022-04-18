@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +24,9 @@ public class AvailableFacilities extends AppCompatActivity {
     RadioButton rbAirCond, rbCooking, rbGender, rbPublicTrans, rbInternet, rbWashing;
 
     Bundle bundle;
-    Bundle facilities;
-    Bundle convenience;
+
+    ArrayList<String> arrayListFacilities = new ArrayList<>();
+    ArrayList<String> arrayListConvenience = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +37,9 @@ public class AvailableFacilities extends AppCompatActivity {
         bundle = getIntent().getExtras();
         category = bundle.getString("category");
 
-        //initilize bundle
-        facilities = new Bundle();
-        convenience = new Bundle();
-
         mvBackBtn = findViewById(R.id.mvBackBtn);
 
+        //declaration for radio button
         rbSwim = findViewById(R.id.rbSwim);
         rbGym = findViewById(R.id.rbGym);
         rbTennis = findViewById(R.id.rbTennis);
@@ -75,13 +74,18 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbSwim.isSelected()) {
                     rbSwim.setChecked(true);
                     rbSwim.setSelected(true);
-                    facilities.putString("Swimming", "Swimming pool");
-                    Log.e("Swimming ", "onCreate: " + facilities);
+//                    facilities.putString("Swimming", "Swimming pool");
+//                    Log.e("Swimming ", "onCreate: " + facilities);
+                    arrayListFacilities.add("Swimming pool");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbSwim.setChecked(false);
                     rbSwim.setSelected(false);
-                    facilities.remove("Swimming");
-                    Log.e("Swimming ", "onCreate: " + facilities);
+//                    facilities.remove("Swimming");
+//                    Log.e("Swimming ", "onCreate: " + facilities);
+                    arrayListFacilities.remove("Swimming pool");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -92,13 +96,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbGym.isSelected()) {
                     rbGym.setChecked(true);
                     rbGym.setSelected(true);
-                    facilities.putString("Gymnasium", "Gymnasium");
-                    Log.e("Gymnasium ", "onCreate: " + facilities);
+//                    facilities.putString("Gymnasium", "Gymnasium");
+//                    Log.e("Gymnasium ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Gymnasium");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbGym.setChecked(false);
                     rbGym.setSelected(false);
-                    facilities.remove("Gymnasium");
-                    Log.e("Gymnasium ", "onCreate: " + facilities);
+//                    facilities.remove("Gymnasium");
+//                    Log.e("Gymnasium ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Gymnasium");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -109,13 +120,19 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbTennis.isSelected()) {
                     rbTennis.setChecked(true);
                     rbTennis.setSelected(true);
-                    facilities.putString("Tennis", "Tennis court");
-                    Log.e("Tennis ", "onCreate: " + facilities);
+//                    facilities.putString("Tennis", "Tennis court");
+//                    Log.e("Tennis ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Tennis court");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbTennis.setChecked(false);
                     rbTennis.setSelected(false);
-                    facilities.remove("Tennis");
-                    Log.e("Tennis ", "onCreate: " + facilities);
+//                    facilities.remove("Tennis");
+//                    Log.e("Tennis ", "onCreate: " + facilities);
+                    arrayListFacilities.remove("Tennis court");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -126,13 +143,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbSquash.isSelected()) {
                     rbSquash.setChecked(true);
                     rbSquash.setSelected(true);
-                    facilities.putString("Squash", "Squash court");
-                    Log.e("Squash ", "onCreate: " + facilities);
+//                    facilities.putString("Squash", "Squash court");
+//                    Log.e("Squash ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Squash court");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbSquash.setChecked(false);
                     rbSquash.setSelected(false);
-                    facilities.remove("Squash");
-                    Log.e("Squash ", "onCreate: " + facilities);
+//                    facilities.remove("Squash");
+//                    Log.e("Squash ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Squash court");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -143,13 +167,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbMiniMarket.isSelected()) {
                     rbMiniMarket.setChecked(true);
                     rbMiniMarket.setSelected(true);
-                    facilities.putString("Mini", "Mini market");
-                    Log.e("Mini ", "onCreate: " + facilities);
+//                    facilities.putString("Mini", "Mini market");
+//                    Log.e("Mini ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Mini market");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbMiniMarket.setChecked(false);
                     rbMiniMarket.setSelected(false);
-                    facilities.remove("Mini");
-                    Log.e("Mini ", "onCreate: " + facilities);
+//                    facilities.remove("Mini");
+//                    Log.e("Mini ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Mini market");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -160,13 +191,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbPlayground.isSelected()) {
                     rbPlayground.setChecked(true);
                     rbPlayground.setSelected(true);
-                    facilities.putString("Playground", "Playground");
-                    Log.e("Playground ", "onCreate: " + facilities);
+//                    facilities.putString("Playground", "Playground");
+//                    Log.e("Playground ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Playground");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbPlayground.setChecked(false);
                     rbPlayground.setSelected(false);
-                    facilities.remove("Playground");
-                    Log.e("Playground ", "onCreate: " + facilities);
+//                    facilities.remove("Playground");
+//                    Log.e("Playground ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Playground");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -177,13 +215,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbCarPark.isSelected()) {
                     rbCarPark.setChecked(true);
                     rbCarPark.setSelected(true);
-                    facilities.putString("CarPark", "Car Park");
-                    Log.e("CarPark ", "onCreate: " + facilities);
+//                    facilities.putString("CarPark", "Car Park");
+//                    Log.e("CarPark ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Car Park");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbCarPark.setChecked(false);
                     rbCarPark.setSelected(false);
-                    facilities.remove("CarPark");
-                    Log.e("CarPark ", "onCreate: " + facilities);
+//                    facilities.remove("CarPark");
+//                    Log.e("CarPark ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Car Park");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -194,13 +239,21 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbElevator.isSelected()) {
                     rbElevator.setChecked(true);
                     rbElevator.setSelected(true);
-                    facilities.putString("Elevator", "Elevator");
-                    Log.e("Elevator ", "onCreate: " + facilities);
+//                    facilities.putString("Elevator", "Elevator");
+//                    Log.e("Elevator ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Elevator");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbElevator.setChecked(false);
                     rbElevator.setSelected(false);
-                    facilities.remove("Elevator");
-                    Log.e("Elevator ", "onCreate: " + facilities);
+//                    facilities.remove("Elevator");
+//                    Log.e("Elevator ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Elevator");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 }
             }
         });
@@ -211,13 +264,21 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbGuard.isSelected()) {
                     rbGuard.setChecked(true);
                     rbGuard.setSelected(true);
-                    facilities.putString("Guard", "Guard");
-                    Log.e("Guard ", "onCreate: " + facilities);
+//                    facilities.putString("Guard", "Guard");
+//                    Log.e("Guard ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Security guard");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbGuard.setChecked(false);
                     rbGuard.setSelected(false);
-                    facilities.remove("Guard");
-                    Log.e("Guard ", "onCreate: " + facilities);
+//                    facilities.remove("Guard");
+//                    Log.e("Guard ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Security guard");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 }
             }
         });
@@ -228,13 +289,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbJogging.isSelected()) {
                     rbJogging.setChecked(true);
                     rbJogging.setSelected(true);
-                    facilities.putString("Jogging", "Jogging");
-                    Log.e("Jogging ", "onCreate: " + facilities);
+//                    facilities.putString("Jogging", "Jogging");
+//                    Log.e("Jogging ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Jogging park");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbJogging.setChecked(false);
                     rbJogging.setSelected(false);
-                    facilities.remove("Jogging");
-                    Log.e("Jogging ", "onCreate: " + facilities);
+//                    facilities.remove("Jogging");
+//                    Log.e("Jogging ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Jogging park");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -245,13 +313,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbBalcony.isSelected()) {
                     rbBalcony.setChecked(true);
                     rbBalcony.setSelected(true);
-                    facilities.putString("Balcony", "Balcony");
-                    Log.e("Balcony ", "onCreate: " + facilities);
+//                    facilities.putString("Balcony", "Balcony");
+//                    Log.e("Balcony ", "onCreate: " + facilities);
+
+                    arrayListFacilities.add("Balcony");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
                 } else {
                     rbBalcony.setChecked(false);
                     rbBalcony.setSelected(false);
-                    facilities.remove("Balcony");
-                    Log.e("Balcony ", "onCreate: " + facilities);
+//                    facilities.remove("Balcony");
+//                    Log.e("Balcony ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Balcony");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -262,13 +337,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbCableTv.isSelected()) {
                     rbCableTv.setChecked(true);
                     rbCableTv.setSelected(true);
-                    facilities.putString("CableTv", "CableTv");
-                    Log.e("CableTv ", "onCreate: " + facilities);
+//                    facilities.putString("CableTv", "CableTv");
+//                    Log.e("CableTv ", "onCreate: " + facilities);
+                    arrayListFacilities.add("Cable Tv");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
+
+
                 } else {
                     rbCableTv.setChecked(false);
                     rbCableTv.setSelected(false);
-                    facilities.remove("CableTv");
-                    Log.e("CableTv ", "onCreate: " + facilities);
+//                    facilities.remove("CableTv");
+//                    Log.e("CableTv ", "onCreate: " + facilities);
+
+                    arrayListFacilities.remove("Cable Tv");
+                    Log.e("Swimming ", "onCreate: " + arrayListFacilities);
                 }
             }
         });
@@ -279,13 +361,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbAirCond.isSelected()) {
                     rbAirCond.setChecked(true);
                     rbAirCond.setSelected(true);
-                    convenience.putString("AirCond", "Air-cond");
-                    Log.e("AirCond ", "onCreate: " + convenience);
+//                    convenience.putString("AirCond", "Air-cond");
+//                    Log.e("AirCond ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Air-cond");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbAirCond.setChecked(false);
                     rbAirCond.setSelected(false);
-                    convenience.remove("AirCond");
-                    Log.e("AirCond ", "onCreate: " + convenience);
+//                    convenience.remove("AirCond");
+//                    Log.e("AirCond ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Air-cond");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
                 }
             }
         });
@@ -296,13 +385,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbCooking.isSelected()) {
                     rbCooking.setChecked(true);
                     rbCooking.setSelected(true);
-                    convenience.putString("Cooking", "Cooking");
-                    Log.e("Cooking ", "onCreate: " + convenience);
+//                    convenience.putString("Cooking", "Cooking");
+//                    Log.e("Cooking ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Cooking allowed");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbCooking.setChecked(false);
                     rbCooking.setSelected(false);
-                    convenience.remove("Cooking");
-                    Log.e("Cooking ", "onCreate: " + convenience);
+//                    convenience.remove("Cooking");
+//                    Log.e("Cooking ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Cooking allowed");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
                 }
             }
         });
@@ -313,13 +409,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbGender.isSelected()) {
                     rbGender.setChecked(true);
                     rbGender.setSelected(true);
-                    convenience.putString("Gender", "Mix-gender");
-                    Log.e("Gender ", "onCreate: " + convenience);
+//                    convenience.putString("Gender", "Mix-gender");
+//                    Log.e("Gender ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Mix-gender");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbGender.setChecked(false);
                     rbGender.setSelected(false);
-                    convenience.remove("Gender");
-                    Log.e("Gender ", "onCreate: " + convenience);
+//                    convenience.remove("Gender");
+//                    Log.e("Gender ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Mix-gender");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
                 }
             }
         });
@@ -330,13 +433,21 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbPublicTrans.isSelected()) {
                     rbPublicTrans.setChecked(true);
                     rbPublicTrans.setSelected(true);
-                    convenience.putString("PublicTrans", "Public transport");
-                    Log.e("PublicTrans ", "onCreate: " + convenience);
+//                    convenience.putString("PublicTrans", "Public transport");
+//                    Log.e("PublicTrans ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Public transport");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbPublicTrans.setChecked(false);
                     rbPublicTrans.setSelected(false);
-                    convenience.remove("PublicTrans");
-                    Log.e("PublicTrans ", "onCreate: " + convenience);
+//                    convenience.remove("PublicTrans");
+//                    Log.e("PublicTrans ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Public transport");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 }
             }
         });
@@ -347,13 +458,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbInternet.isSelected()) {
                     rbInternet.setChecked(true);
                     rbInternet.setSelected(true);
-                    convenience.putString("Internet", "Internet");
-                    Log.e("Internet ", "onCreate: " + convenience);
+//                    convenience.putString("Internet", "Internet");
+//                    Log.e("Internet ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Internet connection");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbInternet.setChecked(false);
                     rbInternet.setSelected(false);
-                    convenience.remove("Internet");
-                    Log.e("Internet ", "onCreate: " + convenience);
+//                    convenience.remove("Internet");
+//                    Log.e("Internet ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Internet connection");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
                 }
             }
         });
@@ -364,13 +482,20 @@ public class AvailableFacilities extends AppCompatActivity {
                 if (!rbWashing.isSelected()) {
                     rbWashing.setChecked(true);
                     rbWashing.setSelected(true);
-                    convenience.putString("Washing", "Washing machine");
-                    Log.e("Washing ", "onCreate: " + convenience);
+//                    convenience.putString("Washing", "Washing machine");
+//                    Log.e("Washing ", "onCreate: " + convenience);
+
+                    arrayListConvenience.add("Washing machine");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
+
                 } else {
                     rbWashing.setChecked(false);
                     rbWashing.setSelected(false);
-                    convenience.remove("Washing");
-                    Log.e("Washing ", "onCreate: " + convenience);
+//                    convenience.remove("Washing");
+//                    Log.e("Washing ", "onCreate: " + convenience);
+
+                    arrayListConvenience.remove("Washing machine");
+                    Log.e("AirCond ", "onCreate: " + arrayListConvenience);
                 }
             }
         });
@@ -412,14 +537,18 @@ public class AvailableFacilities extends AppCompatActivity {
     }
 
     public void toMoreDetail(){
+
+        bundle.putStringArrayList("facilities",arrayListFacilities);
+        bundle.putStringArrayList("convenience",arrayListConvenience);
+
         Intent intent = new Intent(getApplicationContext(),MoreDetail.class);
-        intent.putExtra("category",category);
+//        intent.putExtra("category",category);
         intent.putExtras(bundle);
         Log.e("Bundle ", "onCreate: " + bundle);
-        intent.putExtras(facilities);
-        Log.e("Facilities ", "onCreate: " + facilities);
-        intent.putExtras(convenience);
-        Log.e("Convenience ", "onCreate: " + convenience);
+//        intent.putExtras(facilities);
+//        Log.e("Facilities ", "onCreate: " + facilities);
+//        intent.putExtras(convenience);
+//        Log.e("Convenience ", "onCreate: " + convenience);
         startActivity(intent);
     }
 

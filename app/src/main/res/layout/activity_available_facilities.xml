@@ -45,7 +45,7 @@
                 android:text="Available Facilities"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="26dp"
+                android:textSize="20dp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"/>
 
@@ -264,7 +264,7 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="26dp"
+                android:textSize="20dp"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"/>
 

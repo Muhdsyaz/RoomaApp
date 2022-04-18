@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,8 +17,9 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
 
     String category;
     Button btContinue;
-    String text, houseType, bedroom, bathroom, furnishing, parking, propertySize, year, deposit, monthlyRent;
+    String text, houseType, bedroom, bathroom, furnishing, parking, propertySize, finishYear, deposit, monthlyRent;
     Spinner spHouseType, spBedroom, spBathroom, spFurnishing, spParking;
+    EditText etPropertySize, etFinishYear, etDeposit, etMonthlyRent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,12 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
         Intent intent = getIntent();
 
         category = intent.getStringExtra("category");
+
+        //declare variable for edit text
+        etPropertySize = findViewById(R.id.etPropertySize);
+        etFinishYear = findViewById(R.id.etFinishYear);
+        etDeposit = findViewById(R.id.etDeposit);
+        etMonthlyRent = findViewById(R.id.etMonthlyRent);
 
         // declare variable for button
         btContinue = findViewById(R.id.btContinue);
@@ -102,6 +110,12 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
     }
 
     public void toAvailableFacilities(){
+
+        propertySize = etPropertySize.getText().toString();
+        finishYear = etFinishYear.getText().toString();
+        deposit = etDeposit.getText().toString();
+        monthlyRent = etMonthlyRent.getText().toString();
+
         Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
         Bundle bundle = new Bundle();
         bundle.putString("resType",houseType);
@@ -109,7 +123,12 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
         bundle.putString("bathroom",bathroom);
         bundle.putString("furnishing",furnishing);
         bundle.putString("parking",parking);
+        bundle.putString("propertySize",propertySize);
+        bundle.putString("finishYear", finishYear);
+        bundle.putString("deposit",deposit);
+        bundle.putString("monthlyRent",monthlyRent);
         bundle.putString("category",category);
+
         intent.putExtras(bundle);
         startActivity(intent);
         Log.e("Data ", "onCreate: " + bundle);

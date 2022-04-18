@@ -74,10 +74,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         user.put("Email", etEmail.getText().toString().trim());
         user.put("FullName", etFullName.getText().toString());
-        user.put("PhoneNum", etPhoneNum.getText().toString());
+        user.put("PhoneNum", "+6" + etPhoneNum.getText().toString());
         user.put("Address", etAddress.getText().toString());
-        user.put("Password", etPassword.getText().toString());
-        user.put("Confirm Password", etConfirmPassword.getText().toString());
+        user.put("Password", etConfirmPassword.getText().toString());
+        user.put("Picture URL", "");
 
         if(etEmail.getText().toString().equals("") && etFullName.getText().toString().equals("") && etPhoneNum.getText().toString().equals("")
                 && etPassword.getText().toString().equals("") && etAddress.getText().toString().equals("") && etConfirmPassword.getText().toString().equals("")) {
@@ -96,6 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
                     task.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(@NonNull AuthResult authResult) {
+
+                            user.put("Uid", authResult.getUser().getUid());
+
                             // Register User add to Firebase
                             firebaseFirestore.collection("users")
                                     .document(authResult.getUser().getUid())
