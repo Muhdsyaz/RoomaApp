@@ -51,8 +51,8 @@ public class MoreDetail extends AppCompatActivity {
     String category, bathroom, propertySize, furnishing, parking, bedroom, resType, finishYear, monthlyRent, deposit, title, description, state, city;
 
     MaterialIconView mvBackBtn;
-    Bundle bundle, facilities, convenience;
-    Button btContinue;
+    Bundle bundle;
+    Button btContinue, btSubmit;
     Uri houseUri, bedroomUri, bathroomUri, livingroomUri, kitchenUri;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
@@ -105,6 +105,12 @@ public class MoreDetail extends AppCompatActivity {
         Log.e("Facilities ", "MoreDetail: " + arrayListFacilities);
         Log.e("Convenience ", "MoreDetail: " + arrayListConvenience);
 
+        //create random id for ads
+        Random rand = new Random();
+        int randomID = rand.nextInt(99999999)+1;
+
+        adsID = "AD" + randomID;
+
 
         //declare edit text
         etAdsTitle = findViewById(R.id.etAdsTitle);
@@ -113,6 +119,7 @@ public class MoreDetail extends AppCompatActivity {
         //declare button
         mvBackBtn = findViewById(R.id.mvBackBtn);
         btContinue = findViewById(R.id.btContinue);
+        btSubmit = findViewById(R.id.btSubmit);
 
         //declare layout
         layoutAdsCover = findViewById(R.id.layoutAdsCover);
@@ -183,9 +190,16 @@ public class MoreDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //checkExistingAds();
-
                 toAdsPreview();
+
+            }
+        });
+
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                checkExistingAds();
 
             }
         });
@@ -590,15 +604,10 @@ public class MoreDetail extends AppCompatActivity {
         title = etAdsTitle.getText().toString();
         description = etDescription.getText().toString();
 
-        Random rand = new Random();
-        int randomID = rand.nextInt(999999)+1;
-
-        adsID = "AD" + randomID;
-
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,19);
+        todayTime = (formatter.format(date)).substring(10,16);
 
         adsProperty.put("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
         adsProperty.put("adsID", adsID);
@@ -682,18 +691,25 @@ public class MoreDetail extends AppCompatActivity {
 
     public void toAdsPreview(){
 
-        //assign value from edit text
-        title = etAdsTitle.getText().toString();
-        description = etDescription.getText().toString();
-        bundle.putString("title", title);
-        bundle.putString("description", description);
-        bundle.putString("adsID", adsID);
-        bundle.putString("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null)
+        {
+            Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            //assign value from edit text
+            title = etAdsTitle.getText().toString();
+            description = etDescription.getText().toString();
+            bundle.putString("adsID", title);
+            bundle.putString("title", title);
+            bundle.putString("description", description);
+            bundle.putString("adsID", adsID);
+            bundle.putString("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        Intent intent = new Intent(getApplicationContext(), AdsPreview.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        Log.e("Bundle ", "onCreate: " + bundle);
+            Intent intent = new Intent(getApplicationContext(), AdsPreview.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            Log.e("Bundle ", "onCreate: " + bundle);
+        }
 
     }
 

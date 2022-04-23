@@ -341,11 +341,29 @@
                 android:id="@+id/btContinue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit Ads"
+                android:text="Preview Ads"
+                android:backgroundTint="#00a0e3"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:layout_width="380dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:background="#DADADA"/>
+
+            <Button
+                android:id="@+id/btSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Ads"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
 
             <Button
                 android:id="@+id/btCancel"

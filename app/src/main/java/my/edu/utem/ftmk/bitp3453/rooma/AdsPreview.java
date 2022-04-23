@@ -1,20 +1,42 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class AdsPreview extends AppCompatActivity {
 
@@ -25,15 +47,26 @@ public class AdsPreview extends AppCompatActivity {
     LinearLayout layoutAdsPreview;
     HorizontalScrollView layoutHorizontal;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
-    String title, monthlyRent, category, location, resType, floor, bedroom, bathroom, size, furnishing, facilities, year, deposit, other, description;
+    String title, monthlyRent, category, location, resType, floor, bedroom, bathroom, size, furnishing, parking, facilities, year, deposit, other, description;
     String adsID, ownerUid, state, city;
 
     ArrayList<String> arrayListFacilities;
     ArrayList<String> arrayListConvenience;
 
+    StorageReference houseRef, bedroomRef, bathroomRef, livingroomRef,kitchenRef;
+    String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
+
+    MaterialIconView mvBackBtn;
+    Button btSubmit;
+
     SimpleDateFormat formatter;
     Date date;
     String todayDate, todayTime;
+
+    ProgressDialog progressDialog;
+
+    Map<String,String> adsProperty = new HashMap<>();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +83,10 @@ public class AdsPreview extends AppCompatActivity {
         livingroomUri = Uri.parse(bundle.getString("livingroomUri"));
         kitchenUri = Uri.parse(bundle.getString("kitchenUri"));
 
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,19);
+        todayTime = (formatter.format(date)).substring(10,16);
 
         ownerUid = bundle.getString("ownerUid");
         adsID = bundle.getString("adsID");
@@ -61,13 +94,15 @@ public class AdsPreview extends AppCompatActivity {
         title = bundle.getString("title");
         monthlyRent = bundle.getString("monthlyRent");
         category = bundle.getString("category");
-        location = bundle.getString("state") + " > " + bundle.getString("city");
+        state = bundle.getString("state");
+        city = bundle.getString("city");
         resType = bundle.getString("resType");
         floor = bundle.getString("floorRange");
         bedroom = bundle.getString("bedroom");
         bathroom = bundle.getString("bathroom");
         size = bundle.getString("propertySize");
         furnishing = bundle.getString("furnishing");
+        parking = bundle.getString("parking");
         year = bundle.getString("finishYear");
         deposit = bundle.getString("deposit");
         description = bundle.getString("description");
@@ -101,7 +136,7 @@ public class AdsPreview extends AppCompatActivity {
         tvMonthlyRent.setText("RM " + monthlyRent);
         tvDate.setText(todayDate + " " + todayTime);
         tvCategory.setText(category);
-        tvLocation.setText(location);
+        tvLocation.setText(state + " > " + city);
         tvResType.setText(resType);
         tvFloor.setText(floor);
         tvBedroom.setText(bedroom);
@@ -130,6 +165,10 @@ public class AdsPreview extends AppCompatActivity {
         ivLivingRoom.setImageURI(livingroomUri);
         ivKitchen.setImageURI(kitchenUri);
 
+        //define button
+        mvBackBtn = findViewById(R.id.mvBackBtn);
+        btSubmit = findViewById(R.id.btSubmit);
+
         //define layout
         layoutAdsPreview = findViewById(R.id.layoutAdsPreview);
         layoutHorizontal = findViewById(R.id.layoutHorizontal);
@@ -156,5 +195,327 @@ public class AdsPreview extends AppCompatActivity {
             }
         });
 
+        mvBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMoreDetail();
+            }
+        });
+
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkExistingAds();
+            }
+        });
+
+    }
+
+    private void uploadImage() {
+
+        if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null)
+        {
+            Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
+        }
+        else{
+
+//            progressDialog = new ProgressDialog(this);
+//            progressDialog.setTitle("Uploading File....");
+//            progressDialog.show();
+
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Preparing your advertisement...");
+            progressDialog.show();
+
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+            Date now = new Date();
+            String fileName = formatter.format(now);
+            houseRef = FirebaseStorage.getInstance().getReference("images/"+"house_"+fileName);
+            bedroomRef = FirebaseStorage.getInstance().getReference("images/"+"bedroom_"+fileName);
+            bathroomRef = FirebaseStorage.getInstance().getReference("images/"+"bathroom_"+fileName);
+            livingroomRef = FirebaseStorage.getInstance().getReference("images/"+"livingroom_"+fileName);
+            kitchenRef = FirebaseStorage.getInstance().getReference("images/"+"kitchen_"+fileName);
+
+
+            houseRef.putFile(houseUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            //Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+
+                            houseRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    houseURL = uri.toString();
+                                    Log.e("URL ", "onSuccess: " + uri);
+
+                                    bedroomRef.putFile(bedroomUri)
+                                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                                    //Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+
+                                                    bedroomRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+
+                                                            bedroomURL= uri.toString();
+                                                            Log.e("URL ", "onSuccess: " + uri);
+
+                                                            bathroomRef.putFile(bathroomUri)
+                                                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                                                            //Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+
+                                                                            bathroomRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                @Override
+                                                                                public void onSuccess(Uri uri) {
+
+                                                                                    bathroomURL = uri.toString();
+                                                                                    Log.e("URL ", "onSuccess: " + uri);
+
+                                                                                    livingroomRef.putFile(livingroomUri)
+                                                                                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                                                @Override
+                                                                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                                                                                    //Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+
+                                                                                                    livingroomRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                        @Override
+                                                                                                        public void onSuccess(Uri uri) {
+
+                                                                                                            livingroomURL = uri.toString();
+                                                                                                            Log.e("URL ", "onSuccess: " + uri);
+
+                                                                                                            kitchenRef.putFile(kitchenUri)
+                                                                                                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                                                                        @Override
+                                                                                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                                                                                                            //Toast.makeText(getApplicationContext(),"Successfully Uploaded",Toast.LENGTH_SHORT).show();
+
+                                                                                                                            kitchenRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                                                                                @Override
+                                                                                                                                public void onSuccess(Uri uri) {
+
+                                                                                                                                    kitchenURL = uri.toString();
+                                                                                                                                    Log.e("URL ", "onSuccess: " + uri);
+
+                                                                                                                                    postAds();
+
+                                                                                                                                }
+                                                                                                                            });
+
+                                                                                                                            //Log.e("URL ", "onSuccess: " + storageReference.getDownloadUrl());
+//                                                                                                                            if (progressDialog.isShowing())
+//                                                                                                                                progressDialog.dismiss();
+
+                                                                                                                        }
+                                                                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                                                                @Override
+                                                                                                                public void onFailure(@NonNull Exception e) {
+
+
+//                                                                                                                    if (progressDialog.isShowing())
+//                                                                                                                        progressDialog.dismiss();
+                                                                                                                    Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+                                                                                                                }
+                                                                                                            });
+
+                                                                                                        }
+                                                                                                    });
+
+                                                                                                    //Log.e("URL ", "onSuccess: " + storageReference.getDownloadUrl());
+//                                                                                                    if (progressDialog.isShowing())
+//                                                                                                        progressDialog.dismiss();
+
+                                                                                                }
+                                                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                                        @Override
+                                                                                        public void onFailure(@NonNull Exception e) {
+
+
+//                                                                                            if (progressDialog.isShowing())
+//                                                                                                progressDialog.dismiss();
+                                                                                            Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+                                                                                        }
+                                                                                    });
+
+                                                                                }
+                                                                            });
+
+                                                                            //Log.e("URL ", "onSuccess: " + storageReference.getDownloadUrl());
+//                                                                            if (progressDialog.isShowing())
+//                                                                                progressDialog.dismiss();
+
+                                                                        }
+                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+
+
+//                                                                    if (progressDialog.isShowing())
+//                                                                        progressDialog.dismiss();
+                                                                    Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+                                                                }
+                                                            });
+
+                                                        }
+                                                    });
+
+                                                    //Log.e("URL ", "onSuccess: " + storageReference.getDownloadUrl());
+//                                                    if (progressDialog.isShowing())
+//                                                        progressDialog.dismiss();
+
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+
+//                                            if (progressDialog.isShowing())
+//                                                progressDialog.dismiss();
+                                            Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+
+                                }
+                            });
+
+                            //Log.e("URL ", "onSuccess: " + storageReference.getDownloadUrl());
+//                            if (progressDialog.isShowing())
+//                                progressDialog.dismiss();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+
+//                    if (progressDialog.isShowing())
+//                        progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),"Failed to Upload",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+        }
+    }
+
+    public void postAds(){
+
+        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        date = new Date();
+        todayDate = (formatter.format(date)).substring(0,10);
+        todayTime = (formatter.format(date)).substring(10,16);
+
+        adsProperty.put("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        adsProperty.put("adsID", adsID);
+        adsProperty.put("postDate", todayDate);
+        adsProperty.put("postTime", todayTime);
+
+        adsProperty.put("category",category);
+        adsProperty.put("bathroom",bathroom);
+        adsProperty.put("propertySize",size);
+        adsProperty.put("furnishing",furnishing);
+        adsProperty.put("parking",parking);
+        adsProperty.put("bedroom",bedroom);
+        adsProperty.put("resType",resType);
+        adsProperty.put("finishYear",year);
+        adsProperty.put("monthlyRent",monthlyRent);
+        adsProperty.put("deposit",deposit);
+
+        adsProperty.put("facilities", arrayListFacilities.toString());
+        adsProperty.put("convenience", arrayListConvenience.toString());
+
+        adsProperty.put("title", title);
+        adsProperty.put("description", description);
+        adsProperty.put("state",state);
+        adsProperty.put("city",city);
+
+        adsProperty.put("houseURL", houseURL);
+        adsProperty.put("bedroomURL", bedroomURL);
+        adsProperty.put("bathroomURL", bathroomURL);
+        adsProperty.put("livingroomURL", livingroomURL);
+        adsProperty.put("kitchenURL", kitchenURL);
+
+        db.collection("advertisements").document(adsID)
+                .set(adsProperty).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Your advertisement has been uploaded.",Toast.LENGTH_LONG).show();
+                toPostAds();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (progressDialog.isShowing())
+                    progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),"Failed to upload your advertisement.",Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public void checkExistingAds(){
+
+        db.collection("users")
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                String ads = document.getString("adsID");
+
+                                if(ads.equals(adsID)){
+                                    Log.d("TAG", "Ads Exists");
+
+                                }
+                            }
+                        }
+                        if(task.getResult().size() == 0 ) {
+                            //if no ads, call method upload image which will store data in database
+                            uploadImage();
+
+                        }
+                    }
+                });
+    }
+
+    public void toPostAds(){
+        Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
+        startActivity(intent);
+    }
+
+    public void toMoreDetail(){
+
+        bundle.remove("houseUri");
+        bundle.remove("bedroomUri");
+        bundle.remove("bathroomUri");
+        bundle.remove("livingroomUri");
+        bundle.remove("kitchenUri");
+
+        Intent intent = new Intent(getApplicationContext(),MoreDetail.class);
+        intent.putExtras(bundle);
+        Log.e("Bundle ", "onCreate: " + bundle);
+        startActivity(intent);
     }
 }

@@ -542,13 +542,8 @@ public class AvailableFacilities extends AppCompatActivity {
         bundle.putStringArrayList("convenience",arrayListConvenience);
 
         Intent intent = new Intent(getApplicationContext(),MoreDetail.class);
-//        intent.putExtra("category",category);
         intent.putExtras(bundle);
         Log.e("Bundle ", "onCreate: " + bundle);
-//        intent.putExtras(facilities);
-//        Log.e("Facilities ", "onCreate: " + facilities);
-//        intent.putExtras(convenience);
-//        Log.e("Convenience ", "onCreate: " + convenience);
         startActivity(intent);
     }
 
