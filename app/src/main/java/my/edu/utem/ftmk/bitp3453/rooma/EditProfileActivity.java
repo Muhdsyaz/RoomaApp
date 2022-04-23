@@ -166,7 +166,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
                     Date now = new Date();
                     String fileName = formatter.format(now);
-                    storageReference = FirebaseStorage.getInstance().getReference("images/"+fileName);
+                    storageReference = FirebaseStorage.getInstance().getReference("images/"+ " profilepic " +fileName);
 
                     //upload the photo uploaded from camera to storage
                     storageReference.putFile(getImageUri(getApplicationContext(),bitmap))

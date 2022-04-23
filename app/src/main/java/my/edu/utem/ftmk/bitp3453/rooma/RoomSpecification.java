@@ -82,8 +82,8 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+//        String text = parent.getItemAtPosition(position).toString();
+//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
         roomType = spRoomType.getSelectedItem().toString();
         floorRange = spFloorRange.getSelectedItem().toString();
         furnishing = spFurnishing.getSelectedItem().toString();

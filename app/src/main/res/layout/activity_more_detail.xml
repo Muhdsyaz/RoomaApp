@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Insert pictures of the property:"
+                android:text="Picture of your property"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginLeft="30dp"
@@ -235,7 +235,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Describe the property:"
+                android:text="Describe the property"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -243,7 +243,7 @@
                 android:fontFamily="@font/poppins"/>
 
             <EditText
-                android:id="@+id/etAdTitle"
+                android:id="@+id/etAdsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -251,6 +251,7 @@
                 android:layout_marginRight="20dp"
                 android:hint="Ad Title"
                 android:textSize="14dp"
+                android:inputType="text"
                 android:fontFamily="@font/poppins"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -265,6 +266,7 @@
                 android:layout_marginRight="20dp"
                 android:hint="Description"
                 android:textSize="14dp"
+                android:inputType="textLongMessage"
                 android:fontFamily="@font/poppins"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -339,11 +341,26 @@
                 android:id="@+id/btContinue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Continue"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
+                android:text="Submit Ads"
+                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textColor="#F4717F"
+                android:onClick="toPostAds"
+                android:backgroundTint="@color/white"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="100dp"/>
+
 
         </LinearLayout>
 

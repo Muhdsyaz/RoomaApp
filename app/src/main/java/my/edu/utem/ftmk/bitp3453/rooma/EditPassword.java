@@ -47,7 +47,7 @@ public class EditPassword extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //updatePassword();
+                updatePassword();
 
             }
         });
@@ -62,42 +62,42 @@ public class EditPassword extends AppCompatActivity {
             return false;
     }
 
-//    public void updatePassword(){
-//
-//        if(etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty())
-//        {
-//            Toast.makeText(EditPassword.this, "Password cannot be blank!", Toast.LENGTH_SHORT).show();
-//        }
-//        else if(!validatePassword()){
-//            Toast.makeText(EditPassword.this, "Password is not match!", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//
-//            DocumentReference passwordRef = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//
-//            passwordRef
-//                    .update("Password", etConfirmPassword.getText().toString())
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Log.d("EditPassword", "DocumentSnapshot successfully updated!");
-//
-//                            Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
-//                            startActivity(intent);
-//
-//                            updateUserPassword();
-//
-//                            Toast.makeText(EditPassword.this, "Password updated successfully.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w("EditPassword", "Error updating document", e);
-//                        }
-//                    });
-//        }
-//    }
+    public void updatePassword(){
+
+        if(etPassword.getText().toString().isEmpty() || etConfirmPassword.getText().toString().isEmpty())
+        {
+            Toast.makeText(EditPassword.this, "Password cannot be blank!", Toast.LENGTH_SHORT).show();
+        }
+        else if(!validatePassword()){
+            Toast.makeText(EditPassword.this, "Password is not match!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            DocumentReference passwordRef = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+            passwordRef
+                    .update("Password", etConfirmPassword.getText().toString())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("EditPassword", "DocumentSnapshot successfully updated!");
+
+                            Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+                            startActivity(intent);
+
+                            updateUserPassword();
+
+                            Toast.makeText(EditPassword.this, "Password updated successfully.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("EditPassword", "Error updating document", e);
+                        }
+                    });
+        }
+    }
 
     public void updateUserPassword() {
 

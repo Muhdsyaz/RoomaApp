@@ -101,8 +101,8 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+//        text = parent.getItemAtPosition(position).toString();
+//        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
         resType = spResType.getSelectedItem().toString();
         floorRange = spFloorRange.getSelectedItem().toString();
         bedroom = spBedroom.getSelectedItem().toString();

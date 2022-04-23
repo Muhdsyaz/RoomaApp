@@ -17,6 +17,8 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
     String category;
     Button btContinue;
 
+    Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +44,13 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
-        Spinner spinner = findViewById(R.id.spinner1);
+        spinner = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        category = spinner.getSelectedItem().toString();
     }
 
     public void toHome(View v){
@@ -91,8 +94,9 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        category = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), category, Toast.LENGTH_SHORT).show();
+//        category = parent.getItemAtPosition(position).toString();
+//        Toast.makeText(parent.getContext(), category, Toast.LENGTH_SHORT).show();
+        category = spinner.getSelectedItem().toString();
     }
 
     @Override

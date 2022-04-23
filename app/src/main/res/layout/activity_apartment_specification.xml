@@ -183,6 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
+                        android:inputType="number"
                         android:background="@drawable/customborder"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"/>
@@ -260,6 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
+                        android:inputType="number"
                         android:background="@drawable/customborder"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"/>
@@ -283,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
+                        android:inputType="number"
                         android:background="@drawable/customborder"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"/>
@@ -306,6 +309,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
+                        android:inputType="number"
                         android:background="@drawable/customborder"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"/>
