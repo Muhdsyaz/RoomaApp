@@ -7,452 +7,52 @@
     android:orientation="vertical"
     tools:context=".AdsPreview">
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+   <androidx.cardview.widget.CardView
+       android:layout_width="180dp"
+       android:layout_height="wrap_content"
+       app:cardCornerRadius="10dp"
+       app:cardElevation="10dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="10dp"
+           android:orientation="vertical">
+
+           <ImageView
+               android:layout_width="160dp"
+               android:layout_height="120dp"
+               android:background="#E8E8E8" />
+
+           <TextView
+               android:id="@+id/tvTitle"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="3Room The Height Condo MMU UTEM Bukit Beruang"
+               android:fontFamily="@font/poppins"
+               android:textSize="12dp"
+               android:layout_marginTop="10dp"/>
+
+           <TextView
+               android:id="@+id/tvRentPrice"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="RM 1000"
+               android:fontFamily="@font/poppins"
+               android:textColor="#F4717F"
+               android:textStyle="bold" />
+
+           <TextView
+               android:id="@+id/tvAdsDate"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="24/04/2022, 01:59"
+               android:fontFamily="@font/poppins"
+               android:textSize="10dp" />
+
+       </LinearLayout>
+
+   </androidx.cardview.widget.CardView>
 
-        <net.steamcrafted.materialiconlib.MaterialIconView
-            android:id="@+id/mvBackBtn"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-
-            app:materialIcon="chevron_left"
-            app:materialIconColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:padding="20dp"
-            android:text="" />
-
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:id="@+id/layoutAdsPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/ivAdsCover"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="#DADADA"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <HorizontalScrollView
-                    android:id="@+id/layoutHorizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:visibility="invisible"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/ivHouse"
-                            android:layout_width="410dp"
-                            android:layout_height="300dp"
-                            android:src="@drawable/round_pink" />
-
-                        <ImageView
-                            android:id="@+id/ivLivingRoom"
-                            android:layout_width="410dp"
-                            android:layout_height="300dp"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/round_pink" />
-
-                        <ImageView
-                            android:id="@+id/ivBedroom"
-                            android:layout_width="410dp"
-                            android:layout_height="300dp"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/round_pink" />
-
-                        <ImageView
-                            android:id="@+id/ivBathroom"
-                            android:layout_width="410dp"
-                            android:layout_height="300dp"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/round_pink" />
-
-                        <ImageView
-                            android:id="@+id/ivKitchen"
-                            android:layout_width="410dp"
-                            android:layout_height="300dp"
-                            android:layout_marginLeft="20dp"
-                            android:src="@drawable/round_pink" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rumah Sewa Taman Melaka Baru Fasa 3"
-                android:textSize="16dp"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/tvMonthlyRent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RM 1000"
-                android:textSize="20dp"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="#F4717F"
-                android:layout_marginLeft="18dp"/>
-
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="December 14, 2021 at 10:51:25 PM UTC+8"
-                android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
-
-            <TextView
-                android:id="@+id/tvCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apartment"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
-
-            <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Melaka > Batu Berendam"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
-
-            <LinearLayout
-                android:layout_width="380dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:background="#DADADA"/>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Property Details"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/poppins"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Property Type"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvResType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:background="#EDEDED">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Floor Range"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvFloor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bedroom"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvBedroom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:background="#EDEDED">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bathroom"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvBathroom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Size"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvSize"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:background="#EDEDED">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Furnishing"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvFurnishing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Facilities"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvFacilities"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:background="#EDEDED">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Built Year"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvYear"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rental Deposit"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvDeposit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:background="#EDEDED">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Other Facilities"
-                        android:fontFamily="@font/poppins"
-                        android:layout_weight="1"
-                        android:textSize="12dp"/>
-
-                    <TextView
-                        android:id="@+id/tvOther"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins"
-                        android:inputType="textPostalAddress"
-                        android:textColor="@color/black"
-                        android:textSize="12dp"/>
-
-                </TableRow>
-
-            </TableLayout>
-
-            <LinearLayout
-                android:layout_width="380dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:background="#DADADA"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"/>
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/customborder"
-                android:text="dadada"
-                android:textSize="12dp"/>
-
-            <Button
-                android:id="@+id/btSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit Now"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-        </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>

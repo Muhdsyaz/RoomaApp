@@ -83,91 +83,32 @@
         <item>More than 5</item>
     </string-array>
 
-    <string-array name="state">
-        <item>Please Choose Your State</item>
-        <item>Johor</item>
-        <item>Kuala Lumpur</item>
-        <item>Putrajaya</item>
-        <item>Terengganu</item>
-        <item>Kedah</item>
-        <item>Kelantan</item>
-        <item>Pahang</item>
-        <item>Penang</item>
-        <item>Perlis</item>
-        <item>Perak</item>
-        <item>Negeri Sembilan</item>
-        <item>Melaka</item>
-        <item>Labuan</item>
-        <item>Selangor</item>
-        <item>Sarawak</item>
-        <item>Sabah</item>
+    <string-array name="minprice">
+        <item>Any</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+        <item>6000</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>9000</item>
+        <item>10000</item>
     </string-array>
 
-    <string-array name="johor">
-        <item>Please Choose Your City</item>
-        <item>Ayer Baloi</item>
-        <item>Ayer Hitam</item>
-        <item>Bakri</item>
-        <item>Batu Anam</item>
-        <item>Batu Pahat</item>
-        <item>Bekok</item>
-        <item>Benut</item>
-        <item>Bukit Gambir</item>
-        <item>Bukit Pasir</item>
-        <item>Chaah</item>
-        <item>Endau</item>
-        <item>Gelang Patah</item>
-        <item>Gerisek</item>
-        <item>Gugusan Taib Andak</item>
-        <item>Jementah</item>
-        <item>Johor Bahru</item>
-        <item>Kahang</item>
-        <item>Kampung Kenangan Tun Dr Ismail</item>
-        <item>Kluang</item>
-        <item>Kota Tinggi</item>
-        <item>Kukup</item>
-        <item>Kulai</item>
-        <item>Labis</item>
-        <item>Layang Layang</item>
-        <item>Masai</item>
-        <item>Mersing</item>
-        <item>Muar</item>
-        <item>Iskandar Puteri</item>
-        <item>Pagoh</item>
-        <item>Paloh</item>
-        <item>Panchor</item>
-        <item>Parit Jawa</item>
-        <item>Parit Raja</item>
-        <item>Parit Sulong</item>
-        <item>Pasir Gudang</item>
-        <item>Pekan Nanas</item>
-        <item>Pengerang</item>
-        <item>Permas Jaya</item>
-        <item>Plentong</item>
-        <item>Pontian</item>
-        <item>Rengam</item>
-        <item>Rengit</item>
-        <item>Segamat</item>
-        <item>Semerah</item>
-        <item>Senai</item>
-        <item>Senggarang</item>
-        <item>Senibong</item>
-        <item>Seri Gading</item>
-        <item>Setia Indah</item>
-        <item>Setia Tropika</item>
-        <item>Simpang Rengam</item>
-        <item>Skudai</item>
-        <item>Sungai Mati</item>
-        <item>Tampoi</item>
-        <item>Tangkak</item>
-        <item>Ulu Tiram</item>
-        <item>Yong Peng</item>
-    </string-array>
-
-    <string-array name="kualalumpur">
-        <item>Please Choose Your City</item>
-        <item>Ampang Hilir</item>
-        <item>Bandar Damai Perdana</item>
+    <string-array name="maxprice">
+        <item>Any</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+        <item>6000</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>9000</item>
+        <item>10000</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

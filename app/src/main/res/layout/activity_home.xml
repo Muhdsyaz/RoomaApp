@@ -6,6 +6,151 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layoutAdsPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner_below"
+                android:elevation="5dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/customborder"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Search"
+                    android:inputType="textFilter"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="15dp">
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/custom_border_2"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="Location"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_dropdown"
+                            android:textAlignment="center" />
+
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/custom_border_2"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spResType"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/tvPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/custom_border_2"
+                            android:clickable="true"
+                            android:drawableRight="@drawable/ic_dropdown"
+                            android:fontFamily="@font/poppins"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="     Price"
+                            android:textColor="@color/black"
+                            android:textAlignment="center" />
+
+                        <TextView
+                            android:id="@+id/tvClear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="38dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="Clear All"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="380dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#DADADA" />
+
+                <Button
+                    android:id="@+id/btSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAdvertisement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -123,7 +268,217 @@
 
         </LinearLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layoutPrice"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_corner_top"
+        android:elevation="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="Min Price (RM)"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="Max Price (RM)"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <Spinner
+                    android:id="@+id/spMinPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spMaxPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="#DADADA" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#DADADA" />
+
+                <Button
+                    android:id="@+id/btApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLocation"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_corner_top"
+        android:elevation="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="State"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="City"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <Spinner
+                    android:id="@+id/spState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" />
+
+                <Spinner
+                    android:id="@+id/spCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="#DADADA" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btCancel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#DADADA" />
+
+                <Button
+                    android:id="@+id/btApply2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
+
+
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 
