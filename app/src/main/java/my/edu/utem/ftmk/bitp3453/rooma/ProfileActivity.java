@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
@@ -118,7 +119,8 @@ public class ProfileActivity extends AppCompatActivity {
                         tvAddress.setText(document.getData().get("Address").toString());
 
                         url = document.getData().get("Picture URL").toString();
-                        new ProfileActivity.FetchImage(url).start();
+//                        new ProfileActivity.FetchImage(url).start();
+                        Picasso.with(ProfileActivity.this).load(url).into(ivProfilePic);
 
                     } else {
                         Log.d("ProfileActivity", "No such document");
@@ -130,59 +132,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
-
-    class FetchImage extends Thread{
-
-        String URL;
-        Bitmap bitmap;
-
-        FetchImage(String URL){
-
-            this.URL = URL;
-
-        }
-
-        @Override
-        public void run() {
-
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-
-//                    progressDialog = new ProgressDialog(ProfileActivity.this);
-//                    progressDialog.setMessage("Getting your pic....");
-//                    progressDialog.setCancelable(false);
-//                    progressDialog.show();
-                }
-            });
-
-            InputStream inputStream = null;
-            try {
-                inputStream = new java.net.URL(URL).openStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-
-//                    if (progressDialog.isShowing())
-//                        progressDialog.dismiss();
-                    ivProfilePic.setImageBitmap(bitmap);
-
-                }
-            });
-
-
-
-
-        }
-    }
-
 
     public void toHome(View v){
         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);

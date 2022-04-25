@@ -30,6 +30,7 @@
                android:fontFamily="@font/poppins"
                android:textSize="12dp"
                android:textColor="@color/black"
+               android:textStyle="bold"
                android:layout_marginTop="10dp"/>
 
            <TextView
@@ -41,94 +42,105 @@
                android:textColor="#F4717F"
                android:textStyle="bold" />
 
-           <TableLayout
+           <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="wrap_content">
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
 
-               <TableRow>
+               <net.steamcrafted.materialiconlib.MaterialIconView
+                   android:layout_width="20dp"
+                   android:layout_height="15dp"
+                   app:materialIcon="map_marker"
+                   app:materialIconColor="@color/black" />
 
-                   <TextView
-                       android:id="@+id/tvLocation"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="Melaka > Ayer Keroh"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <TextView
+                   android:id="@+id/tvLocation"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Melaka > Ayer Keroh"
+                   android:fontFamily="@font/poppins"
+                   android:textColor="@color/black"
+                   android:textSize="10dp" />
 
-               </TableRow>
+           </LinearLayout>
 
-               <TableRow>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
 
-                   <TextView
-                       android:id="@+id/tvCategory"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="Apartment"
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <net.steamcrafted.materialiconlib.MaterialIconView
+                   android:layout_width="20dp"
+                   android:layout_height="15dp"
+                   app:materialIcon="home"
+                   app:materialIconColor="@color/black" />
 
-                   <TextView
-                       android:id="@+id/tvSize"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="1540 sq.ft."
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <TextView
+                   android:id="@+id/tvCategory"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Apartment"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/poppins"
+                   android:textColor="@color/black"
+                   android:textSize="10dp" />
 
-                   <TextView
+               <net.steamcrafted.materialiconlib.MaterialIconView
+                   android:layout_width="20dp"
+                   android:layout_height="15dp"
+                   app:materialIcon="ruler"
+                   app:materialIconColor="@color/black" />
 
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text=""
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <TextView
+                   android:id="@+id/tvSize"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="1540 sq.ft."
+                   android:layout_weight="1"
+                   android:fontFamily="@font/poppins"
+                   android:textColor="@color/black"
+                   android:textSize="10dp" />
 
-               </TableRow>
+           </LinearLayout>
 
-               <TableRow>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
 
-                   <TextView
-                       android:id="@+id/tvBedroom"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="3 Bedrooms"
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <net.steamcrafted.materialiconlib.MaterialIconView
+                   android:layout_width="20dp"
+                   android:layout_height="15dp"
+                   app:materialIcon="bed_empty"
+                   app:materialIconColor="@color/black" />
 
-                   <TextView
-                       android:id="@+id/tvBathroom"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="2 Bathrooms"
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textColor="@color/black"
-                       android:textSize="10dp" />
+               <TextView
+                   android:id="@+id/tvBedroom"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="3 Bedrooms"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/poppins"
+                   android:textColor="@color/black"
+                   android:textSize="10dp" />
 
-                   <TextView
+               <net.steamcrafted.materialiconlib.MaterialIconView
+                   android:layout_width="20dp"
+                   android:layout_height="15dp"
+                   app:materialIcon="water"
+                   app:materialIconColor="@color/black" />
 
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text=""
-                       android:layout_weight="1"
-                       android:fontFamily="@font/poppins"
-                       android:textSize="10dp" />
+               <TextView
+                   android:id="@+id/tvBathroom"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="2 Bathrooms"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/poppins"
+                   android:textColor="@color/black"
+                   android:textSize="10dp" />
 
-               </TableRow>
-
-
-           </TableLayout>
-
-
+           </LinearLayout>
 
            <TextView
                android:id="@+id/tvAdsDate"

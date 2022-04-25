@@ -73,7 +73,8 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true" />

@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
@@ -115,7 +116,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         tvPassword.setText(document.getData().get("Password").toString());
 
                         url = document.getData().get("Picture URL").toString();
-                        new EditProfileActivity.FetchImage(url).start();
+//                        new EditProfileActivity.FetchImage(url).start();
+                        Picasso.with(EditProfileActivity.this).load(url).into(ivProfilePic);
 
                     } else {
                         Log.d("ProfileActivity", "No such document");
@@ -212,56 +214,6 @@ public class EditProfileActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-        }
-    }
-
-    class FetchImage extends Thread{
-
-        String URL;
-        Bitmap bitmap;
-
-        FetchImage(String URL){
-
-            this.URL = URL;
-
-        }
-
-        @Override
-        public void run() {
-
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-
-//                    progressDialog = new ProgressDialog(ProfileActivity.this);
-//                    progressDialog.setMessage("Getting your pic....");
-//                    progressDialog.setCancelable(false);
-//                    progressDialog.show();
-                }
-            });
-
-            InputStream inputStream = null;
-            try {
-                inputStream = new java.net.URL(URL).openStream();
-                bitmap = BitmapFactory.decodeStream(inputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-
-//                    if (progressDialog.isShowing())
-//                        progressDialog.dismiss();
-                    ivProfilePic.setImageBitmap(bitmap);
-
-                }
-            });
-
-
         }
     }
 
