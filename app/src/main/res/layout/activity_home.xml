@@ -35,70 +35,198 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/customborder"
+                    android:background="@drawable/custom_border_2"
                     android:drawableLeft="@drawable/ic_search"
                     android:fontFamily="@font/poppins"
                     android:hint="Search"
                     android:inputType="textFilter"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Location"
+                            android:layout_weight="1"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="Location"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:drawableRight="@drawable/ic_dropdown" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#DADADA"
+                        android:orientation="vertical"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Category"
+                            android:layout_weight="1"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/tvCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:drawableRight="@drawable/ic_dropdown"
+                            android:fontFamily="@font/poppins"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="Category"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#DADADA"
+                        android:orientation="vertical"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sort"
+                            android:layout_weight="1"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sort"
+                            android:layout_weight="1"
+                            android:textSize="12dp"
+                            android:drawableRight="@drawable/ic_dropdown"
+                            android:clickable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:fontFamily="@font/poppins"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="380dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="#DADADA" />
+
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="match_parent">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="15dp">
+                        android:layout_marginTop="10dp">
 
-                        <TextView
-                            android:id="@+id/tvLocation"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/custom_border_2"
-                            android:clickable="true"
-                            android:fontFamily="@font/poppins"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:text="Location"
-                            android:textColor="@color/black"
-                            android:drawableRight="@drawable/ic_dropdown"
-                            android:textAlignment="center" />
+<!--                        <TextView-->
+
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="20dp"-->
+<!--                            android:background="@drawable/custom_border_2"-->
+<!--                            android:clickable="true"-->
+<!--                            android:fontFamily="@font/poppins"-->
+<!--                            android:foreground="?android:attr/selectableItemBackground"-->
+<!--                            android:text="Location"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:drawableRight="@drawable/ic_dropdown"-->
+<!--                            android:textAlignment="center" />-->
 
 
-                        <LinearLayout
+<!--                        <TextView-->
+<!--                            -->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:background="@drawable/custom_border_2"-->
+<!--                            android:clickable="true"-->
+<!--                            android:drawableRight="@drawable/ic_dropdown"-->
+<!--                            android:fontFamily="@font/poppins"-->
+<!--                            android:foreground="?android:attr/selectableItemBackground"-->
+<!--                            android:text="Category"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textAlignment="center" />-->
 
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:background="@drawable/custom_border_2"
-                            android:orientation="horizontal">
-
-                            <Spinner
-                                android:id="@+id/spResType"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvPropertyType"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:background="@drawable/custom_border_2"-->
+<!--                            android:clickable="true"-->
+<!--                            android:drawableRight="@drawable/ic_dropdown"-->
+<!--                            android:fontFamily="@font/poppins"-->
+<!--                            android:foreground="?android:attr/selectableItemBackground"-->
+<!--                            android:text="Property Type"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textAlignment="center" />-->
 
 
                         <TextView
                             android:id="@+id/tvPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="20dp"
                             android:background="@drawable/custom_border_2"
                             android:clickable="true"
                             android:drawableRight="@drawable/ic_dropdown"
                             android:fontFamily="@font/poppins"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="     Price"
+                            android:textSize="12dp"
                             android:textColor="@color/black"
                             android:textAlignment="center" />
 
@@ -114,38 +242,62 @@
                             android:fontFamily="@font/poppins"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="Clear All"
+                            android:textSize="12dp"
                             android:textColor="@color/black"/>
 
                     </LinearLayout>
 
                 </HorizontalScrollView>
 
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#DADADA" />
-
                 <Button
                     android:id="@+id/btSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Search"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"/>
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAdvertisement"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout7"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
+                android:layout_height="500dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAdvertisement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0" />
+
+                <ProgressBar
+                    android:id="@+id/idProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/rvAdvertisement" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
 
         </LinearLayout>
+
 
     </ScrollView>
 
@@ -362,6 +514,180 @@
 
                 <Button
                     android:id="@+id/btApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutCategory"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_corner_top"
+        android:elevation="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="Category"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <Spinner
+                    android:id="@+id/spCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="#DADADA" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btCancel3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#DADADA" />
+
+                <Button
+                    android:id="@+id/btApply3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apply"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutProperty"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_corner_top"
+        android:elevation="5dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:text="Property Type"
+                    android:textSize="10dp"
+                    android:fontFamily="@font/poppins"/>
+
+            </TableRow>
+
+            <TableRow
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <Spinner
+                    android:id="@+id/spPropertyType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="#DADADA" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btCancel4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#DADADA" />
+
+                <Button
+                    android:id="@+id/btApply4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Apply"

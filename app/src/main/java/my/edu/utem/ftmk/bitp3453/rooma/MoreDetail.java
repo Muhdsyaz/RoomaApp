@@ -604,7 +604,7 @@ public class MoreDetail extends AppCompatActivity {
         title = etAdsTitle.getText().toString();
         description = etDescription.getText().toString();
 
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(10,16);

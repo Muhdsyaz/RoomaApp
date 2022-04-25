@@ -415,7 +415,7 @@ public class AdsPreview extends AppCompatActivity {
 
     public void postAds(){
 
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(10,16);

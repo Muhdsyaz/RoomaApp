@@ -57,8 +57,11 @@ dependencies {
     //for image slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
-    // For recycler view
+    //For recycler view
     implementation "androidx.recyclerview:recyclerview:1.2.1"
-    // For control over item selection of both touch and mouse driven selection
+    //For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
+
+    //for loading image
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
