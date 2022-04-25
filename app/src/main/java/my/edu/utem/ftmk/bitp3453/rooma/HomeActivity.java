@@ -32,7 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdvertisementRVAdapter.ItemClickListener{
 
     TextView tvLocation, tvCategory, tvPrice, tvPropertyType, tvClear;
     Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spPropertyType;
@@ -345,6 +345,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         // adding our array list to our recycler view adapter class.
         advertisementRVAdapter = new AdvertisementRVAdapter(advertisementArrayList, this);
 
+        advertisementRVAdapter.setClickListener(this);
+
         // setting adapter to our recycler view.
         rvAdvertisement.setAdapter(advertisementRVAdapter);
 
@@ -394,6 +396,12 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        String title = advertisementRVAdapter.getItem(position).getTitle();
+        Toast.makeText(getApplicationContext(),"Title: " + title, Toast.LENGTH_SHORT).show();
     }
 
     public void toFavorite(View v){

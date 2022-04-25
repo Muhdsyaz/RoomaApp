@@ -24,6 +24,7 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
 
     private ArrayList<Advertisement> advertisementArrayList;
     private Context context;
+    private ItemClickListener mClickListener;
 
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
@@ -68,9 +69,10 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
     }
 
     public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // creating variables for our text views.
         private final ImageView ivAdsCover;
         private final TextView tvTitle;
@@ -96,7 +98,19 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
             tvBathroom = itemView.findViewById(R.id.tvBathroom);
             tvAdsDate = itemView.findViewById(R.id.tvAdsDate);
 
+            itemView.setOnClickListener(this);
+
         }
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        }
+    }
+
+
+    // allows clicks events to be caught
+    void setClickListener(AdvertisementRVAdapter.ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
     }
 
     // convenience method for getting data at click position
