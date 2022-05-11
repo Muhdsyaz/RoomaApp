@@ -278,10 +278,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <TableRow>
+                <TableRow
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginTop="10dp"
+                        android:text="Address Line 1 "
+                        android:fontFamily="@font/poppins"/>
+
+                    <EditText
+                        android:id="@+id/etAddress1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:background="@drawable/customborder"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginTop="10dp"
+                        android:text="Address Line 2 "
+                        android:fontFamily="@font/poppins"/>
+
+                    <EditText
+                        android:id="@+id/etAddress2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:background="@drawable/customborder"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -334,6 +385,32 @@
 
                     </LinearLayout>
 
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginTop="10dp"
+                        android:text="Postal Code "
+                        android:fontFamily="@font/poppins"/>
+
+                    <EditText
+                        android:id="@+id/etPostCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:textSize="14dp"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:background="@drawable/customborder"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"/>
 
                 </TableRow>
 

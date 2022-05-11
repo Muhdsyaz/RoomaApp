@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -56,11 +60,11 @@ public class MoreDetail extends AppCompatActivity {
     Uri houseUri, bedroomUri, bathroomUri, livingroomUri, kitchenUri;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
-    String adsID;
+    String adsID, address;
 
     ImageView ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen;
     LinearLayout layoutAdsCover, layoutBedroom, layoutBathroom, layoutLivingRoom, layoutKitchen;
-    EditText etAdsTitle, etDescription;
+    EditText etAdsTitle, etDescription, etAddress1, etAddress2, etPostCode;
 
     int number;
 
@@ -72,7 +76,12 @@ public class MoreDetail extends AppCompatActivity {
     ArrayList<String> arrayListFacilities = new ArrayList<>();
     ArrayList<String> arrayListConvenience = new ArrayList<>();
 
-    Map<String,String> adsProperty = new HashMap<>();
+    private double latitude, longitude;
+    private Geocoder geocoder;
+    List<Address> fullAddress;
+    GeoPoint geoPoint;
+
+    Map<String,Object> adsProperty = new HashMap<>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -83,6 +92,8 @@ public class MoreDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_detail);
+
+        geocoder = new Geocoder(this, Locale.getDefault());
 
         bundle = getIntent().getExtras();
 
@@ -115,6 +126,9 @@ public class MoreDetail extends AppCompatActivity {
         //declare edit text
         etAdsTitle = findViewById(R.id.etAdsTitle);
         etDescription = findViewById(R.id.etDescription);
+        etAddress1 = findViewById(R.id.etAddress1);
+        etAddress2 = findViewById(R.id.etAddress2);
+        etPostCode = findViewById(R.id.etPostCode);
 
         //declare button
         mvBackBtn = findViewById(R.id.mvBackBtn);
@@ -355,7 +369,9 @@ public class MoreDetail extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
         }
-        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty()){
+        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty() ||
+                etAddress1.getText().toString().isEmpty() || etAddress2.getText().toString().isEmpty() ||
+                etPostCode.getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
         }
         else if(state == null || city == null){
@@ -609,6 +625,7 @@ public class MoreDetail extends AppCompatActivity {
 
         title = etAdsTitle.getText().toString();
         description = etDescription.getText().toString();
+        address = etAddress1.getText().toString() + " " + etAddress2.getText().toString() + " " + city + " " + etPostCode.getText().toString() + " " + state;
 
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
@@ -638,6 +655,26 @@ public class MoreDetail extends AppCompatActivity {
         adsProperty.put("description", description);
         adsProperty.put("state",state);
         adsProperty.put("city",city);
+        adsProperty.put("address",address);
+
+        try {
+
+            fullAddress = geocoder.getFromLocationName(adsProperty.get("address").toString(), 5);
+
+            Address location = fullAddress.get(0);
+
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+
+            //Toast.makeText(getApplicationContext(), "latitude: " + latitude +", longitude: " + longitude, Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        adsProperty.put("latlng", geoPoint);
 
         adsProperty.put("houseURL", houseURL);
         adsProperty.put("bedroomURL", bedroomURL);
@@ -701,7 +738,9 @@ public class MoreDetail extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
         }
-        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty()){
+        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty() ||
+                etAddress1.getText().toString().isEmpty() || etAddress2.getText().toString().isEmpty() ||
+                etPostCode.getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
         }
         else if(state == null || city == null){
@@ -711,11 +750,14 @@ public class MoreDetail extends AppCompatActivity {
             //assign value from edit text
             title = etAdsTitle.getText().toString();
             description = etDescription.getText().toString();
+            address = etAddress1.getText().toString() + " " + etAddress2.getText().toString() + " " + city + " " + etPostCode.getText().toString() + " " + state;
+
             bundle.putString("adsID", title);
             bundle.putString("title", title);
             bundle.putString("description", description);
             bundle.putString("adsID", adsID);
             bundle.putString("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+            bundle.putString("address", address);
 
             Intent intent = new Intent(getApplicationContext(), AdsPreview.class);
             intent.putExtras(bundle);

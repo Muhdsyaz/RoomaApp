@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -35,6 +38,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,7 +52,7 @@ public class AdsPreview extends AppCompatActivity {
     HorizontalScrollView layoutHorizontal;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
     String title, monthlyRent, category, location, resType, floor, bedroom, bathroom, size, furnishing, parking, facilities, year, deposit, other, description;
-    String adsID, ownerUid, state, city;
+    String adsID, ownerUid, state, city, address;
 
     ArrayList<String> arrayListFacilities;
     ArrayList<String> arrayListConvenience;
@@ -65,13 +69,20 @@ public class AdsPreview extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-    Map<String,String> adsProperty = new HashMap<>();
+    private double latitude, longitude;
+    private Geocoder geocoder;
+    List<Address> fullAddress;
+    GeoPoint geoPoint;
+
+    Map<String,Object> adsProperty = new HashMap<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ads_preview);
+
+        geocoder = new Geocoder(this, Locale.getDefault());
 
         //getting the data bundle from other activity incoming
         bundle = getIntent().getExtras();
@@ -96,6 +107,7 @@ public class AdsPreview extends AppCompatActivity {
         category = bundle.getString("category");
         state = bundle.getString("state");
         city = bundle.getString("city");
+        address = bundle.getString("address");
         resType = bundle.getString("resType");
         floor = bundle.getString("floorRange");
         bedroom = bundle.getString("bedroom");
@@ -443,6 +455,26 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("description", description);
         adsProperty.put("state",state);
         adsProperty.put("city",city);
+        adsProperty.put("address",address);
+
+        try {
+
+            fullAddress = geocoder.getFromLocationName(adsProperty.get("address").toString(), 5);
+
+            Address location = fullAddress.get(0);
+
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+
+            //Toast.makeText(getApplicationContext(), "latitude: " + latitude +", longitude: " + longitude, Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        adsProperty.put("latlng", geoPoint);
 
         adsProperty.put("houseURL", houseURL);
         adsProperty.put("bedroomURL", bedroomURL);
