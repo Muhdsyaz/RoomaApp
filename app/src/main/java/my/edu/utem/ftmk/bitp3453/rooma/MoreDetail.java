@@ -355,6 +355,12 @@ public class MoreDetail extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
         }
+        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
+        }
+        else if(state == null || city == null){
+            Toast.makeText(getApplicationContext(),"Please make sure the state and city are selected.",Toast.LENGTH_SHORT).show();
+        }
         else{
 
 //            progressDialog = new ProgressDialog(this);
@@ -694,6 +700,12 @@ public class MoreDetail extends AppCompatActivity {
         if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null)
         {
             Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
+        }
+        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
+        }
+        else if(state == null || city == null){
+            Toast.makeText(getApplicationContext(),"Please make sure the state and city are selected.",Toast.LENGTH_SHORT).show();
         }
         else {
             //assign value from edit text

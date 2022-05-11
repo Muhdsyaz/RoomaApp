@@ -2,6 +2,7 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,13 +35,13 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdvertisementRVAdapter.ItemClickListener{
 
-    TextView tvLocation, tvCategory, tvPrice, tvPropertyType, tvClear;
-    Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spPropertyType;
-    Button btCancel, btApply, btCancel2, btApply2, btCancel3, btApply3, btSearch;
+    TextView tvClear;
+    Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spSort;
+    Button btSearch;
 
-    String category, minPrice, maxPrice, state, city, location;
+    String adsID, category, minPrice, maxPrice, state, city, sort;
 
-    LinearLayout layoutPrice, layoutLocation, layoutCategory, layoutProperty;
+    ConstraintLayout layoutAdvertisement;
 
     // creating variables for our recycler view,
     // array list, adapter, firebase firestore
@@ -62,34 +63,18 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         spCategory = findViewById(R.id.spCategory);
         spMinPrice = findViewById(R.id.spMinPrice);
         spMaxPrice = findViewById(R.id.spMaxPrice);
-        spPropertyType = findViewById(R.id.spPropertyType);
         spState = findViewById(R.id.spState);
         spCity = findViewById(R.id.spCity);
+        spSort = findViewById(R.id.spSort);
 
         //declare textview
-        tvLocation = findViewById(R.id.tvLocation);
-        tvCategory = findViewById(R.id.tvCategory);
-//        tvPropertyType = findViewById(R.id.tvPropertyType);
-        tvPrice = findViewById(R.id.tvPrice);
         tvClear = findViewById(R.id.tvClear);
 
         //declare button
-        btCancel = findViewById(R.id.btCancel);
-        btApply = findViewById(R.id.btApply);
-        btCancel2 = findViewById(R.id.btCancel2);
-        btApply2 = findViewById(R.id.btApply2);
-        btCancel3 = findViewById(R.id.btCancel3);
-        btApply3 = findViewById(R.id.btApply3);
         btSearch = findViewById(R.id.btSearch);
 
-        //declare layout
-        layoutPrice = findViewById(R.id.layoutPrice);
-        layoutLocation = findViewById(R.id.layoutLocation);
-        layoutCategory = findViewById(R.id.layoutCategory);
-        layoutProperty = findViewById(R.id.layoutProperty);
+        layoutAdvertisement = findViewById(R.id.layoutAdvertisement);
 
-        //get initial value from textview
-        location = tvLocation.getText().toString();
 
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -113,112 +98,21 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         spMaxPrice.setOnItemSelectedListener(this);
         maxPrice = spMaxPrice.getSelectedItem().toString();
 
+        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
+                R.array.sort, android.R.layout.simple_spinner_item);
+        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSort.setAdapter(adapter4);
+        spSort.setOnItemSelectedListener(this);
+        sort = spSort.getSelectedItem().toString();
 
-
-        tvPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutPrice.setVisibility(View.VISIBLE);
-
-                btCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        layoutPrice.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-                btApply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(!minPrice.equals("Any") && !maxPrice.equals("Any")) {
-                            tvPrice.setText(minPrice + " - " + maxPrice);
-
-                            layoutPrice.setVisibility(View.INVISIBLE);
-                        }
-
-                        if(minPrice.equals("") && maxPrice.equals("")) {
-                            tvPrice.setText("Price");
-
-                            layoutPrice.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-
-            }
-        });
-
-        tvLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutLocation.setVisibility(View.VISIBLE);
-
-                btCancel2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        layoutLocation.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-                btApply2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //set new value to tvLocation
-                        tvLocation.setText(state + " > " + city);
-                        layoutLocation.setVisibility(View.INVISIBLE);
-
-                        if(state.equals("") && city.equals("")) {
-                            tvLocation.setText("Location");
-
-                            layoutLocation.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-
-            }
-        });
-
-        tvCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutCategory.setVisibility(View.VISIBLE);
-
-                btCancel3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        layoutCategory.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-                btApply3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //set new value to tvLocation
-                        tvCategory.setText(category);
-                        layoutCategory.setVisibility(View.INVISIBLE);
-
-                        if(category.equals("")) {
-                            tvCategory.setText("Category");
-
-                            layoutCategory.setVisibility(View.INVISIBLE);
-                        }
-                    }
-                });
-            }
-        });
 
         tvClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                category = "";
-                minPrice = "";
-                maxPrice = "";
-                state = "";
-                city = "";
-                location = "";
 
-                tvPrice.setText("Price");
-                tvCategory.setText("Category");
-                tvLocation.setText("Location");
+                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -401,7 +295,14 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(View view, int position) {
         String title = advertisementRVAdapter.getItem(position).getTitle();
-        Toast.makeText(getApplicationContext(),"Title: " + title, Toast.LENGTH_SHORT).show();
+        adsID = advertisementRVAdapter.getItem(position).getAdsID();
+        Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        startActivity(intent);
+
+        toDisplayAds(adsID);
     }
 
     public void toFavorite(View v){
@@ -419,6 +320,12 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
+    public void toDisplayAds(String adsID){
+        Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed()
     {
@@ -430,6 +337,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         category = spCategory.getSelectedItem().toString();
         minPrice = spMinPrice.getSelectedItem().toString();
         maxPrice = spMaxPrice.getSelectedItem().toString();
+        Log.e("Property ", " Category: " + category);
+        Log.e("Min ", " Price: " + minPrice);
+        Log.e("Max ", " Price: " + maxPrice);
 
     }
 

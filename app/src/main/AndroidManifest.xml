@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,6 +16,12 @@
         android:roundIcon="@drawable/roomaiconlogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rooma">
+        <activity
+            android:name=".GoogleMapActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DisplayAdvertisement"
+            android:exported="true" />
         <activity
             android:name=".AdsPreview"
             android:exported="true" />
@@ -74,7 +82,7 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
@@ -84,6 +92,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBhng5SHsEP8nFpmDCMzdxCApzRdP9AVug" />
 
         <meta-data
             android:name="preloaded_fonts"

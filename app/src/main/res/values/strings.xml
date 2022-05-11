@@ -84,7 +84,7 @@
     </string-array>
 
     <string-array name="minprice">
-        <item>Any</item>
+        <item>Min. price</item>
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
@@ -98,7 +98,7 @@
     </string-array>
 
     <string-array name="maxprice">
-        <item>Any</item>
+        <item>Max. price</item>
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>

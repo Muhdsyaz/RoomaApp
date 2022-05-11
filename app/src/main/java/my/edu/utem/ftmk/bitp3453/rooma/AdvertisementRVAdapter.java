@@ -59,6 +59,7 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
         holder.tvBedroom.setText(advertisement.getBedroom() + " Bedroom");
         holder.tvBathroom.setText(advertisement.getBathroom() + " Bathroom");
         holder.tvAdsDate.setText(advertisement.getPostDate() + " " + advertisement.getPostTime());
+        holder.tvAdsID.setText(advertisement.getAdsID());
 
     }
 
@@ -83,6 +84,7 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
         private final TextView tvBedroom;
         private final TextView tvBathroom;
         private final TextView tvAdsDate;
+        private final TextView tvAdsID;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -97,6 +99,7 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
             tvBedroom = itemView.findViewById(R.id.tvBedroom);
             tvBathroom = itemView.findViewById(R.id.tvBathroom);
             tvAdsDate = itemView.findViewById(R.id.tvAdsDate);
+            tvAdsID = itemView.findViewById(R.id.tvAdsID);
 
             itemView.setOnClickListener(this);
 

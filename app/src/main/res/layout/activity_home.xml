@@ -67,18 +67,15 @@
                             android:layout_weight="1"
                             android:textSize="12dp" />
 
-                        <TextView
-                            android:id="@+id/tvLocation"
+                        <Spinner
+                            android:id="@+id/spState"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:fontFamily="@font/poppins"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:text="Location"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"
-                            android:drawableRight="@drawable/ic_dropdown" />
+                            android:layout_height="wrap_content" />
+
+                        <Spinner
+                            android:id="@+id/spCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -102,18 +99,10 @@
                             android:layout_weight="1"
                             android:textSize="12dp" />
 
-                        <TextView
-                            android:id="@+id/tvCategory"
+                        <Spinner
+                            android:id="@+id/spCategory"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:drawableRight="@drawable/ic_dropdown"
-                            android:fontFamily="@font/poppins"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:text="Category"
-                            android:textSize="12dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/black" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -137,18 +126,10 @@
                             android:layout_weight="1"
                             android:textSize="12dp" />
 
-                        <TextView
+                        <Spinner
+                            android:id="@+id/spSort"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sort"
-                            android:layout_weight="1"
-                            android:textSize="12dp"
-                            android:drawableRight="@drawable/ic_dropdown"
-                            android:clickable="true"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:fontFamily="@font/poppins"
-                            android:textStyle="bold"
-                            android:textColor="@color/black"/>
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -168,67 +149,39 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:paddingBottom="10dp"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp">
 
-<!--                        <TextView-->
-
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="20dp"-->
-<!--                            android:background="@drawable/custom_border_2"-->
-<!--                            android:clickable="true"-->
-<!--                            android:fontFamily="@font/poppins"-->
-<!--                            android:foreground="?android:attr/selectableItemBackground"-->
-<!--                            android:text="Location"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:drawableRight="@drawable/ic_dropdown"-->
-<!--                            android:textAlignment="center" />-->
-
-
-<!--                        <TextView-->
-<!--                            -->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="10dp"-->
-<!--                            android:background="@drawable/custom_border_2"-->
-<!--                            android:clickable="true"-->
-<!--                            android:drawableRight="@drawable/ic_dropdown"-->
-<!--                            android:fontFamily="@font/poppins"-->
-<!--                            android:foreground="?android:attr/selectableItemBackground"-->
-<!--                            android:text="Category"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textAlignment="center" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/tvPropertyType"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="10dp"-->
-<!--                            android:background="@drawable/custom_border_2"-->
-<!--                            android:clickable="true"-->
-<!--                            android:drawableRight="@drawable/ic_dropdown"-->
-<!--                            android:fontFamily="@font/poppins"-->
-<!--                            android:foreground="?android:attr/selectableItemBackground"-->
-<!--                            android:text="Property Type"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textAlignment="center" />-->
-
-
-                        <TextView
-                            android:id="@+id/tvPrice"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:layout_marginLeft="20dp"
-                            android:background="@drawable/custom_border_2"
-                            android:clickable="true"
-                            android:drawableRight="@drawable/ic_dropdown"
-                            android:fontFamily="@font/poppins"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:text="     Price"
-                            android:textSize="12dp"
-                            android:textColor="@color/black"
-                            android:textAlignment="center" />
+                            android:background="@drawable/customborder"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spMinPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="20dp"
+                            android:background="@drawable/customborder"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spMaxPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/tvClear"
@@ -236,13 +189,11 @@
                             android:layout_height="38dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
+                            android:paddingTop="10dp"
                             android:clickable="true"
                             android:fontFamily="@font/poppins"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="Clear All"
-                            android:textSize="12dp"
                             android:textColor="@color/black"/>
 
                     </LinearLayout>
@@ -262,7 +213,7 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout7"
+                android:id="@+id/layoutAdvertisement"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_marginLeft="10dp"
@@ -422,390 +373,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layoutPrice"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_top"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="Min Price (RM)"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:text="Max Price (RM)"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-            </TableRow>
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <Spinner
-                    android:id="@+id/spMinPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1" />
-
-                <Spinner
-                    android:id="@+id/spMaxPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="380dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="#DADADA" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <Button
-                    android:id="@+id/btCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="40dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DADADA" />
-
-                <Button
-                    android:id="@+id/btApply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-
-
-            </TableRow>
-
-        </TableLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutCategory"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_top"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="Category"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-            </TableRow>
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <Spinner
-                    android:id="@+id/spCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="380dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="#DADADA" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <Button
-                    android:id="@+id/btCancel3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="40dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DADADA" />
-
-                <Button
-                    android:id="@+id/btApply3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-
-
-            </TableRow>
-
-        </TableLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutProperty"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_top"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="Property Type"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-            </TableRow>
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <Spinner
-                    android:id="@+id/spPropertyType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="380dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="#DADADA" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <Button
-                    android:id="@+id/btCancel4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="40dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DADADA" />
-
-                <Button
-                    android:id="@+id/btApply4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-
-
-            </TableRow>
-
-        </TableLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutLocation"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_top"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:text="State"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:text="City"
-                    android:textSize="10dp"
-                    android:fontFamily="@font/poppins"/>
-
-            </TableRow>
-
-            <TableRow
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-
-                <Spinner
-                    android:id="@+id/spState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1" />
-
-                <Spinner
-                    android:id="@+id/spCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="380dp"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="#DADADA" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <Button
-                    android:id="@+id/btCancel2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cancel"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="40dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#DADADA" />
-
-                <Button
-                    android:id="@+id/btApply2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_weight="1" />
-
-
-            </TableRow>
-
-        </TableLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
