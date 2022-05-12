@@ -59,6 +59,23 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Intent intent = getIntent();
+
+        Bundle bundle = getIntent().getExtras();
+        state = intent.getStringExtra("state");
+        city = intent.getStringExtra("city");
+        category = intent.getStringExtra("category");
+        minPrice = intent.getStringExtra("minPrice");
+        maxPrice = intent.getStringExtra("maxPrice");
+        sort = intent.getStringExtra("sort");
+
+        Log.e("onCreate ", " State: " + state);
+        Log.e("onCreate ", " City: " + city);
+        Log.e("onCreate ", " Category: " + category);
+        Log.e("onCreate ", " Min Price: " + minPrice);
+        Log.e("onCreate ", " Max Price: " + maxPrice);
+        Log.e("onCreate ", "Sort: " + sort);
+
         //declare spinner
         spCategory = findViewById(R.id.spCategory);
         spMinPrice = findViewById(R.id.spMinPrice);
@@ -69,13 +86,225 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //declare textview
         tvClear = findViewById(R.id.tvClear);
+        tvEmptyDb = findViewById(R.id.tvEmptyDb);
 
         //declare button
         btSearch = findViewById(R.id.btSearch);
 
         layoutAdvertisement = findViewById(R.id.layoutAdvertisement);
 
+        // initializing our variables.
+        rvAdvertisement = findViewById(R.id.rvAdvertisement);
+        loadingPB = findViewById(R.id.idProgressBar);
 
+        // initializing our variable for firebase
+        // firestore and getting its instance.
+        db = FirebaseFirestore.getInstance();
+
+        // creating our new array list
+        advertisementArrayList = new ArrayList<>();
+        rvAdvertisement.setHasFixedSize(true);
+        rvAdvertisement.setLayoutManager(new LinearLayoutManager(this));
+
+        // adding our array list to our recycler view adapter class.
+        advertisementRVAdapter = new AdvertisementRVAdapter(advertisementArrayList, this);
+
+        advertisementRVAdapter.setClickListener(this);
+
+        // setting adapter to our recycler view.
+        rvAdvertisement.setAdapter(advertisementRVAdapter);
+
+        if(state == null && city == null && category == null && minPrice == null && maxPrice == null){
+
+            // below line is use to get the data from Firebase Firestore.
+            // previously we were saving data on a reference of Courses
+            // now we will be getting the data from the same reference.
+            db.collection("advertisements").get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            // after getting the data we are calling on success method
+                            // and inside this method we are checking if the received
+                            // query snapshot is empty or not.
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                // if the snapshot is not empty we are
+                                // hiding our progress bar and adding
+                                // our data in a list.
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    // after getting this list we are passing
+                                    // that list to our object class.
+                                    Advertisement c = d.toObject(Advertisement.class);
+
+                                    // and we will pass this object class
+                                    // inside our arraylist which we have
+                                    // created for recycler view.
+                                    advertisementArrayList.add(c);
+                                }
+                                // after adding the data to recycler view.
+                                // we are calling recycler view notifuDataSetChanged
+                                // method to notify that data has been changed in recycler view.
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // if we do not get any data or any error we are displaying
+                    // a toast message that we do not get any data
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+        else if(state == null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
+            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements").whereEqualTo("category", category).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state != null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
+            Toast.makeText(getApplicationContext(), "Kat sini " + state + " " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("state", state)
+                    .whereEqualTo("category", category).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state != null && city != null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
+            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("state", state)
+                    .whereEqualTo("city", city)
+                    .whereEqualTo("category", category).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else {
+            // below line is use to get the data from Firebase Firestore.
+            // previously we were saving data on a reference of Courses
+            // now we will be getting the data from the same reference.
+            db.collection("advertisements").get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            // after getting the data we are calling on success method
+                            // and inside this method we are checking if the received
+                            // query snapshot is empty or not.
+                            if (!queryDocumentSnapshots.isEmpty()) {
+                                // if the snapshot is not empty we are
+                                // hiding our progress bar and adding
+                                // our data in a list.
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    // after getting this list we are passing
+                                    // that list to our object class.
+                                    Advertisement c = d.toObject(Advertisement.class);
+
+                                    // and we will pass this object class
+                                    // inside our arraylist which we have
+                                    // created for recycler view.
+                                    advertisementArrayList.add(c);
+                                }
+                                // after adding the data to recycler view.
+                                // we are calling recycler view notifuDataSetChanged
+                                // method to notify that data has been changed in recycler view.
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // if we do not get any data or any error we are displaying
+                    // a toast message that we do not get any data
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
                 R.array.category, android.R.layout.simple_spinner_item);
@@ -223,70 +452,33 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         });
         // -----> Spinner City and State
 
-        // initializing our variables.
-        rvAdvertisement = findViewById(R.id.rvAdvertisement);
-        loadingPB = findViewById(R.id.idProgressBar);
 
-        // initializing our variable for firebase
-        // firestore and getting its instance.
-        db = FirebaseFirestore.getInstance();
 
-        // creating our new array list
-        advertisementArrayList = new ArrayList<>();
-        rvAdvertisement.setHasFixedSize(true);
-        rvAdvertisement.setLayoutManager(new LinearLayoutManager(this));
-
-        // adding our array list to our recycler view adapter class.
-        advertisementRVAdapter = new AdvertisementRVAdapter(advertisementArrayList, this);
-
-        advertisementRVAdapter.setClickListener(this);
-
-        // setting adapter to our recycler view.
-        rvAdvertisement.setAdapter(advertisementRVAdapter);
-
-        // below line is use to get the data from Firebase Firestore.
-        // previously we were saving data on a reference of Courses
-        // now we will be getting the data from the same reference.
-        db.collection("advertisements").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        // after getting the data we are calling on success method
-                        // and inside this method we are checking if the received
-                        // query snapshot is empty or not.
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            // if the snapshot is not empty we are
-                            // hiding our progress bar and adding
-                            // our data in a list.
-                            loadingPB.setVisibility(View.GONE);
-                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot d : list) {
-                                // after getting this list we are passing
-                                // that list to our object class.
-                                Advertisement c = d.toObject(Advertisement.class);
-
-                                // and we will pass this object class
-                                // inside our arraylist which we have
-                                // created for recycler view.
-                                advertisementArrayList.add(c);
-                            }
-                            // after adding the data to recycler view.
-                            // we are calling recycler view notifuDataSetChanged
-                            // method to notify that data has been changed in recycler view.
-                            advertisementRVAdapter.notifyDataSetChanged();
-                        } else {
-                            // if the snapshot is empty we are displaying a toast message.
-                            loadingPB.setVisibility(View.GONE);
-                            tvEmptyDb.setVisibility(View.VISIBLE);
-                            //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
+        btSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                // if we do not get any data or any error we are displaying
-                // a toast message that we do not get any data
-                Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+
+
+                Log.e("btSearch ", " State: " + state);
+                Log.e("btSearch ", " City: " + city);
+                Log.e("btSearch ", " Category: " + category);
+                Log.e("btSearch ", " Min Price: " + minPrice);
+                Log.e("btSearch ", " Max Price: " + maxPrice);
+                Log.e("btSearch ", "Sort: " + sort);
+
+                Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("state",state);
+                bundle.putString("city",city);
+                bundle.putString("category",category);
+                bundle.putString("minPrice",minPrice);
+                bundle.putString("maxPrice",maxPrice);
+                bundle.putString("sort",sort);
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+                Log.e("Data ", "onCreate: " + bundle);
+
             }
         });
 
@@ -296,6 +488,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(View view, int position) {
         String title = advertisementRVAdapter.getItem(position).getTitle();
         adsID = advertisementRVAdapter.getItem(position).getAdsID();
+        Log.e("DisplayAds,  ", "AdsID: " + adsID);
         Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
@@ -323,6 +516,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     public void toDisplayAds(String adsID){
         Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
         intent.putExtra("adsID", adsID);
+        intent.putExtra("activity", "home");
         startActivity(intent);
     }
 
@@ -337,9 +531,10 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         category = spCategory.getSelectedItem().toString();
         minPrice = spMinPrice.getSelectedItem().toString();
         maxPrice = spMaxPrice.getSelectedItem().toString();
-        Log.e("Property ", " Category: " + category);
-        Log.e("Min ", " Price: " + minPrice);
-        Log.e("Max ", " Price: " + maxPrice);
+//        Log.e("Property ", " Category: " + category);
+//        Log.e("Min ", " Price: " + minPrice);
+//        Log.e("Max ", " Price: " + maxPrice);
+//        Log.e("Sort ", sort);
 
     }
 

@@ -705,7 +705,7 @@ public class MoreDetail extends AppCompatActivity {
 
     public void checkExistingAds(){
 
-        db.collection("users")
+        db.collection("advertisements")
                 .whereEqualTo("adsID", adsID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

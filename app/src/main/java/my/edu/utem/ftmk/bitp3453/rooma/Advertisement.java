@@ -1,9 +1,51 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
+import com.google.firebase.firestore.GeoPoint;
+
 public class Advertisement {
 
     String ownerUid, adsID, bedroom, bedroomURL, bathroom, bathroomURL, category, city, convenience, deposit, description, facilities, finishYear;
-    String furnishing, houseURL, kitchenURL, livingroomURL, monthlyRent, parking, postDate, postTime, propertySize, resType, state, title;
+    String furnishing;
+    String houseURL;
+    String kitchenURL;
+    String livingroomURL;
+    String monthlyRent;
+    String parking;
+    String postDate;
+    String postTime;
+    String propertySize;
+    String resType;
+    String state;
+    String title;
+    String address;
+
+    public String getFloorRange() {
+        return floorRange;
+    }
+
+    public void setFloorRange(String floorRange) {
+        this.floorRange = floorRange;
+    }
+
+    String floorRange;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public GeoPoint getLatlng() {
+        return latlng;
+    }
+
+    public void setLatlng(GeoPoint latlng) {
+        this.latlng = latlng;
+    }
+
+    GeoPoint latlng;
 
     public String getOwnerUid() {
         return ownerUid;

@@ -131,6 +131,7 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
         bundle.putString("bedroom",bedroom);
         bundle.putString("bathroom",bathroom);
         bundle.putString("furnishing",furnishing);
+        bundle.putString("floorRange","");
         bundle.putString("parking",parking);
         bundle.putString("propertySize",propertySize);
         bundle.putString("finishYear", finishYear);

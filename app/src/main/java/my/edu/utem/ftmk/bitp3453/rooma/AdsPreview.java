@@ -94,7 +94,7 @@ public class AdsPreview extends AppCompatActivity {
         livingroomUri = Uri.parse(bundle.getString("livingroomUri"));
         kitchenUri = Uri.parse(bundle.getString("kitchenUri"));
 
-        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(10,16);
@@ -437,9 +437,12 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("postDate", todayDate);
         adsProperty.put("postTime", todayTime);
 
+
+
         adsProperty.put("category",category);
         adsProperty.put("bathroom",bathroom);
         adsProperty.put("propertySize",size);
+        adsProperty.put("floorRange",floor);
         adsProperty.put("furnishing",furnishing);
         adsProperty.put("parking",parking);
         adsProperty.put("bedroom",bedroom);

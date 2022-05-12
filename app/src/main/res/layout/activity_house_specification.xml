@@ -213,7 +213,7 @@
                         android:paddingLeft="18dp"
                         android:textSize="16dp"
                         android:inputType="number"
-                        android:maxLength="2"
+                        android:maxLength="4"
                         android:background="@drawable/customborder"
                         android:layout_weight="1" />
 
