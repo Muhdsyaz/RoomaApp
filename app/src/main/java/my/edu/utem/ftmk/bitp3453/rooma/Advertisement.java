@@ -19,6 +19,16 @@ public class Advertisement {
     String title;
     String address;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    String status;
+
     public String getFloorRange() {
         return floorRange;
     }

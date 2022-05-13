@@ -1,64 +1,148 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AllAdsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AllAdsFragment extends Fragment {
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class AllAdsFragment extends Fragment implements AdvertisementRVAdapter.ItemClickListener{
 
-    public AllAdsFragment() {
-        // Required empty public constructor
-    }
+    // creating variables for our recycler view,
+    // array list, adapter, firebase firestore
+    // and our progress bar.
+    private RecyclerView rvAdvertisement;
+    private ArrayList<Advertisement> advertisementArrayList;
+    private AdvertisementRVAdapter advertisementRVAdapter;
+    private FirebaseFirestore db;
+    ProgressBar loadingPB;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AllAdsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AllAdsFragment newInstance(String param1, String param2) {
-        AllAdsFragment fragment = new AllAdsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextView tvEmptyDb;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    String adsID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_ads, container, false);
+        //Initialize view
+        View view = inflater.inflate(R.layout.fragment_all_ads, container, false);
+
+        //Assign variable
+        tvEmptyDb = view.findViewById(R.id.tvEmptyDb);
+
+        // initializing our variables.
+        rvAdvertisement = view.findViewById(R.id.rvAdvertisement);
+        loadingPB = view.findViewById(R.id.idProgressBar);
+
+        // initializing our variable for firebase
+        // firestore and getting its instance.
+        db = FirebaseFirestore.getInstance();
+
+        // creating our new array list
+        advertisementArrayList = new ArrayList<>();
+        rvAdvertisement.setHasFixedSize(true);
+        rvAdvertisement.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // adding our array list to our recycler view adapter class.
+        advertisementRVAdapter = new AdvertisementRVAdapter(advertisementArrayList, getContext());
+
+        advertisementRVAdapter.setClickListener(this);
+
+        // setting adapter to our recycler view.
+        rvAdvertisement.setAdapter(advertisementRVAdapter);
+
+        // below line is use to get the data from Firebase Firestore.
+        // previously we were saving data on a reference of Courses
+        // now we will be getting the data from the same reference.
+        db.collection("advertisements")
+                .whereEqualTo("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("status","sold")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // after getting the data we are calling on success method
+                        // and inside this method we are checking if the received
+                        // query snapshot is empty or not.
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            // if the snapshot is not empty we are
+                            // hiding our progress bar and adding
+                            // our data in a list.
+                            loadingPB.setVisibility(View.GONE);
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : list) {
+                                // after getting this list we are passing
+                                // that list to our object class.
+                                Advertisement c = d.toObject(Advertisement.class);
+
+                                // and we will pass this object class
+                                // inside our arraylist which we have
+                                // created for recycler view.
+                                advertisementArrayList.add(c);
+                            }
+                            // after adding the data to recycler view.
+                            // we are calling recycler view notifuDataSetChanged
+                            // method to notify that data has been changed in recycler view.
+                            advertisementRVAdapter.notifyDataSetChanged();
+                        } else {
+                            // if the snapshot is empty we are displaying a toast message.
+                            loadingPB.setVisibility(View.GONE);
+                            tvEmptyDb.setVisibility(View.VISIBLE);
+                            //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // if we do not get any data or any error we are displaying
+                // a toast message that we do not get any data
+                //Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        return view;
+
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        String title = advertisementRVAdapter.getItem(position).getTitle();
+        adsID = advertisementRVAdapter.getItem(position).getAdsID();
+        Log.e("DisplayAds,  ", "AdsID: " + adsID);
+        Toast.makeText(getContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getContext(),DisplayAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        startActivity(intent);
+
+        toDisplayAds(adsID);
+    }
+
+    public void toDisplayAds(String adsID){
+        Intent intent = new Intent(getContext(),DisplayAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        intent.putExtra("activity", "allAds");
+        startActivity(intent);
     }
 }

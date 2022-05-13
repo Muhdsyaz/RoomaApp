@@ -437,8 +437,6 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("postDate", todayDate);
         adsProperty.put("postTime", todayTime);
 
-
-
         adsProperty.put("category",category);
         adsProperty.put("bathroom",bathroom);
         adsProperty.put("propertySize",size);
@@ -450,6 +448,7 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("finishYear",year);
         adsProperty.put("monthlyRent",monthlyRent);
         adsProperty.put("deposit",deposit);
+        adsProperty.put("status","live");
 
         adsProperty.put("facilities", arrayListFacilities.toString());
         adsProperty.put("convenience", arrayListConvenience.toString());

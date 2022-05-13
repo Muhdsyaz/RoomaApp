@@ -647,6 +647,7 @@ public class MoreDetail extends AppCompatActivity {
         adsProperty.put("finishYear",finishYear);
         adsProperty.put("monthlyRent",monthlyRent);
         adsProperty.put("deposit",deposit);
+        adsProperty.put("status","live");
 
         adsProperty.put("facilities", arrayListFacilities.toString());
         adsProperty.put("convenience", arrayListConvenience.toString());

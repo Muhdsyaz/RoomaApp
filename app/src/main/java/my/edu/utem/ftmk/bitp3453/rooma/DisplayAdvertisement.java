@@ -104,8 +104,14 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 if(activity.equals("home")){
                     toHome();
                 }
-                else{
+                else if(activity.equals("favorite")){
                     toFavorite();
+                }
+                else if(activity.equals("liveAds")){
+                    toAdsHistory();
+                }
+                else{
+                    toAdsHistory();
                 }
             }
         });
@@ -361,6 +367,21 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void toFavorite(){
         Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+        startActivity(intent);
+    }
+
+    public void toAdsHistory(){
+        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+        startActivity(intent);
+    }
+
+    public void toLiveAds(){
+        Intent intent = new Intent(getApplicationContext(),LiveAdsFragment.class);
+        startActivity(intent);
+    }
+
+    public void toAllAds(){
+        Intent intent = new Intent(getApplicationContext(),AllAdsFragment.class);
         startActivity(intent);
     }
 

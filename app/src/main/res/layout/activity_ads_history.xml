@@ -11,7 +11,6 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F4717F"
         android:orientation="horizontal">
 
         <net.steamcrafted.materialiconlib.MaterialIconView
@@ -35,15 +34,19 @@
         android:id="@+id/tlAdsTab"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        app:tabTextColor="@color/white"
-        android:background="#F4717F"
-        app:tabIndicatorColor="#EC717F"
+        app:tabTextColor="#F4717F"
         app:tabIndicatorGravity="stretch"
-        app:tabSelectedTextColor="#850000"
+        app:tabSelectedTextColor="@color/white"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicator="@drawable/tab_indicator"/>
+<!--
+        android:background="#F4717F"
+        app:tabIndicatorColor="#EC717F"-->
+
     
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"

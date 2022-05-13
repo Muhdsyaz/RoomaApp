@@ -15,9 +15,9 @@ public class AdsFragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if(position == 1){
-            return new LiveAdsFragment();
+            return new AllAdsFragment();
         }
-        return new AllAdsFragment();
+        return new LiveAdsFragment();
     }
 
     @Override
