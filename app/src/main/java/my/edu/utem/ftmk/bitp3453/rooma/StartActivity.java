@@ -48,12 +48,23 @@ public class StartActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            toHomeActivity();
+
+            if(currentUser.getEmail().equals("admin@rooma.com")){
+                toAdminMenu();
+            }
+            else{
+                toHomeActivity();
+            }
         }
     }
 
     public void toHomeActivity(){
         Intent intent = new Intent(StartActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void toAdminMenu(){
+        Intent intent = new Intent(StartActivity.this, AdminMenu.class);
         startActivity(intent);
     }
 

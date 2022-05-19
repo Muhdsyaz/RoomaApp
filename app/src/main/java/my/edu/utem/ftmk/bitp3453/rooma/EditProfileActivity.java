@@ -115,7 +115,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         tvAddress.setText(document.getData().get("Address").toString());
                         tvPassword.setText(document.getData().get("Password").toString());
 
-                        url = document.getData().get("Picture URL").toString();
+                        url = document.getData().get("PictureURL").toString();
 //                        new EditProfileActivity.FetchImage(url).start();
                         Picasso.with(EditProfileActivity.this).load(url).into(ivProfilePic);
 
@@ -230,7 +230,7 @@ public class EditProfileActivity extends AppCompatActivity {
         DocumentReference nameRef = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         nameRef
-                .update("Picture URL", url)
+                .update("PictureURL", url)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

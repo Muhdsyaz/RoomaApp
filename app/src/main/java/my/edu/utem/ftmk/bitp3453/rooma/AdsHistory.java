@@ -25,7 +25,8 @@ public class AdsHistory extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager2);
 
         tlAdsTab.addTab(tlAdsTab.newTab().setText("Live Ads"));
-        tlAdsTab.addTab(tlAdsTab.newTab().setText("All Ads"));
+        tlAdsTab.addTab(tlAdsTab.newTab().setText("Sold Ads"));
+        tlAdsTab.addTab(tlAdsTab.newTab().setText("Bumped Ads"));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         adapter = new AdsFragmentAdapter(fragmentManager , getLifecycle());

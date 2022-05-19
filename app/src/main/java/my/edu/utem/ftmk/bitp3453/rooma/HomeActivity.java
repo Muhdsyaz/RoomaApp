@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -38,6 +40,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView tvClear;
     Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spSort;
     Button btSearch;
+
+    BottomNavigationView bottomNav;
 
     String adsID, category, minPrice, maxPrice, state, city, sort;
 
@@ -75,6 +79,39 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.e("onCreate ", " Min Price: " + minPrice);
         Log.e("onCreate ", " Max Price: " + maxPrice);
         Log.e("onCreate ", "Sort: " + sort);
+
+        //declare bottom navigation
+        bottomNav = findViewById(R.id.bottomNav);
+
+        //set home selected
+        bottomNav.setSelectedItemId(R.id.home);
+
+        //perform ItemSelectedListener
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        return true;
+
+                    case R.id.favorite:
+                        startActivity(new Intent(getApplicationContext(),FavoriteActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.postAds:
+                        startActivity(new Intent(getApplicationContext(),PostAdsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         //declare spinner
         spCategory = findViewById(R.id.spCategory);
@@ -119,7 +156,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             // below line is use to get the data from Firebase Firestore.
             // previously we were saving data on a reference of Courses
             // now we will be getting the data from the same reference.
-            db.collection("advertisements").get()
+            db.collection("advertisements")
+                    .whereEqualTo("status","live")
+                    .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -165,7 +204,10 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         else if(state == null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
             Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
-            db.collection("advertisements").whereEqualTo("category", category).get()
+            db.collection("advertisements")
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -197,7 +239,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             Toast.makeText(getApplicationContext(), "Kat sini " + state + " " + category, Toast.LENGTH_SHORT).show();
             db.collection("advertisements")
                     .whereEqualTo("state", state)
-                    .whereEqualTo("category", category).get()
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -230,7 +274,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             db.collection("advertisements")
                     .whereEqualTo("state", state)
                     .whereEqualTo("city", city)
-                    .whereEqualTo("category", category).get()
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -262,7 +308,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             // below line is use to get the data from Firebase Firestore.
             // previously we were saving data on a reference of Courses
             // now we will be getting the data from the same reference.
-            db.collection("advertisements").get()
+            db.collection("advertisements")
+                    .whereEqualTo("status","live")
+                    .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

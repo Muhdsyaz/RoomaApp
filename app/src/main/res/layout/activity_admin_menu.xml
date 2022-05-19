@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdminMenu">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin Panel"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="toAdminManageUser"
+        android:layout_marginTop="100dp"
+        android:drawableLeft="@drawable/ic_person"
+        android:text="Manage User" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_user_verify"
+        android:drawableTint="@color/white"
+        android:text="Manage Verification Request" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_sell"
+        android:text="Manage Advertisement" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_disable"
+        android:drawableTint="@color/white"
+        android:text="Disabled Advertisement" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_disable_person"
+        android:drawableTint="@color/white"
+        android:text="Disabled User" />
+
+    <Button
+        android:id="@+id/btLogout"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#00a0e3"
+        android:drawableLeft="@drawable/ic_logout"
+        android:drawableTint="@color/white"
+        android:layout_marginTop="10dp"
+        android:text="Logout" />
+
+</LinearLayout>

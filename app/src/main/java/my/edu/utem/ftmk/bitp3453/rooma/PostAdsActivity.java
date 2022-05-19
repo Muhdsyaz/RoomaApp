@@ -1,10 +1,12 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,10 +14,14 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class PostAdsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     String category;
     Button btContinue;
+
+    BottomNavigationView bottomNav;
 
     Spinner spinner;
 
@@ -25,6 +31,39 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_post_ads);
 
         btContinue = findViewById(R.id.btContinue);
+
+        //declare bottom navigation
+        bottomNav = findViewById(R.id.bottomNav);
+
+        //set home selected
+        bottomNav.setSelectedItemId(R.id.postAds);
+
+        //perform ItemSelectedListener
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.favorite:
+                        startActivity(new Intent(getApplicationContext(),FavoriteActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.postAds:
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         btContinue.setOnClickListener(new View.OnClickListener() {
             @Override

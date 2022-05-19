@@ -1,8 +1,10 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,12 +39,14 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     String adsID, favID, activity;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
+    TextView tvEdit, tvDelete, tvSold, tvBump;
 
     ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked;
 
     MaterialIconView mvBackBtn;
+    Button btToMap;
 
-    LinearLayout layoutAdsPreview;
+    LinearLayout layoutAdsPreview, layoutOption;
     HorizontalScrollView layoutHorizontal;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
@@ -95,8 +100,23 @@ public class DisplayAdvertisement extends AppCompatActivity {
         tvOther = findViewById(R.id.tvOther);
         tvDescription = findViewById(R.id.tvDescription);
 
+        tvEdit = findViewById(R.id.tvEdit);
+        tvDelete = findViewById(R.id.tvDelete);
+        tvSold = findViewById(R.id.tvSold);
+        tvBump = findViewById(R.id.tvBump);
+
         //define mvbutton
         mvBackBtn = findViewById(R.id.mvBackBtn);
+
+        //define button
+        btToMap = findViewById(R.id.btToMap);
+
+        btToMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toMap();
+            }
+        });
 
         mvBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +127,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 else if(activity.equals("favorite")){
                     toFavorite();
                 }
-                else if(activity.equals("liveAds")){
+                else if(activity.equals("allAds")){
                     toAdsHistory();
                 }
                 else{
@@ -116,9 +136,84 @@ public class DisplayAdvertisement extends AppCompatActivity {
             }
         });
 
+
         //define layout
         layoutAdsPreview = findViewById(R.id.layoutAdsPreview);
         layoutHorizontal = findViewById(R.id.layoutHorizontal);
+        layoutOption = findViewById(R.id.layoutOption);
+
+        //if the previous activity is from ads history, then enable the layout
+        if(activity.equals("allAds") || activity.equals("liveAds")) {
+            layoutOption.setVisibility(View.VISIBLE);
+
+//            tvEdit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//
+//            });
+
+            tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    deleteAds();
+
+                }
+            });
+
+            tvSold.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateStatus();
+                }
+            });
+
+            tvBump.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bumpAds();
+                }
+            });
+        }
+
+        if(activity.equals("bumpAds")){
+            layoutOption.setVisibility(View.VISIBLE);
+
+//            tvEdit.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    toEditAds();
+//                }
+//
+//            });
+
+            tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    deleteAds();
+
+                }
+            });
+
+            tvSold.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    updateStatus();
+                }
+            });
+
+            tvBump.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    unBumpAds();
+                }
+            });
+
+            tvBump.setText("Unbump");
+        }
 
         //if image house is clicked, then show layouthorizontal
         ivPhotoLibrary.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +237,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
             }
         });
 
+
         checkFavorite();
 
         ivFavorite.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +245,6 @@ public class DisplayAdvertisement extends AppCompatActivity {
             public void onClick(View v) {
                 ivFavoriteClicked.setVisibility(View.VISIBLE);
                 favoriteAds();
-//                checkExistingAds();
 
                 ivFavoriteClicked.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -287,36 +382,6 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 });
     }
 
-    public void checkExistingAds(){
-
-        db.collection("favorites")
-                .whereEqualTo("favID", favID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                String ads = document.getString("favID");
-
-                                if(ads.equals(favID)){
-                                    checkExistingAds();
-                                    Log.d("TAG", "This ads is already favorite by this user.");
-
-                                }
-                            }
-                        }
-                        if(task.getResult().size() == 0 ) {
-                            //if no ads, call method upload image which will store data in database
-                            favoriteAds();
-
-                        }
-                    }
-                });
-    }
-
     public void favoriteAds(){
         // Add a new document with a generated id.
         Map<String, Object> favorite = new HashMap<>();
@@ -360,6 +425,107 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     }
 
+    public void deleteAds(){
+
+        db.collection("advertisements").document(adsID)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+                        Toast.makeText(getApplicationContext(), "The advertisement, id: " + adsID + " successfully deleted.", Toast.LENGTH_LONG).show();
+
+                        toAdsHistory();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
+
+    }
+
+    public void updateStatus(){
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("status", "sold")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Tag", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Status updated successfully.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Tag", "Error updating document", e);
+                    }
+                });
+
+    }
+
+    public void bumpAds(){
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("status", "bump")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Tag", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Advertisement bumped.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Tag", "Error updating document", e);
+                    }
+                });
+
+    }
+
+    public void unBumpAds(){
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("status", "live")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Tag", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Advertisement unbumped.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Tag", "Error updating document", e);
+                    }
+                });
+
+    }
+
     public void toHome(){
         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
         startActivity(intent);
@@ -372,6 +538,20 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void toAdsHistory(){
         Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+        startActivity(intent);
+    }
+
+    public void toMap(){
+        Intent intent = new Intent(getApplicationContext(), GoogleMapActivity.class);
+        intent.putExtra("adsID", adsID);
+        intent.putExtra("activity", activity);
+        startActivity(intent);
+    }
+
+    public void toEditAds(View v){
+        Intent intent = new Intent(getApplicationContext(), EditAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        intent.putExtra("activity", activity);
         startActivity(intent);
     }
 

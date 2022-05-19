@@ -30,98 +30,68 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
 
-public class MoreDetail extends AppCompatActivity {
-
-    String category, bathroom, propertySize, furnishing, parking, bedroom, resType, finishYear, monthlyRent, deposit, title, description, state, city;
+public class EditAdvertisement extends AppCompatActivity {
 
     MaterialIconView mvBackBtn;
-    Bundle bundle;
-    Button btContinue, btSubmit;
-    Uri houseUri, bedroomUri, bathroomUri, livingroomUri, kitchenUri;
+    Button btSubmit;
 
+    Uri houseUri, bedroomUri, bathroomUri, livingroomUri, kitchenUri;
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
-    String adsID, address, address1, address2, postCode;
+    String state, city;
+
+    String adsID, activity, title, description, address, address1, address2, postCode, statedb, citydb;
+    int number;
 
     ImageView ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen;
     LinearLayout layoutAdsCover, layoutBedroom, layoutBathroom, layoutLivingRoom, layoutKitchen;
     EditText etAdsTitle, etDescription, etAddress1, etAddress2, etPostCode;
+    TextView tvState, tvCity;
 
-    int number;
-
-    SimpleDateFormat formatter;
-    Date date;
-    String todayDate, todayTime;
+    ProgressDialog progressDialog;
+    StorageReference houseRef, bedroomRef, bathroomRef, livingroomRef,kitchenRef;
 
     Spinner spState, spCity;
-    ArrayList<String> arrayListFacilities = new ArrayList<>();
-    ArrayList<String> arrayListConvenience = new ArrayList<>();
 
     private double latitude, longitude;
     private Geocoder geocoder;
     List<Address> fullAddress;
     GeoPoint geoPoint;
 
-    Map<String,Object> adsProperty = new HashMap<>();
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    ProgressDialog progressDialog;
-    StorageReference houseRef, bedroomRef, bathroomRef, livingroomRef,kitchenRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_more_detail);
+        setContentView(R.layout.activity_edit_advertisement);
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
-        bundle = getIntent().getExtras();
+        Intent intent = getIntent();
 
-        category = bundle.getString("category");
-        bathroom =  bundle.getString("bathroom");
-        propertySize =  bundle.getString("propertySize");
-        furnishing =  bundle.getString("furnishing");
-        parking =  bundle.getString("parking");
-        bedroom =  bundle.getString("bedroom");
-        resType =  bundle.getString("resType");
-        finishYear =  bundle.getString("finishYear");
-        monthlyRent =  bundle.getString("monthlyRent");
-        deposit =  bundle.getString("deposit");
+        adsID = intent.getStringExtra("adsID");
+        activity = intent.getStringExtra("activity");
+        Log.e("GoogleMap,  ", "AdsID: " + adsID + ", From: " + activity);
 
-        arrayListFacilities = bundle.getStringArrayList("facilities");
-        arrayListConvenience = bundle.getStringArrayList("convenience");
 
-        Log.e("Bundle ", "MoreDetail: " + bundle);
-        Log.e("Category ", "MoreDetail: " + category);
-        Log.e("Facilities ", "MoreDetail: " + arrayListFacilities);
-        Log.e("Convenience ", "MoreDetail: " + arrayListConvenience);
-
-        //create random id for ads
-        Random rand = new Random();
-        int randomID = rand.nextInt(99999999)+1;
-
-        adsID = "AD" + randomID;
-
+        //declare text view
+        tvState = findViewById(R.id.tvState);
+        tvCity = findViewById(R.id.tvCity);
 
         //declare edit text
         etAdsTitle = findViewById(R.id.etAdsTitle);
@@ -132,7 +102,6 @@ public class MoreDetail extends AppCompatActivity {
 
         //declare button
         mvBackBtn = findViewById(R.id.mvBackBtn);
-        btContinue = findViewById(R.id.btContinue);
         btSubmit = findViewById(R.id.btSubmit);
 
         //declare layout
@@ -149,75 +118,12 @@ public class MoreDetail extends AppCompatActivity {
         ivLivingRoom = findViewById(R.id.ivLivingRoom);
         ivKitchen = findViewById(R.id.ivKitchen);
 
-        Intent intent = getIntent();
-
-        category = intent.getStringExtra("category");
-
         mvBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toAvailableFacilities();
+                toDisplayAds();
             }
         });
-
-        layoutAdsCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = 1;
-                selectImage();
-            }
-        });
-
-        layoutBedroom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = 2;
-                selectImage();
-            }
-        });
-
-        layoutBathroom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = 3;
-                selectImage();
-            }
-        });
-
-        layoutLivingRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = 4;
-                selectImage();
-            }
-        });
-
-        layoutKitchen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = 5;
-                selectImage();
-            }
-        });
-
-        btContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                toAdsPreview();
-
-            }
-        });
-
-        btSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                checkExistingAds();
-
-            }
-        });
-
 
         // <---- Spinner City and State
 
@@ -296,7 +202,6 @@ public class MoreDetail extends AppCompatActivity {
                             .show();
                     state = spState.getSelectedItem().toString();
 
-                    bundle.putString("state", state);
                 }
             }
 
@@ -315,8 +220,6 @@ public class MoreDetail extends AppCompatActivity {
 
                     city = spCity.getSelectedItem().toString();
 
-                    bundle.putString("city", city);
-
                     Log.e("State ", "onCreate: " + state);
                     Log.e("City ", "onCreate: " + city);
                 }
@@ -328,60 +231,119 @@ public class MoreDetail extends AppCompatActivity {
             }
         });
         // -----> Spinner City and State
+
+        displayAdvertisement();
+
+        layoutAdsCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number = 1;
+                selectImage();
+            }
+        });
+
+        layoutBedroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number = 2;
+                selectImage();
+            }
+        });
+
+        layoutBathroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number = 3;
+                selectImage();
+            }
+        });
+
+        layoutLivingRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number = 4;
+                selectImage();
+            }
+        });
+
+        layoutKitchen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                number = 5;
+                selectImage();
+            }
+        });
+
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+                //updateAdsDetail();
+            }
+        });
+
+
     }
 
-    public void toAvailableFacilities(){
-        Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
-        bundle.remove("Swimming");
-        bundle.remove("Gymnasium");
-        bundle.remove("Tennis");
-        bundle.remove("Squash");
-        bundle.remove("Mini");
-        bundle.remove("Playground");
-        bundle.remove("CarPark");
-        bundle.remove("Elevator");
-        bundle.remove("Guard");
-        bundle.remove("Jogging");
-        bundle.remove("Balcony");
-        bundle.remove("CableTv");
-        bundle.remove("AirCond");
-        bundle.remove("Cooking");
-        bundle.remove("Gender");
-        bundle.remove("PublicTrans");
-        bundle.remove("Internet");
-        bundle.remove("Washing");
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
+    public void displayAdvertisement(){
 
-    private void selectImage() {
+        DocumentReference docRef = db.collection("advertisements").document(adsID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("DisplayAdvertisementActivity", "DocumentSnapshot data: " + document.getData());
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,100);
+                        houseURL = document.getData().get("houseURL").toString();
+                        bedroomURL = document.getData().get("bedroomURL").toString();
+                        bathroomURL = document.getData().get("bathroomURL").toString();
+                        livingroomURL = document.getData().get("livingroomURL").toString();
+                        kitchenURL = document.getData().get("kitchenURL").toString();
+
+                        // assign value to image view
+                        Picasso.with(getApplicationContext()).load(houseURL).into(ivHouse);
+                        Picasso.with(getApplicationContext()).load(bedroomURL).into(ivBedroom);
+                        Picasso.with(getApplicationContext()).load(bathroomURL).into(ivBathroom);
+                        Picasso.with(getApplicationContext()).load(livingroomURL).into(ivLivingRoom);
+                        Picasso.with(getApplicationContext()).load(kitchenURL).into(ivKitchen);
+
+                        //assign value to textview
+                        tvState.setText(document.getData().get("state").toString());
+                        tvCity.setText(document.getData().get("city").toString());
+
+                        //assign value to edittext
+                        etAdsTitle.setText(document.getData().get("title").toString());
+                        etDescription.setText(document.getData().get("description").toString());
+                        etAddress1.setText(document.getData().get("address1").toString());
+                        etAddress2.setText(document.getData().get("address2").toString());
+                        etPostCode.setText(document.getData().get("postCode").toString());
+
+
+
+                    } else {
+                        Log.d("DisplayAdvertisementActivity", "No such document");
+                    }
+                } else {
+                    Log.d("DisplayAdvertisementActivity", "get failed with ", task.getException());
+                }
+            }
+        });
 
     }
 
     private void uploadImage() {
 
-        if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null)
-        {
-            Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
-        }
-        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty() ||
-                etAddress1.getText().toString().isEmpty() || etAddress2.getText().toString().isEmpty() ||
-                etPostCode.getText().toString().isEmpty()){
+
+        if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty() ||
+                etAddress1.getText().toString().isEmpty() || etAddress2.getText().toString().isEmpty() || etPostCode.getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
         }
-        else if(state == null || city == null){
-            Toast.makeText(getApplicationContext(),"Please make sure the state and city are selected.",Toast.LENGTH_SHORT).show();
+        else if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null){
+            updateAdsDetail();
         }
         else{
-
-//            progressDialog = new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading File....");
-//            progressDialog.show();
 
             progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Preparing your advertisement...");
@@ -468,7 +430,7 @@ public class MoreDetail extends AppCompatActivity {
                                                                                                                                     kitchenURL = uri.toString();
                                                                                                                                     Log.e("URL ", "onSuccess: " + uri);
 
-                                                                                                                                    postAds();
+                                                                                                                                    updateAdsDetail();
 
                                                                                                                                 }
                                                                                                                             });
@@ -573,6 +535,88 @@ public class MoreDetail extends AppCompatActivity {
         }
     }
 
+
+    public void updateAdsDetail(){
+
+        title = etAdsTitle.getText().toString();
+        description = etDescription.getText().toString();
+        address1 = etAddress1.getText().toString();
+        address2 = etAddress2.getText().toString();
+        postCode = etPostCode.getText().toString();
+        statedb = tvState.getText().toString();
+        citydb = tvCity.getText().toString();
+
+        if(state == null || city == null){
+
+            state = statedb;
+            city = citydb;
+
+            address = address1 + " " + address2 + " " + city + " " + postCode + " " + state;
+        }
+        else{
+            address = address1 + " " + address2 + " " + city + " " + postCode + " " + state;
+        }
+
+        try {
+
+            fullAddress = geocoder.getFromLocationName(address, 5);
+
+            Address location = fullAddress.get(0);
+
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+
+            geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Preparing your advertisement...");
+        progressDialog.show();
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("title", title, "description", description, "address", address, "address1", address1, "address2",
+                        address2, "postCode",postCode, "latlng", geoPoint, "state", state, "city", city,
+                        "houseURL", houseURL, "bedroomURL", bedroomURL, "bathroomURL", bathroomURL, "livingroomURL", livingroomURL, "kitchenURL", kitchenURL)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("EditAdvertisement", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+                        startActivity(intent);
+
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Advertisement details updated successfully.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+                        Log.w("EditName", "Error updating document", e);
+                        Toast.makeText(getApplicationContext(), "Advertisement update failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
+
+    private void selectImage() {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,100);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -583,15 +627,11 @@ public class MoreDetail extends AppCompatActivity {
                 houseUri = data.getData();
                 ivHouse.setImageURI(houseUri);
 
-                bundle.putString("houseUri", houseUri.toString());
-
             }
 
             if(number == 2){
                 bedroomUri = data.getData();
                 ivBedroom.setImageURI(bedroomUri);
-
-                bundle.putString("bedroomUri", bedroomUri.toString());
 
             }
 
@@ -599,15 +639,11 @@ public class MoreDetail extends AppCompatActivity {
                 bathroomUri = data.getData();
                 ivBathroom.setImageURI(bathroomUri);
 
-                bundle.putString("bathroomUri", bathroomUri.toString());
-
             }
 
             if(number == 4){
                 livingroomUri = data.getData();
                 ivLivingRoom.setImageURI(livingroomUri);
-
-                bundle.putString("livingroomUri", livingroomUri.toString());
 
             }
 
@@ -615,189 +651,14 @@ public class MoreDetail extends AppCompatActivity {
                 kitchenUri = data.getData();
                 ivKitchen.setImageURI(kitchenUri);
 
-                bundle.putString("kitchenUri", kitchenUri.toString());
-
             }
         }
     }
 
-    public void postAds(){
-
-        title = etAdsTitle.getText().toString();
-        description = etDescription.getText().toString();
-        address = etAddress1.getText().toString() + " " + etAddress2.getText().toString() + " " + city + " " + etPostCode.getText().toString() + " " + state;
-
-        address1 = etAddress1.getText().toString();
-        address2 = etAddress2.getText().toString();
-        postCode = etPostCode.getText().toString();
-
-        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        date = new Date();
-        todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,16);
-
-        adsProperty.put("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
-        adsProperty.put("adsID", adsID);
-        adsProperty.put("postDate", todayDate);
-        adsProperty.put("postTime", todayTime);
-
-        adsProperty.put("category",category);
-        adsProperty.put("bathroom",bathroom);
-        adsProperty.put("propertySize",propertySize);
-        adsProperty.put("furnishing",furnishing);
-        adsProperty.put("parking",parking);
-        adsProperty.put("bedroom",bedroom);
-        adsProperty.put("resType",resType);
-        adsProperty.put("finishYear",finishYear);
-        adsProperty.put("monthlyRent",monthlyRent);
-        adsProperty.put("deposit",deposit);
-        adsProperty.put("status","live");
-
-        adsProperty.put("facilities", arrayListFacilities.toString());
-        adsProperty.put("convenience", arrayListConvenience.toString());
-
-        adsProperty.put("title", title);
-        adsProperty.put("description", description);
-        adsProperty.put("state",state);
-        adsProperty.put("city",city);
-        adsProperty.put("address",address);
-        adsProperty.put("address1",address1);
-        adsProperty.put("address2",address2);
-        adsProperty.put("postCode",postCode);
-
-        try {
-
-            fullAddress = geocoder.getFromLocationName(adsProperty.get("address").toString(), 5);
-
-            Address location = fullAddress.get(0);
-
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
-
-            geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
-
-            //Toast.makeText(getApplicationContext(), "latitude: " + latitude +", longitude: " + longitude, Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        adsProperty.put("latlng", geoPoint);
-
-        adsProperty.put("houseURL", houseURL);
-        adsProperty.put("bedroomURL", bedroomURL);
-        adsProperty.put("bathroomURL", bathroomURL);
-        adsProperty.put("livingroomURL", livingroomURL);
-        adsProperty.put("kitchenURL", kitchenURL);
-
-        db.collection("advertisements").document(adsID)
-                .set(adsProperty).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                if (progressDialog.isShowing())
-                    progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Your advertisement has been uploaded.",Toast.LENGTH_LONG).show();
-                toPostAds();
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (progressDialog.isShowing())
-                    progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Failed to upload your advertisement.",Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    public void checkExistingAds(){
-
-        db.collection("advertisements")
-                .whereEqualTo("adsID", adsID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                String ads = document.getString("adsID");
-
-                                if(ads.equals(adsID)){
-                                    Log.d("TAG", "Ads Exists");
-
-                                }
-                            }
-                        }
-                        if(task.getResult().size() == 0 ) {
-                            //if no ads, call method upload image which will store data in database
-                            uploadImage();
-
-                        }
-                    }
-                });
-    }
-
-    public void toAdsPreview(){
-
-        if(houseUri == null || bedroomUri == null || bathroomUri == null || livingroomUri == null || kitchenUri == null)
-        {
-            Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
-        }
-        else if(etAdsTitle.getText().toString().isEmpty() || etDescription.getText().toString().isEmpty() ||
-                etAddress1.getText().toString().isEmpty() || etAddress2.getText().toString().isEmpty() ||
-                etPostCode.getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Please make sure you fill all the form.",Toast.LENGTH_SHORT).show();
-        }
-        else if(state == null || city == null){
-            Toast.makeText(getApplicationContext(),"Please make sure the state and city are selected.",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            //assign value from edit text
-            title = etAdsTitle.getText().toString();
-            description = etDescription.getText().toString();
-            address = etAddress1.getText().toString() + " " + etAddress2.getText().toString() + " " + city + " " + etPostCode.getText().toString() + " " + state;
-
-            bundle.putString("adsID", title);
-            bundle.putString("title", title);
-            bundle.putString("description", description);
-            bundle.putString("adsID", adsID);
-            bundle.putString("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
-            bundle.putString("address", address);
-
-            address1 = etAddress1.getText().toString();
-            address2 = etAddress2.getText().toString();
-            postCode = etPostCode.getText().toString();
-
-            bundle.putString("address1", address1);
-            bundle.putString("address2", address2);
-            bundle.putString("postCode", postCode);
-
-            Intent intent = new Intent(getApplicationContext(), AdsPreview.class);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            Log.e("Bundle ", "onCreate: " + bundle);
-        }
-
-    }
-
-    public void toPostAds(View v){
-        Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
+    public void toDisplayAds(){
+        Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
+        intent.putExtra("adsID", adsID);
+        intent.putExtra("activity", activity);
         startActivity(intent);
     }
-
-    //this method is same like above method but with no parameter
-    public void toPostAds(){
-        Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        moveTaskToBack(true);
-    }
-
 }

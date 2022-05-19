@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MoreDetail"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".EditAdvertisement">
 
     <LinearLayout
         android:id="@+id/linearLayout6"
@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="More Details"
+                android:text="Edit Advertisement"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20dp"
@@ -292,8 +292,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <TableRow
-                    android:layout_marginTop="10dp">
+                <TableRow>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -317,8 +316,7 @@
 
                 </TableRow>
 
-                <TableRow
-                    android:layout_marginTop="10dp">
+                <TableRow>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -346,7 +344,22 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
+                        android:id="@+id/tvState"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="State"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:textAlignment="textEnd"
+                        android:background="@color/white"
+                        android:fontFamily="@font/poppins"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginTop="10dp"
@@ -374,6 +387,21 @@
                     android:layout_marginTop="10dp">
 
                     <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:textSize="14dp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:fontFamily="@font/poppins"/>
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -399,8 +427,7 @@
 
                 </TableRow>
 
-                <TableRow
-                    android:layout_marginTop="10dp">
+                <TableRow>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -427,16 +454,6 @@
 
             </TableLayout>
 
-            <Button
-                android:id="@+id/btContinue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Preview Ads"
-                android:backgroundTint="#00a0e3"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"/>
 
             <LinearLayout
                 android:layout_width="380dp"
@@ -461,7 +478,6 @@
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:textColor="#F4717F"
-                android:onClick="toPostAds"
                 android:backgroundTint="@color/white"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"

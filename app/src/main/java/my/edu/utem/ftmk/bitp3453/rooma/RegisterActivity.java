@@ -77,7 +77,10 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("PhoneNum", "+6" + etPhoneNum.getText().toString());
         user.put("Address", etAddress.getText().toString());
         user.put("Password", etConfirmPassword.getText().toString());
-        user.put("Picture URL", "");
+        user.put("PictureURL", "");
+        user.put("Status", "active");
+        user.put("Verify", "false");
+        user.put("UserType", "client");
 
         if(etEmail.getText().toString().equals("") && etFullName.getText().toString().equals("") && etPhoneNum.getText().toString().equals("")
                 && etPassword.getText().toString().equals("") && etAddress.getText().toString().equals("") && etConfirmPassword.getText().toString().equals("")) {

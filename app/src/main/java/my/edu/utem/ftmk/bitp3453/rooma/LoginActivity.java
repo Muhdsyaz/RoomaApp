@@ -103,7 +103,13 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                toHomeActivity();
+
+                                if(email.equals("admin@rooma.com")){
+                                    toAdminMenu();
+                                }
+                                else {
+                                    toHomeActivity();
+                                }
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -196,6 +202,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void toHomeActivity(){
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void toAdminMenu(){
+        Intent intent = new Intent(LoginActivity.this, AdminMenu.class);
         startActivity(intent);
     }
 

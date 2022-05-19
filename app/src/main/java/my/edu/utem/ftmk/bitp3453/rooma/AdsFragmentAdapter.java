@@ -17,11 +17,16 @@ public class AdsFragmentAdapter extends FragmentStateAdapter {
         if(position == 1){
             return new AllAdsFragment();
         }
+
+        if(position == 2){
+            return new BumpAdsFragment();
+        }
+
         return new LiveAdsFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

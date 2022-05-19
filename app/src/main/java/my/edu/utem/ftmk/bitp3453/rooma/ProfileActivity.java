@@ -10,17 +10,25 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
@@ -33,11 +41,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     LinearLayout layoutProfile, layoutProfileMenu;
-    TextView tvEmail, tvName, tvPhone, tvAddress, tvLiveAds, tvEdit, tvLogout;
+    TextView tvEmail, tvName, tvPhone, tvAddress, tvAds, tvEdit, tvLogout;
     MaterialIconView mvProfileMenu;
     CircleImageView ivProfilePic;
 
     String url;
+
+    BottomNavigationView bottomNav;
+
+    int total = 0;
 
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
@@ -52,12 +64,45 @@ public class ProfileActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        //declare bottom navigation
+        bottomNav = findViewById(R.id.bottomNav);
+
+        //set home selected
+        bottomNav.setSelectedItemId(R.id.profile);
+
+        //perform ItemSelectedListener
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.favorite:
+                        startActivity(new Intent(getApplicationContext(),FavoriteActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.postAds:
+                        startActivity(new Intent(getApplicationContext(),PostAdsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.profile:
+                        return true;
+                }
+                return false;
+            }
+        });
+
         //set variable for textview
         tvEmail = findViewById(R.id.tvEmail);
         tvName = findViewById(R.id.tvName);
         tvPhone = findViewById(R.id.tvPhone);
         tvAddress = findViewById(R.id.tvAddress);
-        tvLiveAds = findViewById(R.id.tvLiveAds);
+        tvAds = findViewById(R.id.tvAds);
         tvEdit = findViewById(R.id.tvEdit);
         tvLogout = findViewById(R.id.tvLogout);
 
@@ -100,6 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         displayProfile();
+        numberLiveAds();
     }
 
     public void displayProfile(){
@@ -118,7 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
                         tvPhone.setText(document.getData().get("PhoneNum").toString());
                         tvAddress.setText(document.getData().get("Address").toString());
 
-                        url = document.getData().get("Picture URL").toString();
+                        url = document.getData().get("PictureURL").toString();
 //                        new ProfileActivity.FetchImage(url).start();
                         Picasso.with(ProfileActivity.this).load(url).into(ivProfilePic);
 
@@ -130,6 +176,34 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    public void numberLiveAds(){
+
+
+        db.collection("advertisements")
+                .whereEqualTo("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("status", "live")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                total++;
+
+                            }
+
+                            tvAds.setText(String.valueOf(total));
+
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
 
     }
 

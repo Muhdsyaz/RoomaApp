@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,6 +37,8 @@ public class FavoriteActivity extends AppCompatActivity implements Advertisement
     private FirebaseFirestore db;
     ProgressBar loadingPB;
 
+    BottomNavigationView bottomNav;
+
     LinearLayout layoutNoData;
 
     String adsID;
@@ -51,6 +55,39 @@ public class FavoriteActivity extends AppCompatActivity implements Advertisement
         loadingPB = findViewById(R.id.idProgressBar);
 
         layoutNoData = findViewById(R.id.layoutNoData);
+
+        //declare bottom navigation
+        bottomNav = findViewById(R.id.bottomNav);
+
+        //set home selected
+        bottomNav.setSelectedItemId(R.id.favorite);
+
+        //perform ItemSelectedListener
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.favorite:
+                        return true;
+
+                    case R.id.postAds:
+                        startActivity(new Intent(getApplicationContext(),PostAdsActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         // initializing our variable for firebase
         // firestore and getting its instance.

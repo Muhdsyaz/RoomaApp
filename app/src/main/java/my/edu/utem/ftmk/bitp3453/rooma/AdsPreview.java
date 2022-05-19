@@ -52,7 +52,7 @@ public class AdsPreview extends AppCompatActivity {
     HorizontalScrollView layoutHorizontal;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
     String title, monthlyRent, category, location, resType, floor, bedroom, bathroom, size, furnishing, parking, facilities, year, deposit, other, description;
-    String adsID, ownerUid, state, city, address;
+    String adsID, ownerUid, state, city, address, address1, address2, postCode;
 
     ArrayList<String> arrayListFacilities;
     ArrayList<String> arrayListConvenience;
@@ -108,6 +108,11 @@ public class AdsPreview extends AppCompatActivity {
         state = bundle.getString("state");
         city = bundle.getString("city");
         address = bundle.getString("address");
+
+        address1 = bundle.getString("address1");
+        address2 = bundle.getString("address2");
+        postCode = bundle.getString("postCode");
+
         resType = bundle.getString("resType");
         floor = bundle.getString("floorRange");
         bedroom = bundle.getString("bedroom");
@@ -458,6 +463,10 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("state",state);
         adsProperty.put("city",city);
         adsProperty.put("address",address);
+
+        adsProperty.put("address1",address1);
+        adsProperty.put("address2",address2);
+        adsProperty.put("postCode",postCode);
 
         try {
 

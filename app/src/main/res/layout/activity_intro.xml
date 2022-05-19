@@ -8,13 +8,22 @@
     android:orientation="vertical"
     tools:context=".IntroActivity">
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
     <ImageView
         android:id="@+id/splashImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_rooma_logo_foreground"
-        android:layout_marginTop="180dp" />
+        android:layout_gravity="center"
+        android:background="@mipmap/ic_rooma_logo_foreground" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
 
 </LinearLayout>
