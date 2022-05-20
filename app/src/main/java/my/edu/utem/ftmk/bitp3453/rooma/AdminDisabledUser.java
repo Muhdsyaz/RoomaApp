@@ -10,9 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.style.UnderlineSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -27,12 +25,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -42,7 +37,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter.ItemClickListener{
+public class AdminDisabledUser extends AppCompatActivity implements  UserRVAdapter.ItemClickListener{
 
     // creating variables for our recycler view,
     // array list, adapter, firebase firestore
@@ -54,7 +49,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
     ProgressBar loadingPB;
 
     TextView tvEmail, tvName, tvPhone, tvAddress, tvEmptyDb, tvSearch;
-    Button btDelete, btBack, btDisable;
+    Button btDelete, btBack, btEnable;
     CircleImageView ivProfilePic;
     ImageButton ibSearch;
 
@@ -65,7 +60,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manage_user);
+        setContentView(R.layout.activity_admin_disabled_user);
 
         Intent intent = getIntent();
 
@@ -84,7 +79,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
         // initializing button
         btDelete = findViewById(R.id.btDelete);
         btBack = findViewById(R.id.btBack);
-        btDisable = findViewById(R.id.btDisable);
+        btEnable = findViewById(R.id.btEnable);
 
         ibSearch = findViewById(R.id.ibSearch);
 
@@ -122,7 +117,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
             // now we will be getting the data from the same reference.
             db.collection("users")
                     .whereEqualTo("UserType", "client")
-                    .whereEqualTo("Status", "active")
+                    .whereEqualTo("Status", "disabled")
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -168,7 +163,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
         else{
             db.collection("users")
                     .whereEqualTo("UserType", "client")
-                    .whereEqualTo("Status", "active")
+                    .whereEqualTo("Status", "disabled")
                     .whereEqualTo("FullName", name)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -213,19 +208,19 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
             }
         });
 
-        btDisable.setOnClickListener(new View.OnClickListener() {
+        btEnable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(AdminManageUser.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(AdminDisabledUser.this);
                 dialog.setCancelable(false);
-                dialog.setTitle("Disable User");
-                dialog.setMessage("Are you sure you want to disable this user?" );
-                dialog.setPositiveButton("Disable", new DialogInterface.OnClickListener() {
+                dialog.setTitle("Enable User");
+                dialog.setMessage("Are you sure you want to enable this user?" );
+                dialog.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         //Action for "Delete".
-                        disableUser();
+                        enableUser();
                     }
                 })
                         .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
@@ -252,7 +247,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
 
                 name = tvSearch.getText().toString().trim();
 
-                Intent intent = new Intent(getApplicationContext(), AdminManageUser.class);
+                Intent intent = new Intent(getApplicationContext(), AdminDisabledUser.class);
                 intent.putExtra("name", name);
                 startActivity(intent);
             }
@@ -282,9 +277,9 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
                         searchItems.add(documentSnapshot);
                     }
                 }
-                userRVAdapter = new UserRVAdapter(searchItems,AdminManageUser.this);
+                userRVAdapter = new UserRVAdapter(searchItems,AdminDisabledUser.this);
                 rvUser.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false));
-                userRVAdapter.setClickListener(AdminManageUser.this);
+                userRVAdapter.setClickListener(AdminDisabledUser.this);
                 rvUser.setAdapter(userRVAdapter);
 
             }
@@ -348,22 +343,22 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
 
     }
 
-    public void disableUser(){
+    public void enableUser(){
 
         Log.e("Uid",uid);
         DocumentReference nameRef = db.collection("users").document(uid);
 
         nameRef
-                .update("Status", "disabled")
+                .update("Status", "active")
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("disableUser", "DocumentSnapshot successfully updated!");
 
-                        Intent intent = new Intent(getApplicationContext(),AdminManageUser.class);
+                        Intent intent = new Intent(getApplicationContext(),AdminDisabledUser.class);
                         startActivity(intent);
 
-                        Toast.makeText(getApplicationContext(), "Account has been disabled.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Account has been enabled.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -375,14 +370,8 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
 
     }
 
-    public void deleteUser() {
-//        FirebaseAuth.getInstance().deleteUser(uid);
-//        System.out.println("Successfully deleted user.");
-
-    }
-
     public void toAdminMenu(View v){
-        Intent intent = new Intent(AdminManageUser.this, AdminMenu.class);
+        Intent intent = new Intent(getApplicationContext(), AdminMenu.class);
         startActivity(intent);
     }
 

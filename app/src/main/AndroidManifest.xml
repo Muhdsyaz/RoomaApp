@@ -17,9 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rooma">
         <activity
-            android:name=".AdminManageUser"
+            android:name=".AdminDisabledUser"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name=".AdminManageUser"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".EditAdvertisement"
             android:exported="true" />

@@ -47,7 +47,12 @@ public class UserRVAdapter extends RecyclerView.Adapter<UserRVAdapter.ViewHolder
 
         String pictureURL = null;
         pictureURL = user.getPictureURL();
-        Picasso.with(context).load(pictureURL).into(holder.ivProfilePic);
+        if(pictureURL == ""){
+
+        }
+        else{
+            Picasso.with(context).load(pictureURL).into(holder.ivProfilePic);
+        }
 
         holder.tvName.setText(user.getFullName());
         holder.tvEmail.setText(user.getEmail());

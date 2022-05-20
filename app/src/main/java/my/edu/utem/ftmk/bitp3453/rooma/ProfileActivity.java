@@ -3,7 +3,9 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -140,7 +142,34 @@ public class ProfileActivity extends AppCompatActivity {
         tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ProfileActivity.this);
+                dialog.setCancelable(false);
+                dialog.setTitle("Logout Confirmation");
+                dialog.setMessage("Are you sure you want to logout?" );
+                dialog.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Action for "Logout".
+                        signOut();
+
+                    }
+                })
+                        .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Action for "Cancel".
+
+                            }
+                        });
+
+                final AlertDialog alert = dialog.create();
+                alert.show();
+
+                alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.black));
+
+
             }
         });
 
@@ -166,7 +195,13 @@ public class ProfileActivity extends AppCompatActivity {
 
                         url = document.getData().get("PictureURL").toString();
 //                        new ProfileActivity.FetchImage(url).start();
-                        Picasso.with(ProfileActivity.this).load(url).into(ivProfilePic);
+
+                        if(url == ""){
+
+                        }else{
+                            Picasso.with(ProfileActivity.this).load(url).into(ivProfilePic);
+                        }
+
 
                     } else {
                         Log.d("ProfileActivity", "No such document");

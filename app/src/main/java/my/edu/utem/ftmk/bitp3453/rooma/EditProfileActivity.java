@@ -116,8 +116,12 @@ public class EditProfileActivity extends AppCompatActivity {
                         tvPassword.setText(document.getData().get("Password").toString());
 
                         url = document.getData().get("PictureURL").toString();
-//                        new EditProfileActivity.FetchImage(url).start();
-                        Picasso.with(EditProfileActivity.this).load(url).into(ivProfilePic);
+
+                        if(url == ""){
+
+                        }else {
+                            Picasso.with(EditProfileActivity.this).load(url).into(ivProfilePic);
+                        }
 
                     } else {
                         Log.d("ProfileActivity", "No such document");

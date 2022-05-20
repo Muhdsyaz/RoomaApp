@@ -427,6 +427,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void deleteAds(){
 
+        // delete ads from collection advertisements
         db.collection("advertisements").document(adsID)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -443,6 +444,45 @@ public class DisplayAdvertisement extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("TAG", "Error deleting document", e);
+                    }
+                });
+
+        // delete all ads that contain the deleted adsID in collection favorite
+        db.collection("favorites")
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                String favID = document.getData().get("favID").toString();
+
+                                db.collection("favorites").document(favID)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+                                                Toast.makeText(getApplicationContext(), "The advertisement, id: " + adsID + " successfully deleted.", Toast.LENGTH_LONG).show();
+
+                                                toAdsHistory();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("TAG", "Error deleting document", e);
+                                            }
+                                        });
+
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
                     }
                 });
 
