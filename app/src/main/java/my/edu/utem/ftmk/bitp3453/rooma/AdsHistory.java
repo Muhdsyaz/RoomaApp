@@ -59,6 +59,7 @@ public class AdsHistory extends AppCompatActivity {
 
     public void toProfile(View v){
         Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

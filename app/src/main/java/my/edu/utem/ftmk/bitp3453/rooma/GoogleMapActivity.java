@@ -189,10 +189,6 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
         addMarker();
 
-        // set default map location
-//        CameraUpdate point = CameraUpdateFactory.newLatLngZoom(new LatLng(4.210484, 101.975769), 7);
-
-
         db.collection("advertisements")
                 .whereEqualTo("adsID", adsID)
                 .get()
@@ -292,6 +288,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
         intent.putExtra("adsID", adsID);
         intent.putExtra("activity", activity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

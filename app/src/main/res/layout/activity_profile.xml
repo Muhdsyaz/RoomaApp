@@ -39,7 +39,7 @@
 
                 <LinearLayout
                     android:id="@+id/layoutProfileMenu"
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@color/white"
@@ -78,6 +78,29 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:onClick="toVerifyAccount"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Verify Account"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#0F000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:clickable="true"
                         android:foreground="?android:attr/selectableItemBackground"
                         android:orientation="vertical"
@@ -95,42 +118,100 @@
 
                 </LinearLayout>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ivProfilePic"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/ic_person"
-                    android:background="@drawable/circle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.08" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="320dp"
-                    android:layout_height="200dp"
-                    android:background="@drawable/pink_round"
+                    android:id="@+id/linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-                    app:layout_constraintVertical_bias="0.038">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.08">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfilePic"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_person" />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutVerified"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_white"
+                        android:visibility="invisible"
+                        android:backgroundTint="#458eff"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="5dp"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Verified"
+                            android:textSize="10dp"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:fontFamily="@font/poppins"
+                            android:textColor="@color/white"/>
+
+                        <net.steamcrafted.materialiconlib.MaterialIconView
+                            android:id="@+id/mvCheck"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center"
+                            app:materialIcon="check_circle"
+                            app:materialIconColor="@color/white" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:background="@drawable/round_pink"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintVertical_bias="0.06">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Name"
-                        android:textSize="12dp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvName"
@@ -139,21 +220,21 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="20dp"
-                        android:textSize="12dp"
-                        android:text="Muhammad Syazani Bin Mohd Shah"
+                        android:fontFamily="@font/poppins"
+                        android:text=""
                         android:textColor="@color/white"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Phone"
-                        android:textSize="12dp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvPhone"
@@ -162,21 +243,21 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginRight="20dp"
-                        android:text="+60172696437"
-                        android:textSize="12dp"
+                        android:fontFamily="@font/poppins"
+                        android:text=""
                         android:textColor="@color/white"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Address"
-                        android:textSize="12dp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvAddress"
@@ -184,18 +265,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="0dp"
-                        android:textSize="12dp"
                         android:layout_marginRight="20dp"
-                        android:text="No. 40 Jalan Melaka Baru 3/12 Taman Melaka Baru Fasa 3, Batu Berendam, 75350 Melaka."
+                        android:fontFamily="@font/poppins"
+                        android:text=""
                         android:textColor="@color/white"
-                        android:fontFamily="@font/poppins"/>
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="320dp"
                     android:layout_height="140dp"
-                    android:background="@drawable/customborder"
+                    android:background="@drawable/custom_border_2"
+                    android:elevation="5dp"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="toAdsHistory"
@@ -219,7 +301,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="0"
+                        android:text=""
                         android:textColor="#F4717F"
                         android:textSize="30dp"
                         android:textStyle="bold" />
@@ -257,21 +339,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="test@gmail.com"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="12dp"
-                    android:fontFamily="@font/poppins"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivProfilePic"
-                    app:layout_constraintVertical_bias="0.01" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

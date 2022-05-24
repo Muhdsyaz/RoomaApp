@@ -115,6 +115,7 @@ public class HouseSpecification extends AppCompatActivity implements AdapterView
 
     public void toPostAds(View v){
         Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

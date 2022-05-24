@@ -42,9 +42,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    LinearLayout layoutProfile, layoutProfileMenu;
+    LinearLayout layoutProfile, layoutProfileMenu, layoutVerified;
     TextView tvEmail, tvName, tvPhone, tvAddress, tvAds, tvEdit, tvLogout;
-    MaterialIconView mvProfileMenu;
+    MaterialIconView mvProfileMenu, mvCheck;
     CircleImageView ivProfilePic;
 
     String url;
@@ -114,6 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
         //set variable for layout
         layoutProfile = findViewById(R.id.layoutProfile);
         layoutProfileMenu = findViewById(R.id.layoutProfileMenu);
+        layoutVerified = findViewById(R.id.layoutVerified);
 
         //set variable for material icon
         mvProfileMenu = findViewById(R.id.mvProfileMenu);
@@ -186,7 +187,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("ProfileActivity", "DocumentSnapshot data: " + document.getData());
+                        //Log.d("ProfileActivity", "DocumentSnapshot data: " + document.getData());
 
                         tvEmail.setText(document.getData().get("Email").toString());
                         tvName.setText(document.getData().get("FullName").toString());
@@ -194,7 +195,6 @@ public class ProfileActivity extends AppCompatActivity {
                         tvAddress.setText(document.getData().get("Address").toString());
 
                         url = document.getData().get("PictureURL").toString();
-//                        new ProfileActivity.FetchImage(url).start();
 
                         if(url == ""){
 
@@ -202,6 +202,9 @@ public class ProfileActivity extends AppCompatActivity {
                             Picasso.with(ProfileActivity.this).load(url).into(ivProfilePic);
                         }
 
+                        if(document.getData().get("Verify").toString().equals("Verified")){
+                            layoutVerified.setVisibility(View.VISIBLE);
+                        }
 
                     } else {
                         Log.d("ProfileActivity", "No such document");
@@ -226,7 +229,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("TAG", document.getId() + " => " + document.getData());
+                                //Log.d("TAG", document.getId() + " => " + document.getData());
 
                                 total++;
 
@@ -240,6 +243,11 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void toVerifyAccount(View v){
+        Intent intent = new Intent(getApplicationContext(),VerifyAccount.class);
+        startActivity(intent);
     }
 
     public void toHome(View v){
@@ -270,6 +278,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void signOut() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

@@ -351,6 +351,7 @@ public class MoreDetail extends AppCompatActivity {
         bundle.remove("Internet");
         bundle.remove("Washing");
         intent.putExtras(bundle);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

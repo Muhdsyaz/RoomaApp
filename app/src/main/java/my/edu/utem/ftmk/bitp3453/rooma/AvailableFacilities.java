@@ -521,18 +521,21 @@ public class AvailableFacilities extends AppCompatActivity {
     public void toApartmentSpecification(){
         Intent intent = new Intent(getApplicationContext(),ApartmentSpecification.class);
         intent.putExtra("category",category);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     public void toHouseSpecification(){
         Intent intent = new Intent(getApplicationContext(),HouseSpecification.class);
         intent.putExtra("category",category);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     public void toRoomSpecification(){
         Intent intent = new Intent(getApplicationContext(),RoomSpecification.class);
         intent.putExtra("category",category);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

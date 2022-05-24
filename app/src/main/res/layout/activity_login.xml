@@ -80,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColorHint="@color/black"
-                app:startIconDrawable="@drawable/ic_lock">
+                app:startIconDrawable="@drawable/ic_lock"
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/etPassword"

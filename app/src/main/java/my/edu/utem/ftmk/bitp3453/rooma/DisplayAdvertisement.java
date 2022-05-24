@@ -568,16 +568,19 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void toHome(){
         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     public void toFavorite(){
         Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     public void toAdsHistory(){
         Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -592,16 +595,6 @@ public class DisplayAdvertisement extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EditAdvertisement.class);
         intent.putExtra("adsID", adsID);
         intent.putExtra("activity", activity);
-        startActivity(intent);
-    }
-
-    public void toLiveAds(){
-        Intent intent = new Intent(getApplicationContext(),LiveAdsFragment.class);
-        startActivity(intent);
-    }
-
-    public void toAllAds(){
-        Intent intent = new Intent(getApplicationContext(),AllAdsFragment.class);
         startActivity(intent);
     }
 

@@ -17,9 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rooma">
         <activity
+            android:name=".VerifyAccount"
+            android:exported="true" />
+        <activity
             android:name=".AdminDisabledUser"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".AdminManageUser"
             android:exported="true"
