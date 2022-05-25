@@ -10,7 +10,39 @@ public class User {
     String PictureURL;
     String Uid;
     String UserType;
-    String Verify;
+    String Verify, IcURL, SelfieURL, RequestDate, RequestTime;
+
+    public String getIcURL() {
+        return IcURL;
+    }
+
+    public void setIcURL(String icURL) {
+        IcURL = icURL;
+    }
+
+    public String getSelfieURL() {
+        return SelfieURL;
+    }
+
+    public void setSelfieURL(String selfieURL) {
+        SelfieURL = selfieURL;
+    }
+
+    public String getRequestDate() {
+        return RequestDate;
+    }
+
+    public void setRequestDate(String requestDate) {
+        RequestDate = requestDate;
+    }
+
+    public String getRequestTime() {
+        return RequestTime;
+    }
+
+    public void setRequestTime(String requestTime) {
+        RequestTime = requestTime;
+    }
 
     public String getVerify() {
         return Verify;

@@ -7,71 +7,135 @@
     android:orientation="vertical"
     tools:context=".AdminMenu">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Admin Panel"
-        android:textAlignment="center"
-        android:textSize="40dp"
-        android:fontFamily="@font/poppins"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/round_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="40dp"
+                android:text="Admin Panel"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="toAdminVerificationRequest"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tvRequest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppins"
+                        android:text="Verification Request"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="toAdminManageUser"
-        android:layout_marginTop="100dp"
-        android:drawableLeft="@drawable/ic_person"
-        android:text="Manage User" />
+            </androidx.cardview.widget.CardView>
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_user_verify"
-        android:drawableTint="@color/white"
-        android:text="Manage Verification Request" />
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_person"
+                android:onClick="toAdminManageUser"
+                android:text="Manage User" />
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_sell"
-        android:text="Manage Advertisement" />
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:onClick="toAdminManageAdvertisement"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_sell"
+                android:text="Manage Advertisement" />
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_disable"
-        android:drawableTint="@color/white"
-        android:text="Disabled Advertisement" />
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_disable"
+                android:drawableTint="@color/white"
+                android:text="Disabled Advertisement" />
 
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:onClick="toAdminDisabledUser"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_disable_person"
-        android:drawableTint="@color/white"
-        android:text="Disabled User" />
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_disable_person"
+                android:drawableTint="@color/white"
+                android:onClick="toAdminDisabledUser"
+                android:text="Disabled User" />
 
-    <Button
-        android:id="@+id/btLogout"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#00a0e3"
-        android:drawableLeft="@drawable/ic_logout"
-        android:drawableTint="@color/white"
-        android:layout_marginTop="10dp"
-        android:text="Logout" />
+            <Button
+                android:id="@+id/btLogout"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#00a0e3"
+                android:drawableLeft="@drawable/ic_logout"
+                android:drawableTint="@color/white"
+                android:text="Logout" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </LinearLayout>

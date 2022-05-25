@@ -46,13 +46,16 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/text_color.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/white_round.xml" value="0.35462962962962963" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_disabled_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_manage_advertisement.xml" value="0.2851851851851852" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_manage_user.xml" value="0.26481481481481484" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_menu.xml" value="0.3398148148148148" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_verification_detail.xml" value="0.3074074074074074" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_verification_request.xml" value="0.3074074074074074" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_ads_history.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_ads_preview.xml" value="0.33" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_apartment_specification.xml" value="0.33" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_available_facilities.xml" value="0.3175925925925926" />
-        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_display_advertisement.xml" value="0.19842105263157894" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_display_advertisement.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_edit_address.xml" value="0.32685185185185184" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_edit_advertisement.xml" value="0.33" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_edit_name.xml" value="0.32685185185185184" />
@@ -75,7 +78,9 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_start.xml" value="0.3175925925925926" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_verify_account.xml" value="0.3194444444444444" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/ads_row.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/advertisement_row.xml" value="0.29814814814814816" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/bottom_nav.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/disabled_ads_row.xml" value="0.2851851851851852" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/facilities_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/fragment_all_ads.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/fragment_bump_ads.xml" value="0.36666666666666664" />
@@ -84,6 +89,7 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/slider_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/test.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/user_row.xml" value="0.26481481481481484" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/verify_list_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/menu/profile_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.36666666666666664" />

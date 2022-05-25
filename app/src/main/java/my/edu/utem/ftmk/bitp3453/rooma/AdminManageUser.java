@@ -383,7 +383,14 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
 
     public void toAdminMenu(View v){
         Intent intent = new Intent(AdminManageUser.this, AdminMenu.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        moveTaskToBack(true);
     }
 
 }

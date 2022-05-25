@@ -1,26 +1,46 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AdminMenu extends AppCompatActivity {
 
     Button btLogout;
+    TextView tvRequest;
+    int request;
+
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu);
 
+        db = FirebaseFirestore.getInstance();
+
+        // declare button
         btLogout = findViewById(R.id.btLogout);
+
+        // declare textview
+        tvRequest = findViewById(R.id.tvRequest);
+
+        totalRequest();
 
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +74,44 @@ public class AdminMenu extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void totalRequest(){
+
+
+        db.collection("users")
+                .whereEqualTo("UserType", "client")
+                .whereEqualTo("Verify", "Pending")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                request++;
+
+                            }
+
+                            tvRequest.setText(String.valueOf(request));
+
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+
+    public void toAdminVerificationRequest(View v) {
+        Intent intent = new Intent(getApplicationContext(), AdminVerificationRequest.class);
+        startActivity(intent);
+    }
+
+    public void toAdminManageAdvertisement(View v) {
+        Intent intent = new Intent(getApplicationContext(), AdminManageAdvertisement.class);
+        startActivity(intent);
     }
 
     public void toAdminManageUser(View v) {

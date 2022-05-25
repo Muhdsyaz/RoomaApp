@@ -94,10 +94,10 @@ public class AdsPreview extends AppCompatActivity {
         livingroomUri = Uri.parse(bundle.getString("livingroomUri"));
         kitchenUri = Uri.parse(bundle.getString("kitchenUri"));
 
-        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        date = new Date();
-        todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,16);
+//        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+//        date = new Date();
+//        todayDate = (formatter.format(date)).substring(0,10);
+//        todayTime = (formatter.format(date)).substring(11,16);
 
         ownerUid = bundle.getString("ownerUid");
         adsID = bundle.getString("adsID");
@@ -435,7 +435,7 @@ public class AdsPreview extends AppCompatActivity {
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,16);
+        todayTime = (formatter.format(date)).substring(11,16);
 
         adsProperty.put("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
         adsProperty.put("adsID", adsID);

@@ -1,9 +1,9 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,23 +31,30 @@ import com.squareup.picasso.Picasso;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class DisplayAdvertisement extends AppCompatActivity {
 
-    String adsID, favID, activity;
+    String adsID, favID, activity, reportRef;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
     TextView tvEdit, tvDelete, tvSold, tvBump;
 
     ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked;
 
     MaterialIconView mvBackBtn;
-    Button btToMap;
+    Button btToMap, btReport;
 
     LinearLayout layoutAdsPreview, layoutOption;
     HorizontalScrollView layoutHorizontal;
+
+    SimpleDateFormat formatter;
+    Date date;
+    String todayDate, todayTime;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
 
@@ -62,7 +69,10 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         Random rand = new Random();
         int randomID = rand.nextInt(99999999)+1;
-        favID = "fav" + randomID;
+        int randomID2 = rand.nextInt(99999999)+1;
+        favID = "Fav" + randomID;
+        reportRef = "Ref" + randomID2;
+//        reportRef = "Ref29714482";
 
         Intent intent = getIntent();
 
@@ -110,6 +120,14 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         //define button
         btToMap = findViewById(R.id.btToMap);
+        btReport = findViewById(R.id.btReport);
+
+        btReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkExistingRef();
+            }
+        });
 
         btToMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,15 +162,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         //if the previous activity is from ads history, then enable the layout
         if(activity.equals("allAds") || activity.equals("liveAds")) {
-            layoutOption.setVisibility(View.VISIBLE);
 
-//            tvEdit.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//
-//            });
+            btReport.setVisibility(View.INVISIBLE);
+            layoutOption.setVisibility(View.VISIBLE);
 
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -180,14 +192,6 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         if(activity.equals("bumpAds")){
             layoutOption.setVisibility(View.VISIBLE);
-
-//            tvEdit.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    toEditAds();
-//                }
-//
-//            });
 
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -258,6 +262,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
 
         displayAdvertisement();
+        checkInitial();
 
 
     }
@@ -467,9 +472,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
                                             public void onSuccess(Void aVoid) {
                                                 Log.d("TAG", "DocumentSnapshot successfully deleted!");
 
-                                                Toast.makeText(getApplicationContext(), "The advertisement, id: " + adsID + " successfully deleted.", Toast.LENGTH_LONG).show();
-
-                                                toAdsHistory();
+//                                                Toast.makeText(getApplicationContext(), "The advertisement, id: " + adsID + " successfully deleted.", Toast.LENGTH_LONG).show();
+//
+//                                                toAdsHistory();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -486,6 +491,179 @@ public class DisplayAdvertisement extends AppCompatActivity {
                     }
                 });
 
+        // delete all ads that contain the deleted adsID in collection reports
+        db.collection("reports")
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                String reportRef = document.getData().get("reportRef").toString();
+
+                                db.collection("reports").document(reportRef)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+//                                                Toast.makeText(getApplicationContext(), "The advertisement, id: " + adsID + " successfully deleted.", Toast.LENGTH_LONG).show();
+//
+//                                                toAdsHistory();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("TAG", "Error deleting document", e);
+                                            }
+                                        });
+
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+
+    public void checkExistingRef(){
+
+        Log.e("checkExistingRef", reportRef);
+
+        db.collection("reports")
+                .whereEqualTo("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            Log.e("Success", reportRef);
+
+                            if(task.getResult().size() == 0 ) {
+
+                                reportAds();
+
+                            }
+                            else{
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                    String report = document.getString("reportRef");
+
+                                    if(report.equals(reportRef)){
+                                        Log.d("TAG", "Refno Exists");
+
+                                        Random rand = new Random();
+                                        int randomID2 = rand.nextInt(99999999)+1;
+                                        reportRef = "Ref" + randomID2;
+
+                                        checkExistingRef();
+
+                                    }
+                                    else{
+                                        checkExistingReport();
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void checkInitial(){
+        db.collection("reports")
+                .whereEqualTo("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DisplayAdvertisement.this);
+
+                                builder.setMessage("This ads will be put under our surveillance.");
+                                builder.setTitle("You already reported this ads.");
+                                builder.setCancelable(false);
+
+                                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+
+                            }
+
+                        }
+                        else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void checkExistingReport(){
+        db.collection("reports")
+                .whereEqualTo("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            if(task.getResult().size() == 0 ) {
+
+                                reportAds();
+
+                            }
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DisplayAdvertisement.this);
+
+                                builder.setMessage("This ads will be put under our surveillance.");
+                                builder.setTitle("You already reported this ads.");
+                                builder.setCancelable(false);
+
+                                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+
+                            }
+                        }
+                        else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     public void updateStatus(){
@@ -512,6 +690,36 @@ public class DisplayAdvertisement extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void reportAds(){
+
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        date = new Date();
+        todayDate = (formatter.format(date)).substring(0,10);
+        todayTime = (formatter.format(date)).substring(11,16);
+
+        Map<String,Object> report = new HashMap<>();
+        report.put("reportRef",reportRef);
+        report.put("adsID", adsID);
+        report.put("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+        report.put("reportDate", todayDate);
+        report.put("reportTime", todayTime);
+
+        db.collection("reports").document(reportRef)
+                .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(getApplicationContext(), "This advertisement has been report.", Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("TAG", "Error updating document", e);
+            }
+        });
     }
 
     public void bumpAds(){

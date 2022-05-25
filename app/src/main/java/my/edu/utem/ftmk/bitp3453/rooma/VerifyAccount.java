@@ -157,6 +157,8 @@ public class VerifyAccount extends AppCompatActivity {
             }
         });
 
+        initialRequestCheck();
+
     }
 
     private void PickImage() {
@@ -295,7 +297,7 @@ public class VerifyAccount extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                                    icRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    selfieRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                         @Override
                                                         public void onSuccess(Uri uri) {
 
@@ -349,7 +351,7 @@ public class VerifyAccount extends AppCompatActivity {
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,16);
+        todayTime = (formatter.format(date)).substring(11,16);
 
         DocumentReference nameRef = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -360,7 +362,7 @@ public class VerifyAccount extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Log.d("EditName", "DocumentSnapshot successfully updated!");
 
-                        Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
+                        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
                         startActivity(intent);
 
                         Toast.makeText(getApplicationContext(), "Your account verification has been submitted.", Toast.LENGTH_SHORT).show();
@@ -406,6 +408,86 @@ public class VerifyAccount extends AppCompatActivity {
                                     }
                                 }
 
+                            }
+                        }
+                        else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    public void initialRequestCheck(){
+        db.collection("users")
+                .whereEqualTo("Uid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+
+                                String status = document.getString("Verify");
+
+                                if(status.equals("Pending")){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(VerifyAccount.this);
+
+                                    builder.setMessage("However, your account verification request is still \"" + status + "\".");
+                                    builder.setTitle("You already have request for account verification.");
+                                    builder.setCancelable(false);
+
+                                    builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                }
+                                else if(status.equals("Rejected")){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(VerifyAccount.this);
+
+                                    builder.setMessage("Please resubmit your account verification request.");
+                                    builder.setTitle("Your previous account verification request has been rejected.");
+                                    builder.setCancelable(false);
+
+                                    builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                }
+                                else if(status.equals("Verified")){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(VerifyAccount.this);
+
+                                    builder.setMessage("You are able to post your advertisements now.");
+                                    builder.setTitle("Congratulation! Your account has been verified.");
+                                    builder.setCancelable(false);
+
+                                    builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                }
+                                else{
+//                                    uploadImage();
+                                }
                             }
                         }
                         else {

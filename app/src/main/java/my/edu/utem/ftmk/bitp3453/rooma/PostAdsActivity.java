@@ -3,6 +3,8 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +16,13 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PostAdsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -24,11 +32,14 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
     BottomNavigationView bottomNav;
 
     Spinner spinner;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_ads);
+
+        db = FirebaseFirestore.getInstance();
 
         btContinue = findViewById(R.id.btContinue);
 
@@ -68,18 +79,9 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
         btContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(category.equals("House")){
-                    toHouseSpecification();
-                    Log.e("House ", "onCreate: " + category);
-                }
-                else if(category.equals("Apartment")){
-                    toApartmentSpecification();
-                    Log.e("Aparment ", "onCreate: " + category);
-                }
-                else{
-                    toRoomSpecification();
-                    Log.e("Room ", "onCreate: " + category);
-                }
+
+                checkVerification();
+
             }
         });
 
@@ -90,6 +92,90 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         category = spinner.getSelectedItem().toString();
+    }
+
+    public void checkVerification(){
+        DocumentReference docRef = db.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        String verify = document.getData().get("Verify").toString();
+
+                        if(verify.equals("Pending")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PostAdsActivity.this);
+
+                            builder.setMessage("However, your account verification request is still \"" + verify + "\".");
+                            builder.setTitle("You already have request for account verification.");
+                            builder.setCancelable(false);
+
+                            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    dialog.cancel();
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                        else if(verify.equals("Verified")){
+                            if(category.equals("House")){
+                                toHouseSpecification();
+                                Log.e("House ", "onCreate: " + category);
+                            }
+                            else if(category.equals("Apartment")){
+                                toApartmentSpecification();
+                                Log.e("Aparment ", "onCreate: " + category);
+                            }
+                            else{
+                                toRoomSpecification();
+                                Log.e("Room ", "onCreate: " + category);
+                            }
+                        }
+                        else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PostAdsActivity.this);
+
+                            builder.setMessage("Please verify your account to enable you to post advertisements.");
+                            builder.setTitle("Your account currently is not verified.");
+                            builder.setCancelable(false);
+
+                            builder.setPositiveButton("Verify Now", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    Intent intent = new Intent(PostAdsActivity.this, VerifyAccount.class);
+                                    startActivity(intent);
+
+                                }
+                            });
+
+                            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    dialog.cancel();
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.black));
+                        }
+
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     public void toHome(View v){

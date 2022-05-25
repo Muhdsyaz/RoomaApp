@@ -17,6 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rooma">
         <activity
+            android:name=".AdminManageAdvertisement"
+            android:exported="true" />
+        <activity
+            android:name=".AdminVerificationDetail"
+            android:exported="true" />
+        <activity
+            android:name=".AdminVerificationRequest"
+            android:exported="true" />
+        <activity
             android:name=".VerifyAccount"
             android:exported="true" />
         <activity

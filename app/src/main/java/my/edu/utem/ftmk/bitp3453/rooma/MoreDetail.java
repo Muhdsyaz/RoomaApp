@@ -635,7 +635,7 @@ public class MoreDetail extends AppCompatActivity {
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
-        todayTime = (formatter.format(date)).substring(10,16);
+        todayTime = (formatter.format(date)).substring(11,16);
 
         adsProperty.put("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
         adsProperty.put("adsID", adsID);

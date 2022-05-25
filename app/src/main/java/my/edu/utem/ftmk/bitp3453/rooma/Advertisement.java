@@ -20,6 +20,39 @@ public class Advertisement {
     String address;
     String address1;
     String address2;
+    String reportRef, reportDate, reportTime, reporterUid;
+
+    public String getReportRef() {
+        return reportRef;
+    }
+
+    public void setReportRef(String reportRef) {
+        this.reportRef = reportRef;
+    }
+
+    public String getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(String reportDate) {
+        this.reportDate = reportDate;
+    }
+
+    public String getReportTime() {
+        return reportTime;
+    }
+
+    public void setReportTime(String reportTime) {
+        this.reportTime = reportTime;
+    }
+
+    public String getReporterUid() {
+        return reporterUid;
+    }
+
+    public void setReporterUid(String reporterUid) {
+        this.reporterUid = reporterUid;
+    }
 
     public String getAddress1() {
         return address1;
