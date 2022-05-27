@@ -66,7 +66,7 @@ public class AdminDisabledAdvertisement extends AppCompatActivity implements Dis
         // previously we were saving data on a reference of Courses
         // now we will be getting the data from the same reference.
         db.collection("advertisements")
-                .whereEqualTo("status", "live")
+                .whereEqualTo("status", "disabled")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

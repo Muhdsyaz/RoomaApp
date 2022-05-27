@@ -77,7 +77,7 @@ public class AdminDisabledUser extends AppCompatActivity implements  UserRVAdapt
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
 
         // initializing button
-        btDelete = findViewById(R.id.btDelete);
+//        btDelete = findViewById(R.id.btDelete);
         btBack = findViewById(R.id.btBack);
         btEnable = findViewById(R.id.btEnable);
 

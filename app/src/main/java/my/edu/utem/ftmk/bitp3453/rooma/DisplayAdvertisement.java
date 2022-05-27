@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +55,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     SimpleDateFormat formatter;
     Date date;
-    String todayDate, todayTime;
+    String todayDate, todayTime, status;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
 
@@ -289,6 +290,37 @@ public class DisplayAdvertisement extends AppCompatActivity {
         if(activity.equals("admin")){
 
             btDisable.setVisibility(View.VISIBLE);
+            btDisable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(DisplayAdvertisement.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("Disable Advertisement");
+                    dialog.setMessage("Disabling this advertisement will remove it from the list of advertisements in the Home page. " +
+                            "Are you sure you want to disable this advertisement? " );
+                    dialog.setPositiveButton("Disable", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            disableAds();
+
+                        }
+                    })
+                            .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Action for "Cancel".
+
+                                }
+                            });
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
+
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.black));
+                }
+            });
 
             //hide item
             btReport.setVisibility(View.INVISIBLE);
@@ -300,6 +332,15 @@ public class DisplayAdvertisement extends AppCompatActivity {
         if(activity.equals("admin-disabled")){
 
             btDisable.setVisibility(View.VISIBLE);
+            btDisable.setText("Enable Ads");
+            btDisable.setBackgroundColor(Color.parseColor("#4CAF50"));
+
+            btDisable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    enableAds();
+                }
+            });
 
             //hide item
             btReport.setVisibility(View.INVISIBLE);
@@ -380,6 +421,30 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         Picasso.with(getApplicationContext()).load(bathroomURL).into(ivBathroom);
                         Picasso.with(getApplicationContext()).load(livingroomURL).into(ivLivingRoom);
                         Picasso.with(getApplicationContext()).load(kitchenURL).into(ivKitchen);
+
+                        status = document.getData().get("status").toString();
+
+                        if(!activity.equals("admin") && !activity.equals("admin-disabled")){
+                            if(status.equals("disabled")){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(DisplayAdvertisement.this);
+
+                                builder.setMessage("Please contact the admin to enable the advertisement.");
+                                builder.setTitle("This advertisement has been disabled.");
+                                builder.setCancelable(false);
+
+                                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
+                        }
+
 
                         //assign value to textview
                         tvTitle.setText(document.getData().get("title").toString());
@@ -852,6 +917,94 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         startActivity(intent);
 
                         Toast.makeText(getApplicationContext(), "Advertisement unbumped.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Tag", "Error updating document", e);
+                    }
+                });
+
+    }
+
+    public void disableAds(){
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("status", "disabled")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Tag", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdminManageAdvertisement.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Advertisement disabled.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Tag", "Error updating document", e);
+                    }
+                });
+
+        // delete all ads that contain the deleted adsID in collection reports
+        db.collection("reports")
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                String reportRef = document.getData().get("reportRef").toString();
+
+                                db.collection("reports").document(reportRef)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("TAG", "Error deleting document", e);
+                                            }
+                                        });
+
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+
+    public void enableAds(){
+
+        DocumentReference nameRef = db.collection("advertisements").document(adsID);
+
+        nameRef
+                .update("status", "live")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Tag", "DocumentSnapshot successfully updated!");
+
+                        Intent intent = new Intent(getApplicationContext(),AdminDisabledAdvertisement.class);
+                        startActivity(intent);
+
+                        Toast.makeText(getApplicationContext(), "Advertisement enabled.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

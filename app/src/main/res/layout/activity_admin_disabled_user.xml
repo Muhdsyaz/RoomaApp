@@ -130,22 +130,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
 
-            <Button
-                android:id="@+id/btDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:text="Delete"
-                android:background="@drawable/round_gray"
-                app:backgroundTint="#F44336"
-                android:paddingLeft="15dp"
-                android:paddingRight="10dp"
-                android:layout_gravity="end"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="12dp"
-                android:drawableRight="@drawable/ic_delete"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/poppins" />
+<!--            <Button-->
+<!--                android:id="@+id/btDelete"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:text="Delete"-->
+<!--                android:background="@drawable/round_gray"-->
+<!--                app:backgroundTint="#F44336"-->
+<!--                android:paddingLeft="15dp"-->
+<!--                android:paddingRight="10dp"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="10dp"-->
+<!--                android:drawableRight="@drawable/ic_delete"-->
+<!--                android:drawableTint="@color/white" />-->
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfilePic"
@@ -238,21 +236,19 @@
                 <Button
                     android:id="@+id/btBack"
                     android:layout_width="110dp"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     app:backgroundTint="@color/white"
                     android:background="@drawable/round_white"
-                    android:fontFamily="@font/poppins"
                     android:text="Back"
                     android:textColor="@color/black" />
 
                 <Button
                     android:id="@+id/btEnable"
                     android:layout_width="110dp"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
                     android:background="@drawable/round_white"
-                    app:backgroundTint="#00A0E3"
-                    android:fontFamily="@font/poppins"
+                    app:backgroundTint="#4CAF50"
                     android:text="Enable"
                     android:textColor="@color/white" />
 

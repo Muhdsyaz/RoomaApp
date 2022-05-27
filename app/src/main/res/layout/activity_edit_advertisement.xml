@@ -470,22 +470,9 @@
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <Button
-                android:id="@+id/btCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textColor="#F4717F"
-                android:backgroundTint="@color/white"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_marginBottom="100dp"/>
-
-
+            
         </LinearLayout>
 
     </ScrollView>

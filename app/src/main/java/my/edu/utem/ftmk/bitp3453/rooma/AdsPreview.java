@@ -94,10 +94,10 @@ public class AdsPreview extends AppCompatActivity {
         livingroomUri = Uri.parse(bundle.getString("livingroomUri"));
         kitchenUri = Uri.parse(bundle.getString("kitchenUri"));
 
-//        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-//        date = new Date();
-//        todayDate = (formatter.format(date)).substring(0,10);
-//        todayTime = (formatter.format(date)).substring(11,16);
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        date = new Date();
+        todayDate = (formatter.format(date)).substring(0,10);
+        todayTime = (formatter.format(date)).substring(11,16);
 
         ownerUid = bundle.getString("ownerUid");
         adsID = bundle.getString("adsID");

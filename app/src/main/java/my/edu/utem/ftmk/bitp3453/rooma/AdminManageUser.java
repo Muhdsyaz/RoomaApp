@@ -82,7 +82,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
 
         // initializing button
-        btDelete = findViewById(R.id.btDelete);
+//        btDelete = findViewById(R.id.btDelete);
         btBack = findViewById(R.id.btBack);
         btDisable = findViewById(R.id.btDisable);
 

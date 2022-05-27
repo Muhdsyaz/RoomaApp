@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LiveAdsFragment extends Fragment implements AdvertisementRVAdapter.ItemClickListener{
@@ -76,7 +77,7 @@ public class LiveAdsFragment extends Fragment implements AdvertisementRVAdapter.
         // now we will be getting the data from the same reference.
         db.collection("advertisements")
                 .whereEqualTo("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .whereEqualTo("status","live")
+                .whereIn("status", Arrays.asList("live", "disabled"))
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
