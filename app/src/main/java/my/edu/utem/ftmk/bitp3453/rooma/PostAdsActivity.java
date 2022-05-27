@@ -124,7 +124,11 @@ public class PostAdsActivity extends AppCompatActivity implements AdapterView.On
                             alertDialog.show();
                         }
                         else if(verify.equals("Verified")){
-                            if(category.equals("House")){
+
+                            if(category.equals("Category")){
+                                Toast.makeText(getApplicationContext(), "Please choose a category before continue.", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(category.equals("House")){
                                 toHouseSpecification();
                                 Log.e("House ", "onCreate: " + category);
                             }

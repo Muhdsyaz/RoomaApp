@@ -146,7 +146,7 @@ public class AdminVerificationRequest extends AppCompatActivity implements Verif
 
     public void toAdminMenu(View v){
         Intent intent = new Intent(getApplicationContext(), AdminMenu.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

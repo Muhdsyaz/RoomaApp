@@ -557,6 +557,7 @@ public class AdsPreview extends AppCompatActivity {
         bundle.remove("kitchenUri");
 
         Intent intent = new Intent(getApplicationContext(),MoreDetail.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(bundle);
         Log.e("Bundle ", "onCreate: " + bundle);
         startActivity(intent);

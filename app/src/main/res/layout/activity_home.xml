@@ -15,44 +15,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutAdsPreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_corner_below"
-                android:elevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/search"
+                    android:id="@+id/tvSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/custom_border_2"
                     android:drawableLeft="@drawable/ic_search"
                     android:fontFamily="@font/poppins"
                     android:hint="Search"
                     android:inputType="textFilter"
-                    android:layout_marginTop="10dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
 
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_dropdown" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:background="@drawable/round_corner_below"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -63,8 +87,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Location"
                             android:layout_weight="1"
+                            android:text="Location"
                             android:textSize="12dp" />
 
                         <Spinner
@@ -83,20 +107,20 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:background="#DADADA"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="12dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingLeft="12dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Category"
                             android:layout_weight="1"
+                            android:text="Category"
                             android:textSize="12dp" />
 
                         <Spinner
@@ -110,20 +134,20 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:background="#DADADA"
-                        android:orientation="vertical"/>
+                        android:orientation="vertical" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sort"
                             android:layout_weight="1"
+                            android:text="Sort"
                             android:textSize="12dp" />
 
                         <Spinner
@@ -138,8 +162,8 @@
                 <LinearLayout
                     android:layout_width="380dp"
                     android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:background="#DADADA" />
 
                 <HorizontalScrollView
@@ -149,15 +173,15 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:paddingBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal"
-                        android:layout_marginTop="10dp">
+                        android:paddingBottom="10dp">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
                             android:background="@drawable/customborder"
                             android:orientation="horizontal">
 
@@ -171,8 +195,8 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
                             android:background="@drawable/customborder"
                             android:orientation="horizontal">
 
@@ -189,12 +213,12 @@
                             android:layout_height="38dp"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
-                            android:paddingTop="10dp"
                             android:clickable="true"
                             android:fontFamily="@font/poppins"
                             android:foreground="?android:attr/selectableItemBackground"
+                            android:paddingTop="10dp"
                             android:text="Clear All"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
 
@@ -204,186 +228,78 @@
                     android:id="@+id/btSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Search"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:text="Search" />
+
+                <ImageButton
+                    android:id="@+id/ibDrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_dropup"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutAdvertisement"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvAdvertisement"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0" />
-
-                <ProgressBar
-                    android:id="@+id/idProgressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/rvAdvertisement" />
-
-                <TextView
-                    android:id="@+id/tvEmptyDb"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="invisible"
-                    android:textAlignment="center"
-                    android:text="No data found!"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
-        </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutAdvertisement"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAdvertisement"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0" />
+
+                    <ProgressBar
+                        android:id="@+id/idProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rvAdvertisement" />
+
+                    <TextView
+                        android:id="@+id/tvEmptyDb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No data found!"
+                        android:textAlignment="center"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="45dp"-->
-<!--        android:background="#F4717F"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:clickable="true"-->
-<!--            android:foreground="?android:attr/selectableItemBackground">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:src="@drawable/ic_home_black"-->
-<!--                android:layout_gravity="center" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:text="Home"-->
-<!--                android:fontFamily="@font/poppins"-->
-<!--                android:textColor="#850000"-->
-<!--                android:textSize="9dp"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:onClick="toFavorite"-->
-<!--            android:clickable="true"-->
-<!--            android:foreground="?android:attr/selectableItemBackground">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_favorite" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Favorite"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:fontFamily="@font/poppins"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="9dp"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:onClick="toPostAds"-->
-<!--            android:clickable="true"-->
-<!--            android:foreground="?android:attr/selectableItemBackground">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_sell" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Post Ads"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:fontFamily="@font/poppins"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="9dp"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical"-->
-<!--            android:onClick="toProfile"-->
-<!--            android:clickable="true"-->
-<!--            android:foreground="?android:attr/selectableItemBackground">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_person" />-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Profile"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:fontFamily="@font/poppins"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="9dp"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--    </LinearLayout>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"

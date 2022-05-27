@@ -142,7 +142,7 @@
                 android:layout_gravity="end"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:textSize="12dp"
+                android:textSize="10dp"
                 android:drawableRight="@drawable/ic_delete"
                 android:drawableTint="@color/white"
                 android:fontFamily="@font/poppins" />
@@ -153,6 +153,7 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:src="@drawable/ic_person"
                 android:background="@drawable/circle" />
 
             <TextView
@@ -237,7 +238,7 @@
                <Button
                    android:id="@+id/btBack"
                    android:layout_width="110dp"
-                   android:layout_height="45dp"
+                   android:layout_height="40dp"
                    app:backgroundTint="@color/white"
                    android:background="@drawable/round_white"
                    android:fontFamily="@font/poppins"
@@ -247,7 +248,7 @@
                <Button
                    android:id="@+id/btDisable"
                    android:layout_width="110dp"
-                   android:layout_height="45dp"
+                   android:layout_height="40dp"
                    android:layout_marginLeft="30dp"
                    android:background="@drawable/round_white"
                    app:backgroundTint="#F44336"

@@ -2,7 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:paddingTop="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -10,41 +11,25 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvReportRef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ref number: Ref57436253"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/tvAdsID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ads ID: AD89566297"
-        android:fontFamily="@font/poppins"
-        android:textColor="@color/black"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: 26-05-2022"
-            android:textSize="12dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins" />
+            android:text="Condominium Atlantis Residence Kota Laksamana Melaka Tengah 75200 Melaka"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/black"
+           />
 
         <TextView
-            android:id="@+id/tvTime"
+            android:id="@+id/tvAdsID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time: 15:30"
+            android:text="AD89566297"
             android:textSize="12dp"
             android:fontFamily="@font/poppins" />
 
@@ -54,6 +39,7 @@
         android:layout_width="380dp"
         android:layout_height="1dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="#DADADA"/>
 
 </LinearLayout>

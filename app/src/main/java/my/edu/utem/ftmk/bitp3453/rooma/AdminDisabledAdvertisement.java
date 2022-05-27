@@ -22,11 +22,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminManageAdvertisement extends AppCompatActivity implements ReportedRVAdapter.ItemClickListener{
+public class AdminDisabledAdvertisement extends AppCompatActivity implements DisabledRVAdapter.ItemClickListener{
 
     private RecyclerView rvDisabled;
     private ArrayList<Advertisement> advertisementArrayList;
-    private ReportedRVAdapter reportedRVAdapter;
+    private DisabledRVAdapter disabledRVAdapter;
     private FirebaseFirestore db;
     ProgressBar loadingPB;
 
@@ -37,7 +37,7 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manage_advertisement);
+        setContentView(R.layout.activity_admin_disabled_advertisement);
 
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
 
@@ -55,17 +55,18 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
         rvDisabled.setLayoutManager(new LinearLayoutManager(this));
 
         // adding our array list to our recycler view adapter class.
-        reportedRVAdapter = new ReportedRVAdapter(advertisementArrayList, this);
+        disabledRVAdapter = new DisabledRVAdapter(advertisementArrayList, this);
 
-        reportedRVAdapter.setClickListener(this);
+        disabledRVAdapter.setClickListener(this);
 
         // setting adapter to our recycler view.
-        rvDisabled.setAdapter(reportedRVAdapter);
+        rvDisabled.setAdapter(disabledRVAdapter);
 
         // below line is use to get the data from Firebase Firestore.
         // previously we were saving data on a reference of Courses
         // now we will be getting the data from the same reference.
-        db.collection("reports")
+        db.collection("advertisements")
+                .whereEqualTo("status", "live")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -92,7 +93,7 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
                             // after adding the data to recycler view.
                             // we are calling recycler view notifuDataSetChanged
                             // method to notify that data has been changed in recycler view.
-                            reportedRVAdapter.notifyDataSetChanged();
+                            disabledRVAdapter.notifyDataSetChanged();
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
                             loadingPB.setVisibility(View.GONE);
@@ -113,14 +114,14 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
 
     @Override
     public void onItemClick(View view, int position) {
-        String title = reportedRVAdapter.getItem(position).getTitle();
-        adsID = reportedRVAdapter.getItem(position).getAdsID();
+        String title = disabledRVAdapter.getItem(position).getTitle();
+        adsID = disabledRVAdapter.getItem(position).getAdsID();
         Log.e("DisplayAds,  ", "AdsID: " + adsID);
-        Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext()," AdsID: " + adsID, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
         intent.putExtra("adsID", adsID);
-        intent.putExtra("activity", "admin");
+        intent.putExtra("activity", "admin-disabled");
         startActivity(intent);
 
     }

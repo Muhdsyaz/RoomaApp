@@ -169,7 +169,7 @@ public class AdminVerificationDetail extends AppCompatActivity {
 
     public void toAdminVerificationRequest(View v){
         Intent intent = new Intent(getApplicationContext(), AdminVerificationRequest.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

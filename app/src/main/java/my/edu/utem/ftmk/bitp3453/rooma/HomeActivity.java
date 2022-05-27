@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -37,14 +41,16 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdvertisementRVAdapter.ItemClickListener{
 
-    TextView tvClear;
+    TextView tvClear, tvSearch;
     Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spSort;
     Button btSearch;
 
     BottomNavigationView bottomNav;
+    ImageButton imageButton, ibDrop;
 
     String adsID, category, minPrice, maxPrice, state, city, sort;
 
+    LinearLayout layoutFilter;
     ConstraintLayout layoutAdvertisement;
 
     // creating variables for our recycler view,
@@ -113,7 +119,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //declare spinner
+        // declare spinner
         spCategory = findViewById(R.id.spCategory);
         spMinPrice = findViewById(R.id.spMinPrice);
         spMaxPrice = findViewById(R.id.spMaxPrice);
@@ -121,16 +127,23 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         spCity = findViewById(R.id.spCity);
         spSort = findViewById(R.id.spSort);
 
-        //declare textview
+        // declare textview
         tvClear = findViewById(R.id.tvClear);
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
+        tvSearch= findViewById(R.id.tvSearch);
 
-        //declare button
+        // declare button
         btSearch = findViewById(R.id.btSearch);
 
+        // declare imgbtn
+        imageButton = findViewById(R.id.imageButton);
+        ibDrop = findViewById(R.id.ibDrop);
+
+        // declare layout
+        layoutFilter = findViewById(R.id.layoutFilter);
         layoutAdvertisement = findViewById(R.id.layoutAdvertisement);
 
-        // initializing our variables.
+        //  initializing our variables.
         rvAdvertisement = findViewById(R.id.rvAdvertisement);
         loadingPB = findViewById(R.id.idProgressBar);
 
@@ -201,6 +214,38 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             });
 
+        }
+        else if(state == null && city == null && category.equals("Category") && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
+            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("status","live")
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         else if(state == null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
             Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
@@ -530,6 +575,58 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutFilter.setVisibility(View.VISIBLE);
+
+                ibDrop.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutFilter.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        });
+
+        // to filter recyclerview
+        tvSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                ArrayList<Advertisement> searchItems = new ArrayList<>();
+                for(Advertisement documentSnapshot : advertisementArrayList){
+                    if(documentSnapshot.getTitle().toString().toLowerCase().contains(s.toString().toLowerCase())){
+                        searchItems.add(documentSnapshot);
+                    }
+                    else if(documentSnapshot.getState().toString().toLowerCase().contains(s.toString().toLowerCase())){
+                        searchItems.add(documentSnapshot);
+                    }
+                    else if(documentSnapshot.getCity().toString().toLowerCase().contains(s.toString().toLowerCase())){
+                        searchItems.add(documentSnapshot);
+                    }
+                    else if(documentSnapshot.getCategory().toString().toLowerCase().contains(s.toString().toLowerCase())){
+                        searchItems.add(documentSnapshot);
+                    }
+                }
+                advertisementRVAdapter = new AdvertisementRVAdapter(searchItems,HomeActivity.this);
+                rvAdvertisement.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false));
+                advertisementRVAdapter.setClickListener(HomeActivity.this);
+                rvAdvertisement.setAdapter(advertisementRVAdapter);
+
+            }
+        });
+
     }
 
     @Override
@@ -538,10 +635,6 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         adsID = advertisementRVAdapter.getItem(position).getAdsID();
         Log.e("DisplayAds,  ", "AdsID: " + adsID);
         Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
-        intent.putExtra("adsID", adsID);
-        startActivity(intent);
 
         toDisplayAds(adsID);
     }

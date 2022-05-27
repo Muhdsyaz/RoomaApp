@@ -213,6 +213,7 @@ public class LoginActivity extends AppCompatActivity {
     public void toStartActivity(View v){
 
         Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
     }

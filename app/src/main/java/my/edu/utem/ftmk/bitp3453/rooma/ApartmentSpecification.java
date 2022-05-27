@@ -118,7 +118,7 @@ public class ApartmentSpecification extends AppCompatActivity implements Adapter
 
     public void toPostAds(View v){
         Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

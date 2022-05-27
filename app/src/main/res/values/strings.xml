@@ -2,6 +2,7 @@
     <string name="app_name">Rooma</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string-array name="category">
+        <item>Category</item>
         <item>House</item>
         <item>Apartment</item>
         <item>Room</item>

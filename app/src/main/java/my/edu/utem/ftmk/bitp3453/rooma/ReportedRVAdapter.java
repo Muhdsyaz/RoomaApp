@@ -6,45 +6,44 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-public class DisabledRVAdapter extends RecyclerView.Adapter<DisabledRVAdapter.ViewHolder>{
+public class ReportedRVAdapter extends RecyclerView.Adapter<ReportedRVAdapter.ViewHolder>{
 
     private ArrayList<Advertisement> advertisementArrayList;
     private Context context;
-    private DisabledRVAdapter.ItemClickListener mClickListener;
+    private ReportedRVAdapter.ItemClickListener mClickListener;
 
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
 
     // creating constructor for our adapter class
-    public DisabledRVAdapter(ArrayList<Advertisement> advertisementArrayList, Context context) {
+    public ReportedRVAdapter(ArrayList<Advertisement> advertisementArrayList, Context context) {
         this.advertisementArrayList = advertisementArrayList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public DisabledRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReportedRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // passing our layout file for displaying our card item
-        return new DisabledRVAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.disabled_ads_row, parent, false));
+        return new ReportedRVAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.reported_ads_row, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DisabledRVAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReportedRVAdapter.ViewHolder holder, int position) {
         // setting data to our text views from our modal class.
         Advertisement advertisement = advertisementArrayList.get(position);
 
-        holder.tvTitle.setText(advertisement.getTitle());
-        holder.tvAdsID.setText(advertisement.getAdsID());
+        holder.tvReportRef.setText("Report Ref: " + advertisement.getReportRef());
+        holder.tvAdsID.setText("Ads ID: " + advertisement.getAdsID());
+        holder.tvDate.setText("Date: " + advertisement.getReportDate());
+        holder.tvTime.setText("Time: " + advertisement.getReportTime());
 
     }
 
@@ -60,14 +59,19 @@ public class DisabledRVAdapter extends RecyclerView.Adapter<DisabledRVAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // creating variables for our text views.
-        private final TextView tvTitle;
+        private final TextView tvReportRef;
         private final TextView tvAdsID;
+        private final TextView tvDate;
+        private final TextView tvTime;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our text views.
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvReportRef = itemView.findViewById(R.id.tvReportRef);
             tvAdsID = itemView.findViewById(R.id.tvAdsID);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvTime = itemView.findViewById(R.id.tvTime);
 
             itemView.setOnClickListener(this);
 
@@ -80,7 +84,7 @@ public class DisabledRVAdapter extends RecyclerView.Adapter<DisabledRVAdapter.Vi
 
 
     // allows clicks events to be caught
-    void setClickListener(DisabledRVAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(ReportedRVAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

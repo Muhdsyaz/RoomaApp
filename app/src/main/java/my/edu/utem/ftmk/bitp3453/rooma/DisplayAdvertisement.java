@@ -47,7 +47,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
     ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked;
 
     MaterialIconView mvBackBtn;
-    Button btToMap, btReport;
+    Button btToMap, btReport, btDisable;
 
     LinearLayout layoutAdsPreview, layoutOption;
     HorizontalScrollView layoutHorizontal;
@@ -121,6 +121,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         //define button
         btToMap = findViewById(R.id.btToMap);
         btReport = findViewById(R.id.btReport);
+        btDisable = findViewById(R.id.btDisable);
 
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,8 +146,11 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 else if(activity.equals("favorite")){
                     toFavorite();
                 }
-                else if(activity.equals("allAds")){
-                    toAdsHistory();
+                else if(activity.equals("admin")){
+                    toAdminManageAds();
+                }
+                else if(activity.equals("admin-disabled")){
+                    toAdminDisabledAds();
                 }
                 else{
                     toAdsHistory();
@@ -161,16 +165,44 @@ public class DisplayAdvertisement extends AppCompatActivity {
         layoutOption = findViewById(R.id.layoutOption);
 
         //if the previous activity is from ads history, then enable the layout
-        if(activity.equals("allAds") || activity.equals("liveAds")) {
+        if(activity.equals("liveAds")) {
 
             btReport.setVisibility(View.INVISIBLE);
+            ivFavorite.setVisibility(View.INVISIBLE);
+            ivFavoriteClicked.setVisibility(View.INVISIBLE);
+
             layoutOption.setVisibility(View.VISIBLE);
 
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    deleteAds();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(DisplayAdvertisement.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("Delete Advertisement");
+                    dialog.setMessage("Are you sure you want to delete this advertisement? You cannot undone once this action is completed." );
+                    dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            deleteAds();
+
+                        }
+                    })
+                            .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Action for "Cancel".
+
+                                }
+                            });
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
+
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.black));
+
 
                 }
             });
@@ -190,14 +222,49 @@ public class DisplayAdvertisement extends AppCompatActivity {
             });
         }
 
+        if(activity.equals("allAds")){
+            btReport.setVisibility(View.INVISIBLE);
+            ivFavorite.setVisibility(View.INVISIBLE);
+            ivFavoriteClicked.setVisibility(View.INVISIBLE);
+
+        }
+
         if(activity.equals("bumpAds")){
+            btReport.setVisibility(View.INVISIBLE);
+            ivFavorite.setVisibility(View.INVISIBLE);
+            ivFavoriteClicked.setVisibility(View.INVISIBLE);
+
             layoutOption.setVisibility(View.VISIBLE);
 
             tvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    deleteAds();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(DisplayAdvertisement.this);
+                    dialog.setCancelable(false);
+                    dialog.setTitle("Delete Advertisement");
+                    dialog.setMessage("Are you sure you want to delete this advertisement? You cannot undone once this action is completed." );
+                    dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            deleteAds();
+
+                        }
+                    })
+                            .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //Action for "Cancel".
+
+                                }
+                            });
+
+                    final AlertDialog alert = dialog.create();
+                    alert.show();
+
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.black));
 
                 }
             });
@@ -217,6 +284,28 @@ public class DisplayAdvertisement extends AppCompatActivity {
             });
 
             tvBump.setText("Unbump");
+        }
+
+        if(activity.equals("admin")){
+
+            btDisable.setVisibility(View.VISIBLE);
+
+            //hide item
+            btReport.setVisibility(View.INVISIBLE);
+            ivFavorite.setVisibility(View.INVISIBLE);
+            ivFavoriteClicked.setVisibility(View.INVISIBLE);
+
+        }
+
+        if(activity.equals("admin-disabled")){
+
+            btDisable.setVisibility(View.VISIBLE);
+
+            //hide item
+            btReport.setVisibility(View.INVISIBLE);
+            ivFavorite.setVisibility(View.INVISIBLE);
+            ivFavoriteClicked.setVisibility(View.INVISIBLE);
+
         }
 
         //if image house is clicked, then show layouthorizontal
@@ -262,7 +351,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
 
         displayAdvertisement();
-        checkInitial();
+//        checkInitial();
 
 
     }
@@ -276,7 +365,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("DisplayAdvertisementActivity", "DocumentSnapshot data: " + document.getData());
+                        //Log.d("DisplayAdvertisementActivity", "DocumentSnapshot data: " + document.getData());
 
                         houseURL = document.getData().get("houseURL").toString();
                         bedroomURL = document.getData().get("bedroomURL").toString();
@@ -680,7 +769,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
                         startActivity(intent);
 
-                        Toast.makeText(getApplicationContext(), "Status updated successfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Advertisement sold.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -776,19 +865,19 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void toHome(){
         Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void toFavorite(){
         Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void toAdsHistory(){
         Intent intent = new Intent(getApplicationContext(),AdsHistory.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -803,6 +892,18 @@ public class DisplayAdvertisement extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), EditAdvertisement.class);
         intent.putExtra("adsID", adsID);
         intent.putExtra("activity", activity);
+        startActivity(intent);
+    }
+
+    public void toAdminManageAds(){
+        Intent intent = new Intent(getApplicationContext(), AdminManageAdvertisement.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void toAdminDisabledAds(){
+        Intent intent = new Intent(getApplicationContext(), AdminDisabledAdvertisement.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

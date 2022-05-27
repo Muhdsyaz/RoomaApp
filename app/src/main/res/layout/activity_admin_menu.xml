@@ -85,37 +85,46 @@
             </androidx.cardview.widget.CardView>
 
             <Button
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/ic_person"
                 android:onClick="toAdminManageUser"
                 android:text="Manage User" />
 
             <Button
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="toAdminManageAdvertisement"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/ic_sell"
-                android:text="Manage Advertisement" />
+                android:text="Manage Reported Ads" />
 
             <Button
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="toAdminDisabledAdvertisement"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/ic_disable"
                 android:drawableTint="@color/white"
                 android:text="Disabled Advertisement" />
 
             <Button
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:drawableLeft="@drawable/ic_disable_person"
                 android:drawableTint="@color/white"
                 android:onClick="toAdminDisabledUser"
@@ -123,10 +132,12 @@
 
             <Button
                 android:id="@+id/btLogout"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="#00a0e3"
                 android:drawableLeft="@drawable/ic_logout"
                 android:drawableTint="@color/white"

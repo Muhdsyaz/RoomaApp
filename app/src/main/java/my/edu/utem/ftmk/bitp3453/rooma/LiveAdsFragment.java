@@ -142,7 +142,7 @@ public class LiveAdsFragment extends Fragment implements AdvertisementRVAdapter.
     public void toDisplayAds(String adsID){
         Intent intent = new Intent(getContext(),DisplayAdvertisement.class);
         intent.putExtra("adsID", adsID);
-        intent.putExtra("activity", "allAds");
+        intent.putExtra("activity", "liveAds");
         startActivity(intent);
     }
 }

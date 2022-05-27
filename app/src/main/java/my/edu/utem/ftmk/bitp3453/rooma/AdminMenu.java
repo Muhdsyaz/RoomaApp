@@ -114,6 +114,11 @@ public class AdminMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toAdminDisabledAdvertisement(View v) {
+        Intent intent = new Intent(getApplicationContext(), AdminDisabledAdvertisement.class);
+        startActivity(intent);
+    }
+
     public void toAdminManageUser(View v) {
         Intent intent = new Intent(getApplicationContext(), AdminManageUser.class);
         startActivity(intent);

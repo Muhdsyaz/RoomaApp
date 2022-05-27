@@ -453,7 +453,7 @@ public class VerifyAccount extends AppCompatActivity {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(VerifyAccount.this);
 
                                     builder.setMessage("Please resubmit your account verification request.");
-                                    builder.setTitle("Your previous account verification request has been rejected.");
+                                    builder.setTitle("Your account verification request has been rejected.");
                                     builder.setCancelable(false);
 
                                     builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
@@ -561,13 +561,13 @@ public class VerifyAccount extends AppCompatActivity {
 
     public void toProfile(View v){
         Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     public void toProfile(){
         Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

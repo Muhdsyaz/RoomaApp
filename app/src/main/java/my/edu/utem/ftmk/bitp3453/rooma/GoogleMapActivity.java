@@ -288,7 +288,7 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
         intent.putExtra("adsID", adsID);
         intent.putExtra("activity", activity);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

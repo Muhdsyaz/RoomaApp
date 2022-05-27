@@ -521,6 +521,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <Button
+                    android:id="@+id/btDisable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#F44336"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
+                    android:drawableTint="@color/white"
+                    android:text="Disable Advertisement"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <LinearLayout
                     android:id="@+id/layoutOption"
                     android:layout_width="match_parent"
