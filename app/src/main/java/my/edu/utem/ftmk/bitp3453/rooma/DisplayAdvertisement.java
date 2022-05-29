@@ -2,12 +2,17 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,19 +48,21 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     String adsID, favID, activity, reportRef;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
-    TextView tvEdit, tvDelete, tvSold, tvBump;
+    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress;
 
-    ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked;
+    ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked, ivProfilePic, ivProfilePic2;
 
     MaterialIconView mvBackBtn;
-    Button btToMap, btReport, btDisable;
+    Button btToMap, btReport, btDisable, btBack;
 
-    LinearLayout layoutAdsPreview, layoutOption;
+    CardView layoutContact;
+
+    LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo;
     HorizontalScrollView layoutHorizontal;
 
     SimpleDateFormat formatter;
     Date date;
-    String todayDate, todayTime, status;
+    String todayDate, todayTime, status, ownerUid, url;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
 
@@ -92,6 +99,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
         ivPhotoLibrary = findViewById(R.id.ivPhotoLibrary);
         ivFavorite = findViewById(R.id.ivFavorite);
         ivFavoriteClicked = findViewById(R.id.ivFavoriteClicked);
+        ivProfilePic = findViewById(R.id.ivProfilePic);
+        ivProfilePic2 = findViewById(R.id.ivProfilePic2);
 
         //declare textview
         tvTitle = findViewById(R.id.tvTitle);
@@ -116,6 +125,14 @@ public class DisplayAdvertisement extends AppCompatActivity {
         tvSold = findViewById(R.id.tvSold);
         tvBump = findViewById(R.id.tvBump);
 
+        tvEmail = findViewById(R.id.tvEmail);
+        tvName = findViewById(R.id.tvName);
+
+        tvEmail2 = findViewById(R.id.tvEmail2);
+        tvName2 = findViewById(R.id.tvName2);
+        tvPhone = findViewById(R.id.tvPhone);
+        tvAddress = findViewById(R.id.tvAddress);
+
         //define mvbutton
         mvBackBtn = findViewById(R.id.mvBackBtn);
 
@@ -123,6 +140,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         btToMap = findViewById(R.id.btToMap);
         btReport = findViewById(R.id.btReport);
         btDisable = findViewById(R.id.btDisable);
+        btBack = findViewById(R.id.btBack);
 
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +182,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
         layoutAdsPreview = findViewById(R.id.layoutAdsPreview);
         layoutHorizontal = findViewById(R.id.layoutHorizontal);
         layoutOption = findViewById(R.id.layoutOption);
+        layoutOwnerInfo = findViewById(R.id.layoutOwnerInfo);
+
+        layoutContact = findViewById(R.id.layoutContact);
 
         //if the previous activity is from ads history, then enable the layout
         if(activity.equals("liveAds")) {
@@ -392,7 +413,20 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
 
         displayAdvertisement();
-//        checkInitial();
+
+        layoutContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutOwnerInfo.setVisibility(View.VISIBLE);
+
+                btBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutOwnerInfo.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        });
 
 
     }
@@ -445,6 +479,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
                             }
                         }
 
+                        ownerUid = document.getData().get("ownerUid").toString();
+                        displayOwner(ownerUid);
 
                         //assign value to textview
                         tvTitle.setText(document.getData().get("title").toString());
@@ -492,6 +528,57 @@ public class DisplayAdvertisement extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void displayOwner(String ownerUid){
+        DocumentReference docRef = db.collection("users").document(ownerUid);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //Log.d("ProfileActivity", "DocumentSnapshot data: " + document.getData());
+
+                        tvEmail.setText(document.getData().get("Email").toString());
+                        tvName.setText(document.getData().get("FullName").toString());
+
+                        tvEmail2.setText(document.getData().get("Email").toString());
+                        tvName2.setText(document.getData().get("FullName").toString());
+                        tvPhone.setText(document.getData().get("PhoneNum").toString());
+                        tvAddress.setText(document.getData().get("Address").toString());
+
+                        url = document.getData().get("PictureURL").toString();
+
+                        if(url == ""){
+
+                        }else{
+                            Picasso.with(DisplayAdvertisement.this).load(url).into(ivProfilePic);
+                            Picasso.with(DisplayAdvertisement.this).load(url).into(ivProfilePic2);
+                        }
+
+                        String phone = tvPhone.getText().toString();
+                        openWhatsapp(phone);
+
+                        String email = tvEmail2.getText().toString();
+                        openEmail(email);
+
+                        SpannableString content = new SpannableString(phone);
+                        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+                        tvPhone.setText(content);
+
+                        SpannableString content2 = new SpannableString(email);
+                        content2.setSpan(new UnderlineSpan(), 0, content2.length(), 0);
+                        tvEmail2.setText(content2);
+
+                    } else {
+                        Log.d("ProfileActivity", "No such document");
+                    }
+                } else {
+                    Log.d("ProfileActivity", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     public void checkFavorite(){
@@ -1014,6 +1101,40 @@ public class DisplayAdvertisement extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void openWhatsapp(String phone){
+
+        tvPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String url = "https://api.whatsapp.com/send?phone=" + phone;
+                try {
+                    PackageManager pm = getApplicationContext().getPackageManager();
+                    pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } catch (PackageManager.NameNotFoundException e) {
+                    Toast.makeText(getApplicationContext(), "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void openEmail(String email){
+
+        tvEmail2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:" + email + "?");
+                intent.setData(data);
+                startActivity(intent);
+            }
+        });
     }
 
     public void toHome(){

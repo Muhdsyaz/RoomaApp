@@ -3,6 +3,7 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btLogin, btSubmit, btCancel;
     private TextView tvForgotPassword;
     private LinearLayout layoutResetPassword;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,10 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString();
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Signing you in...");
+        progressDialog.show();
+
         if(!email.equals("") && !password.equals("")) {
 
             mAuth.signInWithEmailAndPassword(email, password)
@@ -105,13 +112,22 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
 
                                 if(email.equals("admin@rooma.com")){
+                                    if (progressDialog.isShowing())
+                                        progressDialog.dismiss();
+
                                     toAdminMenu();
                                 }
                                 else {
+                                    if (progressDialog.isShowing())
+                                        progressDialog.dismiss();
+
                                     toHomeActivity();
                                 }
                             } else {
                                 // If sign in fails, display a message to the user.
+                                if (progressDialog.isShowing())
+                                    progressDialog.dismiss();
+
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();

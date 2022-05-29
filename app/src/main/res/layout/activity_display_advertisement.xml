@@ -1,50 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".DisplayAdvertisement">
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/layoutOwnerInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@drawable/round_pink"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:elevation="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
-        <net.steamcrafted.materialiconlib.MaterialIconView
-            android:id="@+id/mvBackBtn"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            app:materialIcon="chevron_left"
-            app:materialIconColor="@color/black" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfilePic2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"
+            android:background="@drawable/circle" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/tvEmail2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/poppins" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text = ""
-            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
-            android:textStyle="bold"/>
+            android:text="Name"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Phone"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins"
+            android:text=""
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Address"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btBack"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/round_white"
+            android:text="Back"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layoutAdsPreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/mvBackBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    app:materialIcon="chevron_left"
+                    app:materialIconColor="@color/black" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:padding="20dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -65,49 +183,49 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:src="@drawable/ic_photo_library"
-                    app:tint="#F4717F"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.03"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0.03"
-                    app:layout_constraintVertical_bias="0.95"/>
+                    app:layout_constraintVertical_bias="0.95"
+                    app:tint="#F4717F" />
 
                 <ImageView
                     android:id="@+id/ivFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_favorite_outline"
                     android:padding="5dp"
-                    app:tint="#F4717F"
+                    android:src="@drawable/ic_favorite_outline"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.956"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.057" />
+                    app:layout_constraintVertical_bias="0.057"
+                    app:tint="#F4717F" />
 
                 <ImageView
                     android:id="@+id/ivFavoriteClicked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_favorite_black"
                     android:padding="5dp"
-                    app:tint="#F4717F"
+                    android:src="@drawable/ic_favorite_black"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.956"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.057" />
+                    app:layout_constraintVertical_bias="0.057"
+                    app:tint="#F4717F" />
 
                 <HorizontalScrollView
                     android:id="@+id/layoutHorizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:visibility="invisible"
                     android:background="@color/white"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -161,61 +279,116 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rumah Sewa Taman Melaka Baru Fasa 3"
-                android:textSize="16dp"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
+                android:fontFamily="@font/poppins"
+                android:text="Rumah Sewa Taman Melaka Baru Fasa 3"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvMonthlyRent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RM 1000"
-                android:textSize="20dp"
+                android:layout_marginLeft="18dp"
                 android:fontFamily="@font/poppins"
-                android:textStyle="bold"
+                android:text="RM 1000"
                 android:textColor="#F4717F"
-                android:layout_marginLeft="18dp"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="December 14, 2021 at 10:51:25 PM UTC+8"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
+                android:text="December 14, 2021 at 10:51:25 PM UTC+8"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apartment"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
+                android:text="Apartment"
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Melaka > Batu Berendam"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
-                android:textSize="12dp"
-                android:layout_marginLeft="20dp" />
+                android:text="Melaka > Batu Berendam"
+                android:textSize="12dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layoutContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfilePic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_person"
+                        app:civ_border_color="#FF000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Muhammad Syazani Bin Mohd Shah"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="user@gmail.com"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:layout_width="380dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:background="#DADADA"/>
+                android:background="#DADADA" />
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
@@ -234,25 +407,25 @@
                         android:layout_marginBottom="20dp">
 
                         <TableRow>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/poppins"
                                 android:text="Property Details"
                                 android:textColor="@color/black"
-                                android:fontFamily="@font/poppins"
-                                android:textStyle="bold"
-                                android:layout_marginTop="10dp" />
+                                android:textStyle="bold" />
                         </TableRow>
 
-                        <TableRow
-                            android:layout_marginTop="10dp">
+                        <TableRow android:layout_marginTop="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Property Type"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Property Type"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvResType"
@@ -261,19 +434,18 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
-                        <TableRow
-                            android:background="#EDEDED">
+                        <TableRow android:background="#EDEDED">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Floor Range"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Floor Range"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvFloor"
@@ -282,7 +454,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
@@ -291,9 +463,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bedroom"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Bedroom"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvBedroom"
@@ -302,19 +474,18 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
-                        <TableRow
-                            android:background="#EDEDED">
+                        <TableRow android:background="#EDEDED">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Bathroom"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Bathroom"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvBathroom"
@@ -323,7 +494,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
@@ -332,9 +503,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Size"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Size"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvSize"
@@ -343,19 +514,18 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
-                        <TableRow
-                            android:background="#EDEDED">
+                        <TableRow android:background="#EDEDED">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Furnishing"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Furnishing"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvFurnishing"
@@ -364,7 +534,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
@@ -373,9 +543,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Facilities"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Facilities"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvFacilities"
@@ -384,19 +554,18 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
-                        <TableRow
-                            android:background="#EDEDED">
+                        <TableRow android:background="#EDEDED">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Built Year"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Built Year"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvYear"
@@ -405,7 +574,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
@@ -414,9 +583,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rental Deposit"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Rental Deposit"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvDeposit"
@@ -425,19 +594,18 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
-                        <TableRow
-                            android:background="#EDEDED">
+                        <TableRow android:background="#EDEDED">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Other Facilities"
                                 android:fontFamily="@font/poppins"
-                                android:textSize="12dp"/>
+                                android:text="Other Facilities"
+                                android:textSize="12dp" />
 
                             <TextView
                                 android:id="@+id/tvOther"
@@ -446,7 +614,7 @@
                                 android:fontFamily="@font/poppins"
                                 android:inputType="textPostalAddress"
                                 android:textColor="@color/black"
-                                android:textSize="12dp"/>
+                                android:textSize="12dp" />
 
                         </TableRow>
 
@@ -460,27 +628,27 @@
                 android:layout_width="380dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:background="#DADADA"/>
+                android:background="#DADADA" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
                 android:text="Description"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/customborder"
+                android:fontFamily="@font/poppins"
                 android:text=""
                 android:textSize="12dp" />
 
@@ -488,20 +656,21 @@
                 android:id="@+id/btToMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Display location in Map"
-                android:drawableLeft="@drawable/ic_location"
-                android:drawableTint="@color/white"
-                android:backgroundTint="#00a0e3"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_weight="1"
+                android:backgroundTint="#EAEAEA"
+                android:textColor="#616161"
+                android:drawableLeft="@drawable/ic_location"
+                android:drawableTint="#616161"
+                android:text="Display location in Map" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="100dp">
 
@@ -515,9 +684,9 @@
                     android:text="Report this ads"
                     android:textSize="10dp"
                     app:backgroundTint="#F44336"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -527,10 +696,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#F44336"
-                    android:textSize="10dp"
-                    android:visibility="invisible"
                     android:drawableTint="@color/white"
                     android:text="Disable Advertisement"
+                    android:textSize="10dp"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -613,16 +782,10 @@
 
                 </LinearLayout>
 
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
