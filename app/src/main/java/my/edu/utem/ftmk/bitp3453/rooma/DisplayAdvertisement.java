@@ -485,7 +485,23 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         //assign value to textview
                         tvTitle.setText(document.getData().get("title").toString());
                         tvMonthlyRent.setText("RM " + document.getData().get("monthlyRent").toString());
-                        tvDate.setText(document.getData().get("postDate").toString() + " " + document.getData().get("postTime").toString());
+
+                        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        date = new Date();
+                        todayDate = (formatter.format(date)).substring(0,10);
+                        todayTime = (formatter.format(date)).substring(11,16);
+
+                        String dbdate = document.getData().get("postDate").toString();
+                        String dbtime = document.getData().get("postTime").toString();
+
+                        if(todayDate.equals(dbdate)){
+                            dbdate = "Today";
+                            tvDate.setText(dbdate + " " + dbtime);
+                        }
+                        else {
+                            tvDate.setText(dbdate + " " + dbtime);
+                        }
+
                         tvCategory.setText(document.getData().get("category").toString());
                         tvLocation.setText(document.getData().get("state").toString() + " > " + document.getData().get("city").toString());
                         tvResType.setText(document.getData().get("resType").toString());

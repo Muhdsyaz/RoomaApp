@@ -54,7 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_dropdown" />
+                    android:src="@drawable/ic_dropdown"
+                    android:backgroundTint="@color/white"/>
 
             </LinearLayout>
 
@@ -238,6 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_dropup"
+                    android:backgroundTint="@color/white"
                     android:layout_gravity="center"/>
 
             </LinearLayout>

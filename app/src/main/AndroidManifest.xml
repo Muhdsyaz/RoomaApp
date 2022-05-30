@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Rooma">
         <activity
+            android:name=".AdminAllAds"
+            android:exported="true" />
+        <activity
             android:name=".AdminDisabledAdvertisement"
             android:exported="true" />
         <activity

@@ -22,8 +22,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class AdminMenu extends AppCompatActivity {
 
     Button btLogout;
-    TextView tvRequest;
-    int request;
+    TextView tvRequest, tvTotalAds;
+    int request, totalAds;
 
     FirebaseFirestore db;
 
@@ -39,8 +39,10 @@ public class AdminMenu extends AppCompatActivity {
 
         // declare textview
         tvRequest = findViewById(R.id.tvRequest);
+        tvTotalAds = findViewById(R.id.tvTotalAds);
 
         totalRequest();
+        totalAdvertisement();
 
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +92,7 @@ public class AdminMenu extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d("TAG", document.getId() + " => " + document.getData());
 
-                                request++;
+                                request = task.getResult().size();
 
                             }
 
@@ -104,10 +106,42 @@ public class AdminMenu extends AppCompatActivity {
 
     }
 
+    public void totalAdvertisement(){
+
+
+        db.collection("advertisements")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("TAG", document.getId() + " => " + document.getData());
+
+                                totalAds = task.getResult().size();
+
+                            }
+
+                            tvTotalAds.setText(String.valueOf(totalAds));
+
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+
     public void toAdminVerificationRequest(View v) {
         Intent intent = new Intent(getApplicationContext(), AdminVerificationRequest.class);
         startActivity(intent);
     }
+
+    public void toAdminAllAds(View v) {
+        Intent intent = new Intent(getApplicationContext(), AdminAllAds.class);
+        startActivity(intent);
+    }
+
 
     public void toAdminManageAdvertisement(View v) {
         Intent intent = new Intent(getApplicationContext(), AdminManageAdvertisement.class);

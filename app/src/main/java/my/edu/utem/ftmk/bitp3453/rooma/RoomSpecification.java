@@ -41,7 +41,16 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
         btContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toAvailableFacilities();
+                if(etPropertySize.getText().toString().isEmpty() || etFinishYear.getText().toString().isEmpty() ||
+                        etDeposit.getText().toString().isEmpty() || etMonthlyRent.getText().toString().isEmpty()){
+
+                    Toast.makeText(getApplicationContext(), "Please fill all the form before continue.", Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    toAvailableFacilities();
+                }
+
             }
         });
 

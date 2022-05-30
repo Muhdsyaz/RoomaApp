@@ -18,13 +18,19 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRVAdapter.ViewHolder>{
 
     private ArrayList<Advertisement> advertisementArrayList;
     private Context context;
     private ItemClickListener mClickListener;
+
+    SimpleDateFormat formatter;
+    Date date;
+    String todayDate, todayTime;
 
     Handler mainHandler = new Handler();
     ProgressDialog progressDialog;
@@ -58,7 +64,24 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
         holder.tvSize.setText(advertisement.getPropertySize() + " sq. ft.");
         holder.tvBedroom.setText(advertisement.getBedroom() + " Bedroom");
         holder.tvBathroom.setText(advertisement.getBathroom() + " Bathroom");
-        holder.tvAdsDate.setText(advertisement.getPostDate() + " " + advertisement.getPostTime());
+
+        formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        date = new Date();
+        todayDate = (formatter.format(date)).substring(0,10);
+        todayTime = (formatter.format(date)).substring(11,16);
+
+        String dbdate = advertisement.getPostDate();
+        String dbtime = advertisement.getPostTime();
+
+        if(todayDate.equals(dbdate)){
+            dbdate = "Today";
+            holder.tvAdsDate.setText(dbdate + " " + dbtime);
+        }
+        else {
+            holder.tvAdsDate.setText(dbdate + " " + dbtime);
+        }
+
+//        holder.tvAdsDate.setText(advertisement.getPostDate() + " " + advertisement.getPostTime());
         holder.tvAdsID.setText(advertisement.getAdsID());
 
     }
