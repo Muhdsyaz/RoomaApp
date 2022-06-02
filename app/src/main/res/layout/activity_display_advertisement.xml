@@ -107,6 +107,26 @@
             android:textColor="@color/white"
             android:textSize="12dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins"
+            android:text="Register date"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvRegDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
         <Button
             android:id="@+id/btBack"
             android:layout_width="110dp"

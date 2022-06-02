@@ -48,7 +48,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     String adsID, favID, activity, reportRef;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
-    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress;
+    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress, tvRegDate;
 
     ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked, ivProfilePic, ivProfilePic2;
 
@@ -132,6 +132,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         tvName2 = findViewById(R.id.tvName2);
         tvPhone = findViewById(R.id.tvPhone);
         tvAddress = findViewById(R.id.tvAddress);
+        tvRegDate = findViewById(R.id.tvRegDate);
 
         //define mvbutton
         mvBackBtn = findViewById(R.id.mvBackBtn);
@@ -563,6 +564,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         tvName2.setText(document.getData().get("FullName").toString());
                         tvPhone.setText(document.getData().get("PhoneNum").toString());
                         tvAddress.setText(document.getData().get("Address").toString());
+                        tvRegDate.setText(document.getData().get("RegisterDate").toString());
 
                         url = document.getData().get("PictureURL").toString();
 

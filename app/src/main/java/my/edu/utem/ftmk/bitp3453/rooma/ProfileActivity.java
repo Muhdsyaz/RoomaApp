@@ -43,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     LinearLayout layoutProfile, layoutProfileMenu, layoutVerified;
-    TextView tvEmail, tvName, tvPhone, tvAddress, tvAds, tvEdit, tvLogout;
+    TextView tvEmail, tvName, tvPhone, tvAddress, tvDate, tvAds, tvEdit, tvLogout;
     MaterialIconView mvProfileMenu, mvCheck;
     CircleImageView ivProfilePic;
 
@@ -104,6 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvName);
         tvPhone = findViewById(R.id.tvPhone);
         tvAddress = findViewById(R.id.tvAddress);
+        tvDate = findViewById(R.id.tvDate);
         tvAds = findViewById(R.id.tvAds);
         tvEdit = findViewById(R.id.tvEdit);
         tvLogout = findViewById(R.id.tvLogout);
@@ -193,6 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
                         tvName.setText(document.getData().get("FullName").toString());
                         tvPhone.setText(document.getData().get("PhoneNum").toString());
                         tvAddress.setText(document.getData().get("Address").toString());
+                        tvDate.setText(document.getData().get("RegisterDate").toString());
 
                         url = document.getData().get("PictureURL").toString();
 

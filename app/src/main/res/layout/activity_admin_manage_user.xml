@@ -130,22 +130,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
 
-<!--            <Button-->
-<!--                android:id="@+id/btDelete"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="35dp"-->
-<!--                android:text="Delete"-->
-<!--                android:background="@drawable/round_gray"-->
-<!--                app:backgroundTint="#F44336"-->
-<!--                android:paddingLeft="15dp"-->
-<!--                android:paddingRight="10dp"-->
-<!--                android:layout_gravity="end"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="10dp"-->
-<!--                android:drawableRight="@drawable/ic_delete"-->
-<!--                android:drawableTint="@color/white"-->
-<!--                android:fontFamily="@font/poppins" />-->
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfilePic"
@@ -220,6 +204,26 @@
 
             <TextView
                 android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/poppins"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="Register date"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"

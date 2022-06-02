@@ -24,6 +24,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.steamcrafted.materialiconlib.MaterialIconView;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
     Button btSignUp;
 
     boolean check = true;
+
+    SimpleDateFormat formatter;
+    Date date;
 
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -70,6 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
     public void registerUser()
     {
 
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+
+        String regDate = myDateObj.format(myFormatObj);
+
         Log.e("Test email: ", etEmail.getText().toString());
 
         user.put("Email", etEmail.getText().toString().trim());
@@ -81,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("Status", "active");
         user.put("Verify", "false");
         user.put("UserType", "client");
+        user.put("RegisterDate", regDate);
 
         if(etEmail.getText().toString().equals("") && etFullName.getText().toString().equals("") && etPhoneNum.getText().toString().equals("")
                 && etPassword.getText().toString().equals("") && etAddress.getText().toString().equals("") && etConfirmPassword.getText().toString().equals("")) {

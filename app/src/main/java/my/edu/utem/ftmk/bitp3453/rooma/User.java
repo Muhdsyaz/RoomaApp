@@ -10,7 +10,15 @@ public class User {
     String PictureURL;
     String Uid;
     String UserType;
-    String Verify, IcURL, SelfieURL, RequestDate, RequestTime;
+    String Verify, IcURL, SelfieURL, RequestDate, RequestTime, RegisterDate;
+
+    public String getRegisterDate() {
+        return RegisterDate;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        RegisterDate = registerDate;
+    }
 
     public String getIcURL() {
         return IcURL;

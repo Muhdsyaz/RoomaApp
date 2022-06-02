@@ -53,7 +53,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
     private FirebaseFirestore db;
     ProgressBar loadingPB;
 
-    TextView tvEmail, tvName, tvPhone, tvAddress, tvEmptyDb, tvSearch;
+    TextView tvEmail, tvName, tvPhone, tvAddress, tvEmptyDb, tvSearch, tvDate;
     Button btDelete, btBack, btDisable;
     CircleImageView ivProfilePic;
     ImageButton ibSearch;
@@ -77,6 +77,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
         tvName = findViewById(R.id.tvName);
         tvPhone = findViewById(R.id.tvPhone);
         tvAddress = findViewById(R.id.tvAddress);
+        tvDate = findViewById(R.id.tvDate);
 
         tvSearch= findViewById(R.id.tvSearch);
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
@@ -326,6 +327,7 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
                                 tvName.setText(document.getData().get("FullName").toString());
                                 tvPhone.setText(document.getData().get("PhoneNum").toString());
                                 tvAddress.setText(document.getData().get("Address").toString());
+                                tvDate.setText(document.getData().get("RegisterDate").toString());
 
                             }
                         } else {
