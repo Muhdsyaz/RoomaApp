@@ -77,7 +77,7 @@ public class LiveAdsFragment extends Fragment implements AdvertisementRVAdapter.
         // now we will be getting the data from the same reference.
         db.collection("advertisements")
                 .whereEqualTo("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .whereIn("status", Arrays.asList("live", "disabled"))
+                .whereEqualTo("status","live")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

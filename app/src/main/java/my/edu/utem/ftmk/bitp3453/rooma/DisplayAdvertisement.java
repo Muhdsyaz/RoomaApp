@@ -16,6 +16,7 @@ import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,16 +49,18 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     String adsID, favID, activity, reportRef;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
-    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress, tvRegDate;
+    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress, tvRegDate, tvFalse, tvScam, tvOtherReport;
+
+    EditText etReportDetail;
 
     ImageView ivAdsCover, ivHouse, ivBedroom, ivBathroom, ivLivingRoom, ivKitchen, ivPhotoLibrary, ivFavorite, ivFavoriteClicked, ivProfilePic, ivProfilePic2;
 
-    MaterialIconView mvBackBtn;
-    Button btToMap, btReport, btDisable, btBack;
+    MaterialIconView mvBackBtn, mvBackBtn2;
+    Button btToMap, btReport, btReport2, btDisable, btBack, btBack2, btSubmit;
 
     CardView layoutContact;
 
-    LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo;
+    LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo, layoutReport, layoutOther;
     HorizontalScrollView layoutHorizontal;
 
     SimpleDateFormat formatter;
@@ -65,6 +68,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
     String todayDate, todayTime, status, ownerUid, url;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
+
+    String reportMessage;
 
     FirebaseFirestore db;
 
@@ -134,19 +139,146 @@ public class DisplayAdvertisement extends AppCompatActivity {
         tvAddress = findViewById(R.id.tvAddress);
         tvRegDate = findViewById(R.id.tvRegDate);
 
+        tvFalse = findViewById(R.id.tvFalse);
+        tvScam = findViewById(R.id.tvScam);
+        tvOtherReport = findViewById(R.id.tvOtherReport);
+
+        etReportDetail = findViewById(R.id.etReportDetail);
+
         //define mvbutton
         mvBackBtn = findViewById(R.id.mvBackBtn);
+        mvBackBtn2 = findViewById(R.id.mvBackBtn2);
 
         //define button
         btToMap = findViewById(R.id.btToMap);
         btReport = findViewById(R.id.btReport);
         btDisable = findViewById(R.id.btDisable);
         btBack = findViewById(R.id.btBack);
+        btReport2 = findViewById(R.id.btReport2);
+        btBack2 = findViewById(R.id.btBack2);
+        btSubmit = findViewById(R.id.btSubmit);
 
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkExistingRef();
+                layoutReport.setVisibility(View.VISIBLE);
+
+                tvFalse.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        tvFalse.setTextColor(Color.parseColor("#F4717F"));
+                        tvFalse.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                        tvScam.setTextColor(Color.parseColor("#FFFFFF"));
+                        tvScam.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                        reportMessage = tvFalse.getText().toString();
+
+                        Log.e("Log", "Report message: " + reportMessage);
+
+                    }
+                });
+
+                tvScam.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        tvScam.setTextColor(Color.parseColor("#F4717F"));
+                        tvScam.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                        tvFalse.setTextColor(Color.parseColor("#FFFFFF"));
+                        tvFalse.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                        reportMessage = "ggggggggggg";
+
+                        Log.e("Log", "Report message: " + reportMessage);
+
+                    }
+                });
+
+                tvOtherReport.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutReport.setVisibility(View.INVISIBLE);
+                        layoutOther.setVisibility(View.VISIBLE);
+
+                        btSubmit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                reportMessage = etReportDetail.getText().toString();
+                                Log.e("Log", "Report message: " + reportMessage);
+
+                                if(reportMessage.isEmpty()){
+                                    Toast.makeText(getApplicationContext(), "Please enter a brief explaination so that we can figure out what's wrong with this advertisement.", Toast.LENGTH_LONG).show();
+                                }
+                                else if(reportMessage.length() < 5){
+                                    Toast.makeText(getApplicationContext(), "Reason input by user too short.", Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    checkExistingRef();
+                                    etReportDetail.getText().clear();
+                                    layoutOther.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+
+                        mvBackBtn2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                layoutReport.setVisibility(View.VISIBLE);
+                                layoutOther.setVisibility(View.INVISIBLE);
+                            }
+                        });
+
+                    }
+                });
+
+                btBack2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        layoutReport.setVisibility(View.INVISIBLE);
+
+                        tvScam.setTextColor(Color.parseColor("#FFFFFF"));
+                        tvScam.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                        tvFalse.setTextColor(Color.parseColor("#FFFFFF"));
+                        tvFalse.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                        reportMessage = "";
+
+                        Log.e("Log", "Report message: " + reportMessage);
+
+                    }
+                });
+
+                btReport2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(reportMessage == null){
+                            Toast.makeText(getApplicationContext(), "Please select a reason why are you reporting or explain what wrong with the advertisement.", Toast.LENGTH_LONG).show();
+                        }
+                        else if(reportMessage.isEmpty()){
+                            Toast.makeText(getApplicationContext(), "Please select a reason why are you reporting or explain what wrong with the advertisement.", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            checkExistingRef();
+
+                            tvScam.setTextColor(Color.parseColor("#FFFFFF"));
+                            tvScam.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                            tvFalse.setTextColor(Color.parseColor("#FFFFFF"));
+                            tvFalse.setBackgroundColor(Color.parseColor("#F4717F"));
+
+                            reportMessage = "";
+
+                            layoutReport.setVisibility(View.INVISIBLE);
+
+                        }
+                    }
+                });
+
             }
         });
 
@@ -186,6 +318,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
         layoutOwnerInfo = findViewById(R.id.layoutOwnerInfo);
 
         layoutContact = findViewById(R.id.layoutContact);
+        layoutReport = findViewById(R.id.layoutReport);
+        layoutOther = findViewById(R.id.layoutOther);
 
         //if the previous activity is from ads history, then enable the layout
         if(activity.equals("liveAds")) {
@@ -477,6 +611,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
                                 });
                                 AlertDialog alertDialog = builder.create();
                                 alertDialog.show();
+
+
+                                layoutOption.setVisibility(View.INVISIBLE);
                             }
                         }
 
@@ -795,6 +932,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         Log.e("checkExistingRef", reportRef);
 
+        Log.e("Log", "Report message: " + reportMessage);
+
         db.collection("reports")
                 .whereEqualTo("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .whereEqualTo("adsID", adsID)
@@ -832,46 +971,6 @@ public class DisplayAdvertisement extends AppCompatActivity {
                                     }
                                 }
                             }
-                        }
-                        else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
-
-    public void checkInitial(){
-        db.collection("reports")
-                .whereEqualTo("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .whereEqualTo("adsID", adsID)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d(TAG, document.getId() + " => " + document.getData());
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(DisplayAdvertisement.this);
-
-                                builder.setMessage("This ads will be put under our surveillance.");
-                                builder.setTitle("You already reported this ads.");
-                                builder.setCancelable(false);
-
-                                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        dialog.cancel();
-                                    }
-                                });
-                                AlertDialog alertDialog = builder.create();
-                                alertDialog.show();
-
-                            }
-
                         }
                         else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
@@ -953,6 +1052,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void reportAds(){
 
+        Log.e("Log", "Report message: " + reportMessage);
+
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
         todayDate = (formatter.format(date)).substring(0,10);
@@ -961,6 +1062,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         Map<String,Object> report = new HashMap<>();
         report.put("reportRef",reportRef);
         report.put("adsID", adsID);
+        report.put("reason", reportMessage);
         report.put("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
         report.put("reportDate", todayDate);
         report.put("reportTime", todayTime);

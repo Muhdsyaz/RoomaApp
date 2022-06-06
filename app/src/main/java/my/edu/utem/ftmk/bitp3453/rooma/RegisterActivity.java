@@ -3,6 +3,7 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -44,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
     Map<String, Object> user = new HashMap<>();
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,10 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("UserType", "client");
         user.put("RegisterDate", regDate);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Signing you up...");
+        progressDialog.show();
+
         if(etEmail.getText().toString().equals("") && etFullName.getText().toString().equals("") && etPhoneNum.getText().toString().equals("")
                 && etPassword.getText().toString().equals("") && etAddress.getText().toString().equals("") && etConfirmPassword.getText().toString().equals("")) {
 
@@ -125,6 +132,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                                             sendEmailVerification();
 
+                                            if (progressDialog.isShowing())
+                                                progressDialog.dismiss();
+
                                             Toast.makeText(RegisterActivity.this, "Sign Up Succesfully", Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                             startActivity(intent);
@@ -137,6 +147,9 @@ public class RegisterActivity extends AppCompatActivity {
                     task.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+
+                            if (progressDialog.isShowing())
+                                progressDialog.dismiss();
                             Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });

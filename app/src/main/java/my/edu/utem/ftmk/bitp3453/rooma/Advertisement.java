@@ -20,7 +20,20 @@ public class Advertisement {
     String address;
     String address1;
     String address2;
-    String reportRef, reportDate, reportTime, reporterUid;
+    String reportRef;
+    String reportDate;
+    String reportTime;
+    String reporterUid;
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    String reason;
 
     public String getReportRef() {
         return reportRef;

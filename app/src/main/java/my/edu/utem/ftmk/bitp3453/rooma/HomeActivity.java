@@ -35,6 +35,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +67,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private TextView tvEmptyDb;
 
+    SliderView sliderView;
+    int[] images = {R.drawable.ic_banner1,R.drawable.ic_banner2,R.drawable.ic_banner3};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +91,15 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.e("onCreate ", " Min Price: " + minPrice);
         Log.e("onCreate ", " Max Price: " + maxPrice);
         Log.e("onCreate ", "Sort: " + sort);
+
+        sliderView = findViewById(R.id.image_slider);
+
+        SliderAdapter sliderAdapter = new SliderAdapter(images);
+
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        sliderView.startAutoCycle();
 
         //declare bottom navigation
         bottomNav = findViewById(R.id.bottomNav);

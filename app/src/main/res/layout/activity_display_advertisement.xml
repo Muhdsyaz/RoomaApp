@@ -808,4 +808,209 @@
 
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/layoutReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_pink"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Why are you reporting this advertisement?"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvFalse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="False information"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/tvScam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Scam or fraud"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/tvOtherReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Other"
+            android:textColor="@color/white"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:drawableTint="@color/white"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btBack2"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/round_white"
+                android:text="Back"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btReport2"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/round_white"
+                app:backgroundTint="#F44336"
+                android:text="Report"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutOther"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_pink"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:id="@+id/mvBackBtn2"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                app:materialIcon="chevron_left"
+                app:materialIconColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Report"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:padding="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Help us understand the problem"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/etReportDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pink_round"
+                android:backgroundTint="@color/white"
+                android:textSize="12dp"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"/>
+
+            <Button
+                android:id="@+id/btSubmit"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_white"
+                app:backgroundTint="#F44336"
+                android:text="Submit"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

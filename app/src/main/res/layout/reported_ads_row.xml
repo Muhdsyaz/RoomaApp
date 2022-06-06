@@ -21,13 +21,22 @@
             android:layout_height="wrap_content"
             android:text="Ref number: Ref57436253"
             android:fontFamily="@font/poppins"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvAdsID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ads ID: AD89566297"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvReason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reason: Fraud or scam"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black"/>
 

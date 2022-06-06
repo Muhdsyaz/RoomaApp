@@ -134,7 +134,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_gravity="center"
                 android:textColorHint="@color/black"
-                >
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/etPassword"
@@ -154,7 +154,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_gravity="center"
                 android:textColorHint="@color/black"
-                >
+                app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/etConfirmPassword"
@@ -172,9 +172,9 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Sign Up"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_marginBottom="100dp"/>
 
         </LinearLayout>

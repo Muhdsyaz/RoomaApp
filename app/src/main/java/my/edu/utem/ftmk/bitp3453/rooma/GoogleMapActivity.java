@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -34,6 +36,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -58,7 +62,10 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     private int GPS_REQUEST_CODE = 9001;
 
-    LinearLayout layoutBack;
+    LinearLayout layoutBack, layoutDetail;
+    Button btBack;
+
+    TextView tvAddress, tvCategory, tvSize, tvBedroom, tvBathroom;
 
     String adsID, activity;
 
@@ -79,7 +86,17 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         activity = intent.getStringExtra("activity");
         Log.e("GoogleMap,  ", "AdsID: " + adsID + ", From: " + activity);
 
+        tvAddress = findViewById(R.id.tvAddress);
+        tvCategory = findViewById(R.id.tvCategory);
+        tvSize = findViewById(R.id.tvSize);
+        tvBedroom = findViewById(R.id.tvBedroom);
+        tvBathroom = findViewById(R.id.tvBathroom);
+
+
         layoutBack = findViewById(R.id.layoutBack);
+        layoutDetail = findViewById(R.id.layoutDetail);
+
+        btBack = findViewById(R.id.btBack);
 
         layoutBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +110,8 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
         checkMyPermission();
 
         initMap();
+
+        displayAdsDetail();
 
         mLocationClient = new FusedLocationProviderClient(this);
 
@@ -239,8 +258,23 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                                 latitude = geoPoint.getLatitude();
                                 longitude = geoPoint.getLongitude();
 
-//                                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng).snippet(document.get("address").toString()).title("Address:").icon(BitmapDescriptorFactory.fromResource(R.mipmap.customer_address_foreground)));
-                                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng).snippet(document.get("address").toString()).title("Address:"));
+                                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+
+                                mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                    @Override
+                                    public boolean onMarkerClick(@NonNull Marker marker) {
+
+                                        layoutDetail.setVisibility(View.VISIBLE);
+                                        btBack.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                layoutDetail.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
+
+                                        return false;
+                                    }
+                                });
 
 
                             }
@@ -282,6 +316,34 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                 Toast.makeText(this,"GPS is not enable", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void displayAdsDetail(){
+
+        DocumentReference docRef = db.collection("advertisements").document(adsID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        tvAddress.setText(document.getData().get("address").toString());
+                        tvCategory.setText(document.getData().get("category").toString());
+                        tvSize.setText(document.getData().get("propertySize").toString() + " sq.ft");
+                        tvBedroom.setText(document.getData().get("bedroom").toString() + " Bedroom");
+                        tvBathroom.setText(document.getData().get("bathroom").toString() + " Bathroom");
+
+                    } else {
+                        Log.d("TAG", "No such document");
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+
+
     }
 
     public void toDisplayAds(){

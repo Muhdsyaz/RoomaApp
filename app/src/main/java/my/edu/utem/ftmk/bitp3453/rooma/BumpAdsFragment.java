@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -77,7 +78,7 @@ public class BumpAdsFragment extends Fragment implements AdvertisementRVAdapter.
         // now we will be getting the data from the same reference.
         db.collection("advertisements")
                 .whereEqualTo("ownerUid", FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .whereEqualTo("status","bump")
+                .whereIn("status", Arrays.asList("bump", "disabled"))
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

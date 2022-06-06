@@ -42,6 +42,7 @@ public class ReportedRVAdapter extends RecyclerView.Adapter<ReportedRVAdapter.Vi
 
         holder.tvReportRef.setText("Report Ref: " + advertisement.getReportRef());
         holder.tvAdsID.setText("Ads ID: " + advertisement.getAdsID());
+        holder.tvReason.setText("Reason: " + advertisement.getReason());
         holder.tvDate.setText("Date: " + advertisement.getReportDate());
         holder.tvTime.setText("Time: " + advertisement.getReportTime());
 
@@ -63,6 +64,7 @@ public class ReportedRVAdapter extends RecyclerView.Adapter<ReportedRVAdapter.Vi
         private final TextView tvAdsID;
         private final TextView tvDate;
         private final TextView tvTime;
+        private final TextView tvReason;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -72,6 +74,7 @@ public class ReportedRVAdapter extends RecyclerView.Adapter<ReportedRVAdapter.Vi
             tvAdsID = itemView.findViewById(R.id.tvAdsID);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvTime = itemView.findViewById(R.id.tvTime);
+            tvReason = itemView.findViewById(R.id.tvReason);
 
             itemView.setOnClickListener(this);
 

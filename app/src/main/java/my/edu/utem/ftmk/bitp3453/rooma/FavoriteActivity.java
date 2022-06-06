@@ -133,6 +133,7 @@ public class FavoriteActivity extends AppCompatActivity implements Advertisement
                                     // now we will be getting the data from the same reference.
                                     db.collection("advertisements")
                                             .whereEqualTo("adsID", adsID)
+                                            .whereEqualTo("status","live")
                                             .get()
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override

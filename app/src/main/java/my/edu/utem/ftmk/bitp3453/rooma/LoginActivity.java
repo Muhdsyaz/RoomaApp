@@ -137,6 +137,9 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
 
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+
             Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
 
         }
