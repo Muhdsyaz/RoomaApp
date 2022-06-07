@@ -1,11 +1,14 @@
 package my.edu.utem.ftmk.bitp3453.rooma;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,14 +29,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -642,6 +650,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        checkDisabledUser();
+
     }
 
     @Override
@@ -654,19 +664,47 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         toDisplayAds(adsID);
     }
 
-    public void toFavorite(View v){
-        Intent intent = new Intent(getApplicationContext(),FavoriteActivity.class);
-        startActivity(intent);
-    }
+    public void checkDisabledUser(){
 
-    public void toPostAds(View v){
-        Intent intent = new Intent(getApplicationContext(),PostAdsActivity.class);
-        startActivity(intent);
-    }
+        db.collection("users")
+                .whereEqualTo("Uid", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .whereEqualTo("Status","disabled")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("TAG", "Listen failed.", e);
+                            return;
+                        }
+                        for (QueryDocumentSnapshot doc : value) {
 
-    public void toProfile(View v){
-        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
-        startActivity(intent);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+
+                            builder.setTitle("Your account has been disabled");
+                            builder.setMessage("Pleas contact the admin to enable your account back.");
+                            builder.setCancelable(false);
+
+                            builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    //dialog.cancel();
+
+                                    //signout user
+                                    FirebaseAuth.getInstance().signOut();
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                        }
+                    }
+                });
     }
 
     public void toDisplayAds(String adsID){

@@ -3,7 +3,9 @@ package my.edu.utem.ftmk.bitp3453.rooma;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private LinearLayout layoutResetPassword;
 
     ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,9 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser();
+
+                checkDisabledUser();
+                //loginUser();
             }
         });
     }
@@ -214,6 +219,51 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_LONG).show();
 
                             layoutResetPassword.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+    }
+
+    public void checkDisabledUser(){
+        db.collection("users")
+                .whereEqualTo("Email", etEmail.getText().toString())
+                .whereEqualTo("Status","disabled")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+
+//                                status = document.getData().get("Status").toString();
+//                                Log.e("Check", "status: " + status);
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+
+                                builder.setTitle("Your account has been disabled");
+                                builder.setMessage("Pleas contact the admin to enable your account back.");
+                                builder.setCancelable(false);
+
+                                builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+                                    }
+                                });
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+
+                            }
+
+                            if(task.getResult().size() == 0 ) {
+                                Log.d(TAG, "User not Exists");
+
+                                loginUser();
+
+                            }
                         }
                     }
                 });

@@ -16,7 +16,7 @@
      <ImageView
                android:id="@+id/ivAdsCover"
                android:layout_width="match_parent"
-               android:layout_height="300dp"
+               android:layout_height="200dp"
                android:src="#E8E8E8"
                 android:scaleType="fitXY"/>
 
