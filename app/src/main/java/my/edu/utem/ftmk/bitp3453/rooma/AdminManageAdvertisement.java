@@ -9,15 +9,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import net.steamcrafted.materialiconlib.MaterialIconView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +37,35 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
     private FirebaseFirestore db;
     ProgressBar loadingPB;
 
-    private TextView tvEmptyDb;
+    private TextView tvEmptyDb, tvReportRef, tvTitle, tvAdsID, tvOwnerName, tvDate, tvTime, tvReportDate, tvReportTime, tvReason;
 
-    String adsID;
+    Button btRemove, btView;
+    MaterialIconView mvBackBtn2;
+
+    LinearLayout layoutReportInfo;
+    String adsID, reportRef, ownerID, ownerName, date, time, reportDate, reportTime , reason, title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_manage_advertisement);
+
+        btRemove = findViewById(R.id.btRemove);
+        btView = findViewById(R.id.btView);
+        mvBackBtn2 = findViewById(R.id.mvBackBtn2);
+
+        layoutReportInfo = findViewById(R.id.layoutReportInfo);
+
+        // initializing text view
+        tvReportRef = findViewById(R.id.tvReportRef);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvAdsID = findViewById(R.id.tvAdsID);
+        tvOwnerName = findViewById(R.id.tvOwnerName);
+        tvDate = findViewById(R.id.tvDate);
+        tvTime = findViewById(R.id.tvTime);
+        tvReportDate = findViewById(R.id.tvReportDate);
+        tvReportTime = findViewById(R.id.tvReportTime);
+        tvReason = findViewById(R.id.tvReason);
 
         tvEmptyDb = findViewById(R.id.tvEmptyDb);
 
@@ -109,20 +137,138 @@ public class AdminManageAdvertisement extends AppCompatActivity implements Repor
             }
         });
 
+        mvBackBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layoutReportInfo.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        btView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
+                intent.putExtra("adsID", adsID);
+                intent.putExtra("activity", "admin");
+                startActivity(intent);
+            }
+        });
+
+        btRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeFromList();
+            }
+        });
     }
 
     @Override
     public void onItemClick(View view, int position) {
         String title = reportedRVAdapter.getItem(position).getTitle();
         adsID = reportedRVAdapter.getItem(position).getAdsID();
+        reportRef = reportedRVAdapter.getItem(position).getReportRef();
         Log.e("DisplayAds,  ", "AdsID: " + adsID);
-        Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext()," AdsID: " + adsID, Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(getApplicationContext(),DisplayAdvertisement.class);
-        intent.putExtra("adsID", adsID);
-        intent.putExtra("activity", "admin");
-        startActivity(intent);
+        layoutReportInfo.setVisibility(View.VISIBLE);
 
+        displayReport();
+
+    }
+
+    public void displayReport(){
+        db.collection("reports")
+                .whereEqualTo("adsID", adsID)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                reportDate = document.getData().get("reportDate").toString();
+                                reportTime = document.getData().get("reportTime").toString();
+                                reason = document.getData().get("reason").toString();
+
+                                tvReportRef.setText("Report Ref: " + reportRef);
+                                tvAdsID.setText("Ads ID: " +adsID);
+                                tvReportDate.setText("Report Date: " +reportDate);
+                                tvReportTime.setText("Report Time: " +reportTime);
+                                tvReason.setText("Reason: " +reason);
+
+                                db.collection("advertisements")
+                                        .whereEqualTo("adsID", adsID)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                        ownerID = document.getData().get("ownerUid").toString();
+                                                        title = document.getData().get("title").toString();
+                                                        date = document.getData().get("postDate").toString();
+                                                        time = document.getData().get("postTime").toString();
+
+                                                        tvTitle.setText("Title: " + title);
+                                                        tvDate.setText("Post Date: " + date);
+                                                        tvTime.setText("Post Time: " +time);
+
+                                                        db.collection("users")
+                                                                .whereEqualTo("Uid", ownerID)
+                                                                .get()
+                                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                                                                ownerName = document.getData().get("FullName").toString();
+                                                                                tvOwnerName.setText("Posted by: " + ownerName);
+
+                                                                            }
+                                                                        } else {
+                                                                            Log.d("TAG", "Error getting documents: ", task.getException());
+                                                                        }
+                                                                    }
+                                                                });
+
+                                                    }
+                                                } else {
+                                                    Log.d("TAG", "Error getting documents: ", task.getException());
+                                                }
+                                            }
+                                        });
+
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
+
+    public void removeFromList(){
+
+        db.collection("reports").document(reportRef)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+
+                        Intent intent = new Intent(getApplicationContext(), AdminManageAdvertisement.class);
+                        startActivity(intent);
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
     }
 
     public void toAdminMenu(View v){

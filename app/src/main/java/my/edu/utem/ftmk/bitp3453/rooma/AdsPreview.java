@@ -63,7 +63,7 @@ public class AdsPreview extends AppCompatActivity {
     MaterialIconView mvBackBtn;
     Button btSubmit;
 
-    SimpleDateFormat formatter;
+    SimpleDateFormat formatter, formatter1;
     Date date;
     String todayDate, todayTime;
 
@@ -235,10 +235,6 @@ public class AdsPreview extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Please make sure you have uploaded all the required picture for the ads before submit.",Toast.LENGTH_SHORT).show();
         }
         else{
-
-//            progressDialog = new ProgressDialog(this);
-//            progressDialog.setTitle("Uploading File....");
-//            progressDialog.show();
 
             progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Preparing your advertisement...");
@@ -434,6 +430,10 @@ public class AdsPreview extends AppCompatActivity {
 
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
+
+        formatter1 = new SimpleDateFormat("ddMMyyyyHHmmss");
+        adsID = "AD" + formatter1.format(date);
+
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(11,16);
 

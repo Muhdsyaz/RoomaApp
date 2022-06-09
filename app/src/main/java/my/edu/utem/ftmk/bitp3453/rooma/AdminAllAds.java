@@ -17,8 +17,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class AdminAllAds extends AppCompatActivity {
 
-    TextView tvApartment, tvHouse, tvRoom;
+    TextView tvApartment, tvHouse, tvRoom, tvPercentageApartment, tvPercentageHouse, tvPercentageRoom;
     int totApartment, totHouse, totRoom;
+    double totalAds, percentApartment, percentHouse, percentRoom;
 
     FirebaseFirestore db;
 
@@ -32,6 +33,10 @@ public class AdminAllAds extends AppCompatActivity {
         tvApartment = findViewById(R.id.tvApartment);
         tvHouse = findViewById(R.id.tvHouse);
         tvRoom = findViewById(R.id.tvRoom);
+
+        tvPercentageApartment = findViewById(R.id.tvPercentageApartment);
+        tvPercentageHouse = findViewById(R.id.tvPercentageHouse);
+        tvPercentageRoom = findViewById(R.id.tvPercentageRoom);
 
         totalAdvertisement();
 
@@ -63,11 +68,20 @@ public class AdminAllAds extends AppCompatActivity {
                                     totRoom++;
                                 }
 
+                                totalAds++;
+
                             }
+
+                            percentApartment = (totApartment/totalAds) * 100;
+                            percentHouse = (totHouse/totalAds) * 100;
+                            percentRoom = (totRoom/totalAds) * 100;
 
                             tvApartment.setText(String.valueOf(totApartment));
                             tvHouse.setText(String.valueOf(totHouse));
                             tvRoom.setText(String.valueOf(totRoom));
+                            tvPercentageApartment.setText(String.valueOf(percentApartment) + "%");
+                            tvPercentageHouse.setText(String.valueOf(percentHouse) + "%");
+                            tvPercentageRoom.setText(String.valueOf(percentRoom) + "%");
 
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

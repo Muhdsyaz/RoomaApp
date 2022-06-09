@@ -52,7 +52,7 @@ import java.util.Random;
 
 public class MoreDetail extends AppCompatActivity {
 
-    String category, bathroom, propertySize, furnishing, parking, bedroom, resType, finishYear, monthlyRent, deposit, title, description, state, city;
+    String category, bathroom, propertySize, furnishing, parking, bedroom, resType, floor, finishYear, monthlyRent, deposit, title, description, state, city;
 
     MaterialIconView mvBackBtn;
     Bundle bundle;
@@ -68,7 +68,7 @@ public class MoreDetail extends AppCompatActivity {
 
     int number;
 
-    SimpleDateFormat formatter;
+    SimpleDateFormat formatter, formatter1;
     Date date;
     String todayDate, todayTime;
 
@@ -104,6 +104,7 @@ public class MoreDetail extends AppCompatActivity {
         parking =  bundle.getString("parking");
         bedroom =  bundle.getString("bedroom");
         resType =  bundle.getString("resType");
+        floor = bundle.getString("floorRange");
         finishYear =  bundle.getString("finishYear");
         monthlyRent =  bundle.getString("monthlyRent");
         deposit =  bundle.getString("deposit");
@@ -117,10 +118,8 @@ public class MoreDetail extends AppCompatActivity {
         Log.e("Convenience ", "MoreDetail: " + arrayListConvenience);
 
         //create random id for ads
-        Random rand = new Random();
-        int randomID = rand.nextInt(99999999)+1;
-
-        adsID = "AD" + randomID;
+//        Random rand = new Random();
+//        int randomID = rand.nextInt(99999999)+1;
 
 
         //declare edit text
@@ -634,6 +633,11 @@ public class MoreDetail extends AppCompatActivity {
 
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
+
+        formatter1 = new SimpleDateFormat("ddMMyyyyHHmmss");
+        adsID = "AD" + formatter1.format(date);
+
+        Log.e("Check", "Ads ID: " + adsID);
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(11,16);
 
@@ -649,6 +653,7 @@ public class MoreDetail extends AppCompatActivity {
         adsProperty.put("parking",parking);
         adsProperty.put("bedroom",bedroom);
         adsProperty.put("resType",resType);
+        adsProperty.put("floorRange",floor);
         adsProperty.put("finishYear",finishYear);
         adsProperty.put("monthlyRent",monthlyRent);
         adsProperty.put("deposit",deposit);

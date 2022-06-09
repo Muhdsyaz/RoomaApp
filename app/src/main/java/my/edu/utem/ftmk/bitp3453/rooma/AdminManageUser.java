@@ -296,7 +296,6 @@ public class AdminManageUser extends AppCompatActivity implements  UserRVAdapter
     public void onItemClick(View view, int position) {
         uid = userRVAdapter.getItem(position).getUid();
         Log.e("ManageUser,  ", "Uid: " + uid);
-        Toast.makeText(getApplicationContext()," Uid: " + uid, Toast.LENGTH_SHORT).show();
 
         readUser();
 

@@ -319,34 +319,89 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                app:materialIcon="clock"
+                app:materialIconColor="#989898" />
+
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="5dp"
                 android:fontFamily="@font/poppins"
-                android:text="December 14, 2021 at 10:51:25 PM UTC+8"
+                android:text="12-05-2022 12:50"
                 android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <net.steamcrafted.materialiconlib.MaterialIconView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                app:materialIcon="home"
+                app:materialIconColor="#989898" />
 
             <TextView
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins"
                 android:text="Apartment"
                 android:textSize="12dp" />
 
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    app:materialIcon="map_marker"
+                    app:materialIconColor="#989898" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Melaka > Batu Berendam"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/tvLocation"
+                android:id="@+id/tvAdsID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:text=""
                 android:fontFamily="@font/poppins"
-                android:text="Melaka > Batu Berendam"
-                android:textSize="12dp" />
+                android:textSize="12dp"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/layoutContact"
@@ -680,17 +735,16 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
-                android:backgroundTint="#EAEAEA"
-                android:textColor="#616161"
+                android:backgroundTint="#F4717F"
+                android:textColor="@color/white"
                 android:drawableLeft="@drawable/ic_location"
-                android:drawableTint="#616161"
+                android:drawableTint="@color/white"
                 android:text="Display location in Map" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="100dp">
 
@@ -712,13 +766,12 @@
 
                 <Button
                     android:id="@+id/btDisable"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#F44336"
                     android:drawableTint="@color/white"
                     android:text="Disable Advertisement"
-                    android:textSize="10dp"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

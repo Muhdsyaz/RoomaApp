@@ -55,8 +55,8 @@ public class VerificationRVAdapter extends RecyclerView.Adapter<VerificationRVAd
 
         holder.tvName.setText(user.getFullName());
         holder.tvEmail.setText(user.getEmail());
-        holder.tvDate.setText(user.getRequestDate());
-        holder.tvTime.setText(user.getRequestTime());
+        holder.tvDate.setText("Date: " + user.getRequestDate());
+        holder.tvTime.setText("Time: " + user.getRequestTime());
 
     }
 

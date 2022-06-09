@@ -49,7 +49,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     String adsID, favID, activity, reportRef;
     TextView tvTitle, tvMonthlyRent, tvDate, tvCategory, tvLocation, tvResType, tvFloor, tvBedroom, tvBathroom, tvSize, tvFurnishing, tvFacilities, tvYear, tvDeposit, tvOther, tvDescription;
-    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress, tvRegDate, tvFalse, tvScam, tvOtherReport;
+    TextView tvEdit, tvDelete, tvSold, tvBump, tvEmail, tvEmail2, tvName, tvName2, tvPhone, tvAddress, tvRegDate, tvFalse, tvScam, tvOtherReport, tvAdsID;
 
     EditText etReportDetail;
 
@@ -63,13 +63,15 @@ public class DisplayAdvertisement extends AppCompatActivity {
     LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo, layoutReport, layoutOther;
     HorizontalScrollView layoutHorizontal;
 
-    SimpleDateFormat formatter;
+    SimpleDateFormat formatter, formatter1;
     Date date;
     String todayDate, todayTime, status, ownerUid, url;
 
     String houseURL, bedroomURL, bathroomURL, livingroomURL, kitchenURL;
 
     String reportMessage;
+
+    int number;
 
     FirebaseFirestore db;
 
@@ -80,12 +82,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        Random rand = new Random();
-        int randomID = rand.nextInt(99999999)+1;
-        int randomID2 = rand.nextInt(99999999)+1;
-        favID = "Fav" + randomID;
-        reportRef = "Ref" + randomID2;
-//        reportRef = "Ref29714482";
+//        Random rand = new Random();
+//        int randomID = rand.nextInt(99999999)+1;
+//        int randomID2 = rand.nextInt(99999999)+1;
 
         Intent intent = getIntent();
 
@@ -124,6 +123,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         tvDeposit = findViewById(R.id.tvDeposit);
         tvOther = findViewById(R.id.tvOther);
         tvDescription = findViewById(R.id.tvDescription);
+        tvAdsID = findViewById(R.id.tvAdsID);
 
         tvEdit = findViewById(R.id.tvEdit);
         tvDelete = findViewById(R.id.tvDelete);
@@ -175,6 +175,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
                         reportMessage = tvFalse.getText().toString();
 
+                        number = 1;
+
                         Log.e("Log", "Report message: " + reportMessage);
 
                     }
@@ -190,7 +192,9 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         tvFalse.setTextColor(Color.parseColor("#FFFFFF"));
                         tvFalse.setBackgroundColor(Color.parseColor("#F4717F"));
 
-                        reportMessage = "ggggggggggg";
+                        reportMessage = "Scam or fraud";
+
+                        number = 2;
 
                         Log.e("Log", "Report message: " + reportMessage);
 
@@ -488,7 +492,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         if(activity.equals("admin-disabled")){
 
             btDisable.setVisibility(View.VISIBLE);
-            btDisable.setText("Enable Ads");
+            btDisable.setText("Enable Advertisement");
             btDisable.setBackgroundColor(Color.parseColor("#4CAF50"));
 
             btDisable.setOnClickListener(new View.OnClickListener() {
@@ -672,6 +676,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                         tvDeposit.setText("RM " + document.getData().get("deposit").toString());
                         tvOther.setText(document.getData().get("convenience").toString());
                         tvDescription.setText(document.getData().get("description").toString());
+                        tvAdsID.setText("AD ID: " + adsID);
 
                     } else {
                         Log.d("DisplayAdvertisementActivity", "No such document");
@@ -784,6 +789,11 @@ public class DisplayAdvertisement extends AppCompatActivity {
     }
 
     public void favoriteAds(){
+
+        formatter1 = new SimpleDateFormat("ddMMyyyyHHmmss");
+        date = new Date();
+        favID = "Fav" + formatter1.format(date);
+
         // Add a new document with a generated id.
         Map<String, Object> favorite = new HashMap<>();
         favorite.put("favID", favID);
@@ -930,7 +940,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void checkExistingRef(){
 
-        Log.e("checkExistingRef", reportRef);
+        //Log.e("checkExistingRef", reportRef);
 
         Log.e("Log", "Report message: " + reportMessage);
 
@@ -943,7 +953,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
 
-                            Log.e("Success", reportRef);
+                            //Log.e("Success", reportRef);
 
                             if(task.getResult().size() == 0 ) {
 
@@ -959,9 +969,13 @@ public class DisplayAdvertisement extends AppCompatActivity {
                                     if(report.equals(reportRef)){
                                         Log.d("TAG", "Refno Exists");
 
-                                        Random rand = new Random();
-                                        int randomID2 = rand.nextInt(99999999)+1;
-                                        reportRef = "Ref" + randomID2;
+//                                        Random rand = new Random();
+//                                        int randomID2 = rand.nextInt(99999999)+1;
+//                                        reportRef = "Ref" + randomID2;
+
+                                        formatter1 = new SimpleDateFormat("ddMMyyyyHHmmss");
+                                        date = new Date();
+                                        reportRef = "Ref" + formatter1.format(date);
 
                                         checkExistingRef();
 
@@ -1000,8 +1014,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(DisplayAdvertisement.this);
 
-                                builder.setMessage("This ads will be put under our surveillance.");
-                                builder.setTitle("You already reported this ads.");
+                                builder.setMessage("This advertisement will be put under our surveillance.");
+                                builder.setTitle("You already reported this advertisement.");
                                 builder.setCancelable(false);
 
                                 builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
@@ -1052,12 +1066,23 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void reportAds(){
 
-        Log.e("Log", "Report message: " + reportMessage);
-
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();
+
+        formatter1 = new SimpleDateFormat("ddMMyyyyHHmmss");
+        reportRef = "Ref" + formatter1.format(date);
+
         todayDate = (formatter.format(date)).substring(0,10);
         todayTime = (formatter.format(date)).substring(11,16);
+
+        if(number==1){
+            reportMessage = "False information";
+        }
+        if(number==2){
+            reportMessage = "Scam or fraud";
+        }
+
+        Log.e("Log", "Report message: " + reportMessage);
 
         Map<String,Object> report = new HashMap<>();
         report.put("reportRef",reportRef);

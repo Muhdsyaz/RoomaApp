@@ -48,7 +48,7 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/tab_indicator.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/text_color.xml" value="0.36018518518518516" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/drawable/white_round.xml" value="0.35462962962962963" />
-        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_all_ads.xml" value="0.20625" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_all_ads.xml" value="0.25" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_disabled_advertisement.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_disabled_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/activity_admin_manage_advertisement.xml" value="0.2851851851851852" />
@@ -95,7 +95,7 @@
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/slider_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/test.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/user_row.xml" value="0.26481481481481484" />
-        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/verify_list_row.xml" value="0.20625" />
+        <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/layout/verify_list_row.xml" value="0.33" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/menu/profile_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/BSSE/AndroidStudioProjects/Rooma/app/src/main/res/mipmap-anydpi-v26/ic_poster1.xml" value="0.34444444444444444" />
