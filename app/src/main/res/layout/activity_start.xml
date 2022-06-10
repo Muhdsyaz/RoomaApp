@@ -18,8 +18,10 @@
 
     <LinearLayout
         android:id="@+id/llLogin"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_gravity="center"
         android:background="@drawable/pink_round"
         android:elevation="5dp"
@@ -38,8 +40,10 @@
 
     <LinearLayout
         android:id="@+id/llRegister"
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_gravity="center"
         android:background="@drawable/white_round"
         android:elevation="5dp"

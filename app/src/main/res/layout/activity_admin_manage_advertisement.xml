@@ -214,21 +214,23 @@
 
                     <Button
                         android:id="@+id/btRemove"
-                        android:layout_width="110dp"
-                        android:layout_height="40dp"
+                        android:layout_width="125dp"
+                        android:layout_height="45dp"
                         app:backgroundTint="@color/white"
                         android:background="@drawable/round_white"
-                        android:text="Remove"
+                        android:text="Remove From List"
+                        android:textSize="10dp"
                         android:textColor="@color/black" />
 
                     <Button
                         android:id="@+id/btView"
-                        android:layout_width="110dp"
-                        android:layout_height="40dp"
+                        android:layout_width="125dp"
+                        android:layout_height="45dp"
                         android:layout_marginLeft="30dp"
                         android:background="@drawable/round_white"
                         app:backgroundTint="@color/white"
-                        android:text="View ADS"
+                        android:text="View Advertisement"
+                        android:textSize="10dp"
                         android:textColor="@color/black" />
 
                 </LinearLayout>

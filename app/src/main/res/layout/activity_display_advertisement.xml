@@ -33,18 +33,34 @@
             android:src="@drawable/ic_person"
             android:background="@drawable/circle" />
 
-        <TextView
-            android:id="@+id/tvEmail2"
+        <LinearLayout
+            android:id="@+id/layoutEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="12dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/poppins" />
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tvEmail2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="zani@gmail.com"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/poppins" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_email"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,16 +92,30 @@
             android:textSize="12dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvPhone"
+        <LinearLayout
+            android:id="@+id/layoutPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/poppins"
-            android:text=""
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="12dp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/poppins"
+                android:text="+6017269647"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_whatsapp"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

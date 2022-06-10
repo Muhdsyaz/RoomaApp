@@ -60,7 +60,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     CardView layoutContact;
 
-    LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo, layoutReport, layoutOther;
+    LinearLayout layoutAdsPreview, layoutOption, layoutOwnerInfo, layoutReport, layoutOther, layoutEmail, layoutPhone;
     HorizontalScrollView layoutHorizontal;
 
     SimpleDateFormat formatter, formatter1;
@@ -324,6 +324,8 @@ public class DisplayAdvertisement extends AppCompatActivity {
         layoutContact = findViewById(R.id.layoutContact);
         layoutReport = findViewById(R.id.layoutReport);
         layoutOther = findViewById(R.id.layoutOther);
+        layoutEmail = findViewById(R.id.layoutEmail);
+        layoutPhone = findViewById(R.id.layoutPhone);
 
         //if the previous activity is from ads history, then enable the layout
         if(activity.equals("liveAds")) {
@@ -1250,7 +1252,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void openWhatsapp(String phone){
 
-        tvPhone.setOnClickListener(new View.OnClickListener() {
+        layoutPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -1271,7 +1273,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
 
     public void openEmail(String email){
 
-        tvEmail2.setOnClickListener(new View.OnClickListener() {
+        layoutEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
