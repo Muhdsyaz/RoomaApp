@@ -15,6 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DecimalFormat;
+
 public class AdminAllAds extends AppCompatActivity {
 
     TextView tvApartment, tvHouse, tvRoom, tvPercentageApartment, tvPercentageHouse, tvPercentageRoom;
@@ -72,6 +74,8 @@ public class AdminAllAds extends AppCompatActivity {
 
                             }
 
+                            DecimalFormat df = new DecimalFormat("0.00");
+
                             percentApartment = (totApartment/totalAds) * 100;
                             percentHouse = (totHouse/totalAds) * 100;
                             percentRoom = (totRoom/totalAds) * 100;
@@ -79,9 +83,9 @@ public class AdminAllAds extends AppCompatActivity {
                             tvApartment.setText(String.valueOf(totApartment));
                             tvHouse.setText(String.valueOf(totHouse));
                             tvRoom.setText(String.valueOf(totRoom));
-                            tvPercentageApartment.setText(String.valueOf(percentApartment) + "%");
-                            tvPercentageHouse.setText(String.valueOf(percentHouse) + "%");
-                            tvPercentageRoom.setText(String.valueOf(percentRoom) + "%");
+                            tvPercentageApartment.setText(df.format(percentApartment) + "%");
+                            tvPercentageHouse.setText(df.format(percentHouse) + "%");
+                            tvPercentageRoom.setText(df.format(percentRoom) + "%");
 
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

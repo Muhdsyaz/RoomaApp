@@ -116,7 +116,8 @@
                     android:fontFamily="@font/poppins"
                     android:text="of total advertisement"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="10dp"/>
 
             </LinearLayout>
 
@@ -200,7 +201,8 @@
                     android:fontFamily="@font/poppins"
                     android:text="of total advertisement"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="10dp"/>
 
             </LinearLayout>
 
@@ -284,7 +286,8 @@
                     android:fontFamily="@font/poppins"
                     android:text="of total advertisement"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="10dp"/>
 
             </LinearLayout>
 
