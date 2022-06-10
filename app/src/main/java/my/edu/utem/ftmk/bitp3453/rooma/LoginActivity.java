@@ -72,7 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         checkExistingUser();
-                        tvForgotPassword.setVisibility(View.VISIBLE);
                     }
                 });
 
@@ -220,6 +219,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_LONG).show();
 
                             layoutResetPassword.setVisibility(View.INVISIBLE);
+                            tvForgotPassword.setVisibility(View.VISIBLE);
                         }
                     }
                 });
