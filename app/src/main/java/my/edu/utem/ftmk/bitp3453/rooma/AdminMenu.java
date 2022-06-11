@@ -114,6 +114,7 @@ public class AdminMenu extends AppCompatActivity {
     public void totalUser(){
 
         db.collection("users")
+                .whereEqualTo("UserType","client")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value,

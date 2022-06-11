@@ -103,6 +103,7 @@ public class AdminAllAds extends AppCompatActivity {
 
 
         db.collection("users")
+                .whereEqualTo("UserType","client")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
