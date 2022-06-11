@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -206,6 +207,32 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    protected void sendEmail() {
+        Log.i("Send email", "");
+
+        String[] TO = {"applicationrooma@gmail.com"};
+//        String[] CC = {"xyz@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "My account has been disabled.");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Sorry to bother you, my account has been disabled by the system. " +
+                "May I know the reason behind it?");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getApplicationContext(),
+                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void sendPasswordReset() {
 
         String emailAddress = etEmailReset.getText().toString().trim();
@@ -245,6 +272,15 @@ public class LoginActivity extends AppCompatActivity {
                                 builder.setTitle("Your account has been disabled");
                                 builder.setMessage("Pleas contact the admin to enable your account back.");
                                 builder.setCancelable(false);
+
+                                builder.setPositiveButton("Contact", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        sendEmail();
+
+                                    }
+                                });
 
                                 builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
 
