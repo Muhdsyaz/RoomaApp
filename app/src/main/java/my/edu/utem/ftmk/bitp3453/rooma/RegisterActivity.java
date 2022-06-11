@@ -105,10 +105,17 @@ public class RegisterActivity extends AppCompatActivity {
         if(etEmail.getText().toString().equals("") && etFullName.getText().toString().equals("") && etPhoneNum.getText().toString().equals("")
                 && etPassword.getText().toString().equals("") && etAddress.getText().toString().equals("") && etConfirmPassword.getText().toString().equals("")) {
 
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+
             Toast.makeText(RegisterActivity.this, "Please make sure all field are filled before submit.", Toast.LENGTH_LONG).show();
         }
         else if(check == false) {
             Log.e("Check: ", "" + check);
+
+            if (progressDialog.isShowing())
+                progressDialog.dismiss();
+
             Toast.makeText(RegisterActivity.this, "Please make sure to fill your information as required.", Toast.LENGTH_SHORT).show();
         }
         else {
@@ -312,12 +319,19 @@ public class RegisterActivity extends AppCompatActivity {
                     etPassword.setError("Please fill in your password.");
 
                     check = false;
-                }else if(etPassword.getText().toString().length() < 6){
-                    etPassword.setError("Password too short, minimum characters at least 6.");
+                }else if(etPassword.getText().toString().length() < 8){
+                    etPassword.setError("Password too short, minimum characters at least 8.");
 
                     check = false;
 
-                } else {
+                }
+                else if(etPassword.getText().toString().length() > 16){
+                    etPassword.setError("Password cannot be more than 16 characters.");
+
+                    check = false;
+
+                }
+                else {
                     etPassword.setError(null);
 
                     check = true;

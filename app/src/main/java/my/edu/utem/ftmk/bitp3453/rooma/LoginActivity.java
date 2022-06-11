@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
 
-                                if(email.equals("admin@rooma.com")){
+                                if(email.equals("roomaapplication@gmail.com")){
                                     if (progressDialog.isShowing())
                                         progressDialog.dismiss();
 

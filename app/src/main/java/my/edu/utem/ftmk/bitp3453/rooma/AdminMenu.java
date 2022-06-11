@@ -28,8 +28,8 @@ import java.util.List;
 public class AdminMenu extends AppCompatActivity {
 
     Button btLogout;
-    TextView tvRequest, tvTotalAds;
-    int request, totalAds;
+    TextView tvRequest, tvTotalAds, tvTotalUser;
+    int request, totalAds, totalUser;
 
     FirebaseFirestore db;
 
@@ -46,8 +46,10 @@ public class AdminMenu extends AppCompatActivity {
         // declare textview
         tvRequest = findViewById(R.id.tvRequest);
         tvTotalAds = findViewById(R.id.tvTotalAds);
+        tvTotalUser = findViewById(R.id.tvTotalUser);
 
         totalRequest();
+        totalUser();
         totalAdvertisement();
 
         btLogout.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +106,29 @@ public class AdminMenu extends AppCompatActivity {
 
                         }
                         tvRequest.setText(String.valueOf(request));
+                    }
+                });
+
+    }
+
+    public void totalUser(){
+
+        db.collection("users")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value,
+                                        @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.w("TAG", "Listen failed.", e);
+                            return;
+                        }
+
+                        for (QueryDocumentSnapshot doc : value) {
+
+                            totalUser = value.size();
+
+                        }
+                        tvTotalUser.setText(String.valueOf(totalUser));
                     }
                 });
 

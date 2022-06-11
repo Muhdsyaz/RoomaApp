@@ -49,7 +49,7 @@ public class StartActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
 
-            if(currentUser.getEmail().equals("admin@rooma.com")){
+            if(currentUser.getEmail().equals("roomaapplication@gmail.com")){
                 toAdminMenu();
             }
             else{
