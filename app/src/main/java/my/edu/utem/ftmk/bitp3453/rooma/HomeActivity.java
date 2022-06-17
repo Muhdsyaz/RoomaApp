@@ -683,19 +683,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                             AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
 
                             builder.setTitle("Your account has been disabled");
-                            builder.setMessage("Pleas contact the admin to enable your account back.");
+                            builder.setMessage("You will be logged out of this system.");
                             builder.setCancelable(false);
-
-                            builder.setPositiveButton("Contact", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    //signout user
-                                    FirebaseAuth.getInstance().signOut();
-                                    sendEmail();
-
-                                }
-                            });
 
                             builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
 
@@ -726,32 +715,6 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
-    protected void sendEmail() {
-        Log.i("Send email", "");
-
-        String[] TO = {"applicationrooma@gmail.com"};
-//        String[] CC = {"xyz@gmail.com"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-
-
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "My account has been disabled.");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Sorry to bother you, my account has been disabled by the system. " +
-                "May I know the reason behind it?");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
-            Log.i("Finished sending email...", "");
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(getApplicationContext(),
-                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void onBackPressed()
     {
@@ -763,10 +726,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         category = spCategory.getSelectedItem().toString();
         minPrice = spMinPrice.getSelectedItem().toString();
         maxPrice = spMaxPrice.getSelectedItem().toString();
-//        Log.e("Property ", " Category: " + category);
-//        Log.e("Min ", " Price: " + minPrice);
-//        Log.e("Max ", " Price: " + maxPrice);
-//        Log.e("Sort ", sort);
+
 
     }
 

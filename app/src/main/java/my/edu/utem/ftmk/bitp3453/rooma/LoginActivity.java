@@ -270,7 +270,7 @@ public class LoginActivity extends AppCompatActivity {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
 
                                 builder.setTitle("Your account has been disabled");
-                                builder.setMessage("Pleas contact the admin to enable your account back.");
+                                builder.setMessage("Please contact the admin to enable your account back.");
                                 builder.setCancelable(false);
 
                                 builder.setPositiveButton("Contact", new DialogInterface.OnClickListener() {

@@ -607,6 +607,15 @@ public class DisplayAdvertisement extends AppCompatActivity {
                                 builder.setTitle("This advertisement has been disabled.");
                                 builder.setCancelable(false);
 
+                                builder.setPositiveButton("Contact", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        sendEmail();
+
+                                    }
+                                });
+
                                 builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
 
                                     @Override
@@ -1282,6 +1291,13 @@ public class DisplayAdvertisement extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    protected void sendEmail() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri data = Uri.parse("mailto:" + "applicationrooma@gmail.com" + "?");
+        intent.setData(data);
+        startActivity(intent);
     }
 
     public void toHome(){

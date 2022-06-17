@@ -243,7 +243,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
                         startActivity(intent);
 
-                        Toast.makeText(EditProfileActivity.this, "Name updated successfully.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, "Profile picture updated successfully.", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
