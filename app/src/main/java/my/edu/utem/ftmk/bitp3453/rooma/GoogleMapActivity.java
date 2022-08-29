@@ -331,8 +331,15 @@ public class GoogleMapActivity extends AppCompatActivity implements OnMapReadyCa
                         tvAddress.setText(document.getData().get("address").toString());
                         tvCategory.setText(document.getData().get("category").toString());
                         tvSize.setText(document.getData().get("propertySize").toString() + " sq.ft");
-                        tvBedroom.setText(document.getData().get("bedroom").toString() + " Bedroom");
-                        tvBathroom.setText(document.getData().get("bathroom").toString() + " Bathroom");
+
+                        if(document.getData().get("category").toString().equals("Room")){
+                            tvBedroom.setText("1 Bedroom");
+                            tvBathroom.setText("1 Bathroom");
+                        }
+                        else {
+                            tvBedroom.setText(document.getData().get("bedroom").toString() + " Bedroom");
+                            tvBathroom.setText(document.getData().get("bathroom").toString() + " Bathroom");
+                        }
 
                     } else {
                         Log.d("TAG", "No such document");

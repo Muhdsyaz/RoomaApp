@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -441,6 +442,7 @@ public class AdsPreview extends AppCompatActivity {
         adsProperty.put("adsID", adsID);
         adsProperty.put("postDate", todayDate);
         adsProperty.put("postTime", todayTime);
+        adsProperty.put("postTimeStamp", new Timestamp(new Date()));
 
         adsProperty.put("category",category);
         adsProperty.put("bathroom",bathroom);

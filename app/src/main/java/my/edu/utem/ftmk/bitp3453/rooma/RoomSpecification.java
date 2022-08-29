@@ -18,7 +18,7 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
     String category;
     Button btContinue;
     Spinner spRoomType, spFloorRange, spFurnishing, spParking;
-    String text, roomType, floorRange, furnishing, parking, propertySize, finishYear, deposit, monthlyRent;
+    String bedroom, bathroom, roomType, floorRange, furnishing, parking, propertySize, finishYear, deposit, monthlyRent;
     EditText etPropertySize, etFinishYear, etDeposit, etMonthlyRent;
 
     @Override
@@ -117,9 +117,14 @@ public class RoomSpecification extends AppCompatActivity implements AdapterView.
         deposit = etDeposit.getText().toString();
         monthlyRent = etMonthlyRent.getText().toString();
 
+        bedroom = "1";
+        bathroom = "1";
+
         Intent intent = new Intent(getApplicationContext(),AvailableFacilities.class);
         Bundle bundle = new Bundle();
         bundle.putString("resType",roomType);
+        bundle.putString("bedroom",bedroom);
+        bundle.putString("bathroom",bathroom);
         bundle.putString("floorRange",floorRange);
         bundle.putString("furnishing",furnishing);
         bundle.putString("parking",parking);

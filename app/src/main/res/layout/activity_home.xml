@@ -25,11 +25,11 @@
                 android:id="@+id/linearLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
                     android:id="@+id/tvSearch"
@@ -54,8 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_dropdown"
-                    android:backgroundTint="@color/white"/>
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/ic_dropdown" />
 
             </LinearLayout>
 
@@ -63,10 +63,10 @@
                 android:id="@+id/layoutFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 android:background="@drawable/round_corner_below"
                 android:elevation="5dp"
                 android:orientation="vertical"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -131,18 +131,28 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#DADADA"
-                        android:orientation="vertical" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="380dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#DADADA" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp">
+                        android:layout_marginLeft="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -158,72 +168,51 @@
 
                     </LinearLayout>
 
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginLeft="20dp"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:background="@drawable/customborder"-->
+                    <!--                            android:orientation="horizontal">-->
+
+                    <!--                            <Spinner-->
+                    <!--                                android:id="@+id/spMinPrice"-->
+                    <!--                                android:layout_width="match_parent"-->
+                    <!--                                android:layout_height="wrap_content" />-->
+
+                    <!--                        </LinearLayout>-->
+
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginLeft="20dp"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:background="@drawable/customborder"-->
+                    <!--                            android:orientation="horizontal">-->
+
+                    <!--                            <Spinner-->
+                    <!--                                android:id="@+id/spMaxPrice"-->
+                    <!--                                android:layout_width="match_parent"-->
+                    <!--                                android:layout_height="wrap_content" />-->
+
+                    <!--                        </LinearLayout>-->
+
+                    <TextView
+                        android:id="@+id/tvClear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:paddingTop="10dp"
+                        android:text="Clear All"
+                        android:textColor="@color/black" />
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="380dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="#DADADA" />
-
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/customborder"
-                            android:orientation="horizontal">
-
-                            <Spinner
-                                android:id="@+id/spMinPrice"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/customborder"
-                            android:orientation="horizontal">
-
-                            <Spinner
-                                android:id="@+id/spMaxPrice"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvClear"
-                            android:layout_width="wrap_content"
-                            android:layout_height="38dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:clickable="true"
-                            android:fontFamily="@font/poppins"
-                            android:foreground="?android:attr/selectableItemBackground"
-                            android:paddingTop="10dp"
-                            android:text="Clear All"
-                            android:textColor="@color/black" />
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
 
                 <Button
                     android:id="@+id/btSearch"
@@ -238,9 +227,9 @@
                     android:id="@+id/ibDrop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_dropup"
+                    android:layout_gravity="center"
                     android:backgroundTint="@color/white"
-                    android:layout_gravity="center"/>
+                    android:src="@drawable/ic_dropup" />
 
             </LinearLayout>
 
@@ -332,12 +321,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F4717F"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

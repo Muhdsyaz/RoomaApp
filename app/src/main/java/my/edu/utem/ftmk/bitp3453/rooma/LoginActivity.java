@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                     progressDialog.dismiss();
 
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "Invalid email or password.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             if (progressDialog.isShowing())
                 progressDialog.dismiss();
 
-            Toast.makeText(LoginActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Please fill both fields to login.",Toast.LENGTH_SHORT).show();
 
         }
     }

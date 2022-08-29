@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -1102,6 +1103,7 @@ public class DisplayAdvertisement extends AppCompatActivity {
         report.put("reporterUid", FirebaseAuth.getInstance().getCurrentUser().getUid());
         report.put("reportDate", todayDate);
         report.put("reportTime", todayTime);
+        report.put("reportTimeStamp", new Timestamp(new Date()));
 
         db.collection("reports").document(reportRef)
                 .set(report).addOnSuccessListener(new OnSuccessListener<Void>() {

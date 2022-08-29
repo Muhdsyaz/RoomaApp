@@ -23,6 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -134,6 +135,7 @@ public class FavoriteActivity extends AppCompatActivity implements Advertisement
                                     db.collection("advertisements")
                                             .whereEqualTo("adsID", adsID)
                                             .whereEqualTo("status","live")
+                                            .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                                             .get()
                                             .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                 @Override

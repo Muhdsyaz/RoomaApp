@@ -221,7 +221,7 @@
                     android:drawableLeft="@drawable/ic_disable_person"
                     android:drawableTint="@color/white"
                     android:onClick="toAdminDisabledUser"
-                    android:text="Disabled User" />
+                    android:text="Disabled User Account" />
 
                 <Button
                     android:id="@+id/btLogout"
@@ -232,7 +232,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="100dp"
-                    android:backgroundTint="#00a0e3"
+                    android:backgroundTint="#850000"
                     android:drawableLeft="@drawable/ic_logout"
                     android:drawableTint="@color/white"
                     android:text="Logout" />

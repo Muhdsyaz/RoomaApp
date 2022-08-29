@@ -62,8 +62,20 @@ public class AdvertisementRVAdapter extends RecyclerView.Adapter<AdvertisementRV
         holder.tvLocation.setText(advertisement.getState() + " > " + advertisement.getCity());
         holder.tvCategory.setText(advertisement.getCategory());
         holder.tvSize.setText(advertisement.getPropertySize() + " sq. ft.");
-        holder.tvBedroom.setText(advertisement.getBedroom() + " Bedroom");
-        holder.tvBathroom.setText(advertisement.getBathroom() + " Bathroom");
+
+        if(advertisement.getBedroom() != null){
+            holder.tvBedroom.setText(advertisement.getBedroom() + " Bedroom");
+        }
+        else{
+            holder.tvBedroom.setText("1 Bedroom");
+        }
+
+        if(advertisement.getBathroom() != null){
+            holder.tvBathroom.setText(advertisement.getBathroom() + " Bathroom");
+        }
+        else{
+            holder.tvBathroom.setText("1 Bathroom");
+        }
 
         formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         date = new Date();

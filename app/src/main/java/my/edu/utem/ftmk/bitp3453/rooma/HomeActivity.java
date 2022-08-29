@@ -54,13 +54,13 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdvertisementRVAdapter.ItemClickListener{
 
     TextView tvClear, tvSearch;
-    Spinner spCategory, spMinPrice, spMaxPrice, spState, spCity, spSort;
+    Spinner spCategory, spState, spCity, spSort;
     Button btSearch;
 
     BottomNavigationView bottomNav;
     ImageButton imageButton, ibDrop;
 
-    String adsID, category, minPrice, maxPrice, state, city, sort;
+    String adsID, category, state, city, sort;
 
     LinearLayout layoutFilter;
     ConstraintLayout layoutAdvertisement;
@@ -90,15 +90,15 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         state = intent.getStringExtra("state");
         city = intent.getStringExtra("city");
         category = intent.getStringExtra("category");
-        minPrice = intent.getStringExtra("minPrice");
-        maxPrice = intent.getStringExtra("maxPrice");
+//        minPrice = intent.getStringExtra("minPrice");
+//        maxPrice = intent.getStringExtra("maxPrice");
         sort = intent.getStringExtra("sort");
 
         Log.e("onCreate ", " State: " + state);
         Log.e("onCreate ", " City: " + city);
         Log.e("onCreate ", " Category: " + category);
-        Log.e("onCreate ", " Min Price: " + minPrice);
-        Log.e("onCreate ", " Max Price: " + maxPrice);
+//        Log.e("onCreate ", " Min Price: " + minPrice);
+//        Log.e("onCreate ", " Max Price: " + maxPrice);
         Log.e("onCreate ", "Sort: " + sort);
 
         sliderView = findViewById(R.id.image_slider);
@@ -145,8 +145,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // declare spinner
         spCategory = findViewById(R.id.spCategory);
-        spMinPrice = findViewById(R.id.spMinPrice);
-        spMaxPrice = findViewById(R.id.spMaxPrice);
+//        spMinPrice = findViewById(R.id.spMinPrice);
+//        spMaxPrice = findViewById(R.id.spMaxPrice);
         spState = findViewById(R.id.spState);
         spCity = findViewById(R.id.spCity);
         spSort = findViewById(R.id.spSort);
@@ -188,13 +188,14 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         // setting adapter to our recycler view.
         rvAdvertisement.setAdapter(advertisementRVAdapter);
 
-        if(state == null && city == null && category == null && minPrice == null && maxPrice == null){
+        if(state == null && city == null && category == null){
 
             // below line is use to get the data from Firebase Firestore.
             // previously we were saving data on a reference of Courses
             // now we will be getting the data from the same reference.
             db.collection("advertisements")
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -239,10 +240,11 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             });
 
         }
-        else if(state == null && city == null && category.equals("Category") && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
-            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+        else if(state == null && city == null && category.equals("Category") && sort.equals("Descending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
             db.collection("advertisements")
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -271,11 +273,45 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             });
         }
-        else if(state == null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
-            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+        else if(state == null && city == null && category.equals("Category") && sort.equals("Ascending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.ASCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state == null && city == null && category != null && sort.equals("Descending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
             db.collection("advertisements")
                     .whereEqualTo("category", category)
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -304,12 +340,47 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             });
         }
-        else if(state != null && city == null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
-            Toast.makeText(getApplicationContext(), "Kat sini " + state + " " + category, Toast.LENGTH_SHORT).show();
+        else if(state == null && city == null && category != null && sort.equals("Ascending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.ASCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state != null && city == null && category != null && sort.equals("Descending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + state + " " + category, Toast.LENGTH_SHORT).show();
             db.collection("advertisements")
                     .whereEqualTo("state", state)
                     .whereEqualTo("category", category)
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -338,13 +409,85 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             });
         }
-        else if(state != null && city != null && category != null && minPrice.equals("Min. price") && maxPrice.equals("Max. price") && sort.equals("Descending")) {
-            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+        else if(state != null && city == null && category != null && sort.equals("Ascending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + state + " " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("state", state)
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.ASCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state != null && city != null && category != null && sort.equals("Descending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
             db.collection("advertisements")
                     .whereEqualTo("state", state)
                     .whereEqualTo("city", city)
                     .whereEqualTo("category", category)
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                            if (!queryDocumentSnapshots.isEmpty()) {
+
+                                loadingPB.setVisibility(View.GONE);
+                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                for (DocumentSnapshot d : list) {
+                                    Advertisement c = d.toObject(Advertisement.class);
+                                    advertisementArrayList.add(c);
+                                }
+                                advertisementRVAdapter.notifyDataSetChanged();
+                            } else {
+                                // if the snapshot is empty we are displaying a toast message.
+                                loadingPB.setVisibility(View.GONE);
+                                tvEmptyDb.setVisibility(View.VISIBLE);
+                                //Toast.makeText(TransactionHistoryActivity.this, "You have not made any transactions yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Fail to get the data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else if(state != null && city != null && category != null && sort.equals("Ascending")) {
+//            Toast.makeText(getApplicationContext(), "Kat sini " + category, Toast.LENGTH_SHORT).show();
+            db.collection("advertisements")
+                    .whereEqualTo("state", state)
+                    .whereEqualTo("city", city)
+                    .whereEqualTo("category", category)
+                    .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.ASCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -379,6 +522,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
             // now we will be getting the data from the same reference.
             db.collection("advertisements")
                     .whereEqualTo("status","live")
+                    .orderBy("postTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -428,28 +572,28 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategory.setAdapter(adapter1);
         spCategory.setOnItemSelectedListener(this);
-        category = spCategory.getSelectedItem().toString();
+//        category = spCategory.getSelectedItem().toString();
 
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.minprice, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spMinPrice.setAdapter(adapter2);
-        spMinPrice.setOnItemSelectedListener(this);
-        minPrice = spMinPrice.getSelectedItem().toString();
+//        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+//                R.array.minprice, android.R.layout.simple_spinner_item);
+//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spMinPrice.setAdapter(adapter2);
+//        spMinPrice.setOnItemSelectedListener(this);
+//        minPrice = spMinPrice.getSelectedItem().toString();
 
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
-                R.array.maxprice, android.R.layout.simple_spinner_item);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spMaxPrice.setAdapter(adapter3);
-        spMaxPrice.setOnItemSelectedListener(this);
-        maxPrice = spMaxPrice.getSelectedItem().toString();
+//        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
+//                R.array.maxprice, android.R.layout.simple_spinner_item);
+//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spMaxPrice.setAdapter(adapter3);
+//        spMaxPrice.setOnItemSelectedListener(this);
+//        maxPrice = spMaxPrice.getSelectedItem().toString();
 
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
                 R.array.sort, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spSort.setAdapter(adapter4);
         spSort.setOnItemSelectedListener(this);
-        sort = spSort.getSelectedItem().toString();
+//        sort = spSort.getSelectedItem().toString();
 
 
         tvClear.setOnClickListener(new View.OnClickListener() {
@@ -579,8 +723,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.e("btSearch ", " State: " + state);
                 Log.e("btSearch ", " City: " + city);
                 Log.e("btSearch ", " Category: " + category);
-                Log.e("btSearch ", " Min Price: " + minPrice);
-                Log.e("btSearch ", " Max Price: " + maxPrice);
+//                Log.e("btSearch ", " Min Price: " + minPrice);
+//                Log.e("btSearch ", " Max Price: " + maxPrice);
                 Log.e("btSearch ", "Sort: " + sort);
 
                 Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
@@ -588,8 +732,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 bundle.putString("state",state);
                 bundle.putString("city",city);
                 bundle.putString("category",category);
-                bundle.putString("minPrice",minPrice);
-                bundle.putString("maxPrice",maxPrice);
+//                bundle.putString("minPrice",minPrice);
+//                bundle.putString("maxPrice",maxPrice);
                 bundle.putString("sort",sort);
 
                 intent.putExtras(bundle);
@@ -660,7 +804,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         String title = advertisementRVAdapter.getItem(position).getTitle();
         adsID = advertisementRVAdapter.getItem(position).getAdsID();
         Log.e("DisplayAds,  ", "AdsID: " + adsID);
-        Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),"Title: " + title + " AdsID: " + adsID, Toast.LENGTH_SHORT).show();
 
         toDisplayAds(adsID);
     }
@@ -724,8 +868,9 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         category = spCategory.getSelectedItem().toString();
-        minPrice = spMinPrice.getSelectedItem().toString();
-        maxPrice = spMaxPrice.getSelectedItem().toString();
+//        minPrice = spMinPrice.getSelectedItem().toString();
+//        maxPrice = spMaxPrice.getSelectedItem().toString();
+        sort = spSort.getSelectedItem().toString();
 
 
     }

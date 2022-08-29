@@ -47,11 +47,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <EditText
             android:id="@+id/tvSearch"
-            android:layout_width="320dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/custom_border_2"
@@ -71,7 +72,7 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/round_gray"
-            android:backgroundTint="#00a0e3"
+            android:backgroundTint="#850000"
             app:tint="@color/white"
             android:src="@drawable/ic_search"/>
 
@@ -255,7 +256,7 @@
                    android:layout_height="40dp"
                    android:layout_marginLeft="30dp"
                    android:background="@drawable/round_white"
-                   app:backgroundTint="#F44336"
+                   app:backgroundTint="#850000"
                    android:text="Disable"
                    android:textColor="@color/white" />
 
